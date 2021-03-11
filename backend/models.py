@@ -14,24 +14,24 @@ class Course(Model):
 class CoursePart(Model):
     title = CharField(200)
     description = TextField()
-    course = ForeignKeyField('models.Course', index=True)
+    course = ForeignKeyField('models.Course', index=True, related_name='course_parts')
 
 
 class Lesson(Model):
     title = CharField(max_length=200)
     video = CharField(50)
     content = TextField()
-    course_part = ForeignKeyField('models.CoursePart', index=True)
+    course_part = ForeignKeyField('models.CoursePart', index=True, related_name='lessons')
 
 
 class CourseMember(Model):
     user_id = IntField(index=True)
-    course = ForeignKeyField('models.Course', index=True)
+    course = ForeignKeyField('models.Course', index=True, related_name='members')
 
 
 class LessonViewed(Model):
     user_id = IntField(index=True)
-    lesson = ForeignKeyField('models.Lesson', index=True)
+    lesson = ForeignKeyField('models.Lesson', index=True, related_name='viewed_lessons')
 
 
 async def init():
