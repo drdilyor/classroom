@@ -12,6 +12,5 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 60vh;
   }
 </style>

@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <Header></Header>
-    <div class="container">
+    <main>
       <RouterView></RouterView>
-    </div>
+    </main>
     <Footer></Footer>
   </div>
 </template>
@@ -25,4 +25,17 @@ export default {
 </script>
 
 <style>
+#app {
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+}
+
+html, body, #app {
+  height: 100%;
+}
+
+main {
+  flex: 1;
+}
 </style>
