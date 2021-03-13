@@ -36,7 +36,7 @@ export default {
     loading: true,
     error: false,
   } },
-  mounted() {
+  created() {
     fetch(this.$backend + '/courses')
     .then(res => res.json())
     .then(data => {
