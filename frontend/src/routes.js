@@ -6,6 +6,7 @@ Vue.use(Router)
 
 // Routes
 import Home from './pages/Home.vue'
+import CourseExplore from './pages/CourseExplore.vue'
 import NotFound from './pages/404.vue'
 
 export default new Router({
@@ -15,6 +16,11 @@ export default new Router({
       path: '/',
       name: 'home',
       component: Home,
+    },
+    {
+      path: '/courses',
+      name: 'courses',
+      component: CourseExplore,
     },
     {
       path: '*',
