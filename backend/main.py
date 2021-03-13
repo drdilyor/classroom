@@ -2,6 +2,7 @@ import asyncio
 from typing import List
 
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 
 import models
 from models import *
@@ -9,6 +10,15 @@ import schemas as s
 
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=['*'],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 asyncio.create_task(models.init())
 
 

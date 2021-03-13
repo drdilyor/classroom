@@ -1,4 +1,4 @@
 /venv
 **/__pycache__
 *.py[oc]
-db.sqlite3
+db.sqlite3*
