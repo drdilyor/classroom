@@ -21,7 +21,7 @@
             <p>{{ course.description }}</p>
           </div>
           <div class="card-action">
-            <a href="#">Details</a>
+            <router-link :to="`/courses/${course.id}`">Details</router-link>
           </div>
         </div>
       </div>
