@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import 'materialize-css/dist/css/materialize.min.css'
+import './assets/scss/styles.scss'
 
 import App from './App.vue'
 import router from './routes'

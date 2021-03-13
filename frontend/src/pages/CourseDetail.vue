@@ -50,7 +50,8 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+@import '../assets/scss/materializevariables.scss';
 .course-part-list {
   margin-top: 2rem;
 }
@@ -58,25 +59,30 @@ export default {
   position: relative;
   padding-left: 2rem;
   padding-bottom: 2rem;
-  border-left: 1px solid #777;
+  border-left: 1px solid #aaa;
+
+  &::before {
+    $size: 1rem;
+    content: "";
+    position: absolute;
+    width: $size;
+    height: $size;
+    left: $size / 2 * -1;
+    display: block;
+    border-radius: 50%;
+    background: $primary-color;
+  }
+
+  & > * {
+    position: relative;
+    top: -1rem;
+  }
+
+  &-header {
+    margin-top: 0;
+  }
 }
-.course-part > * {
-  position: relative;
-  top: -1rem;
-}
-.course-part-header {
-  margin-top: 0;
-}
-.course-part::before {
-  content: "";
-  position: absolute;
-  width: .5rem;
-  height: .5rem;
-  left: -.25rem;
-  display: block;
-  border-radius: 50%;
-  background: black;
-}
+
 .no-mt {
   margin-top: 0;
 }
