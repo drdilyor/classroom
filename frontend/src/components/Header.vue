@@ -7,7 +7,7 @@
         <li><router-link to="/classroom">Classroom</router-link></li>
       </ul>
       <ul class="right">
-        <li><router-link to="/signup">Sign up</router-link></li>
+        <li><router-link to="/profile">Account</router-link></li>
       </ul>
     </div>
   </nav>

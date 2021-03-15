@@ -29,13 +29,13 @@ class Lesson(Model):
 
 class CourseMember(Model):
     id = IntField(pk=True)
-    user_id = IntField(index=True)
+    user_sub = CharField(80, index=True)
     course = ForeignKeyField('models.Course', index=True, related_name='members')
 
 
 class LessonViewed(Model):
     id = IntField(pk=True)
-    user_id = IntField(index=True)
+    user_sub = CharField(80, index=True)
     lesson = ForeignKeyField('models.Lesson', index=True, related_name='viewed_lessons')
 
 

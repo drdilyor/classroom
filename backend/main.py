@@ -1,10 +1,12 @@
 import asyncio
 from typing import List
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Depends, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 
 import models
+from auth import requires_auth, AuthError
 from models import *
 import schemas as s
 
@@ -44,3 +46,25 @@ async def get_course(course_id: int):
         **c.__dict__,
         'course_parts': await c.course_parts,  # noqa
     }
+
+@app.get('/courses/{course_id}/is-enrolled')
+async def is_user_enrolled(course_id: int, payload=Depends(requires_auth())):
+    return {
+        'is_enrolled': (await CourseMember.get_or_none(
+            course_id=course_id,
+            user_sub=payload['sub']
+        )) is not None
+    }
+
+
+@app.get('/headers')
+async def headers(payload=Depends(requires_auth())):
+    return {'payload': payload}
+
+
+@app.exception_handler(AuthError)
+def auth_error(_request: Request, exc: AuthError):
+    return JSONResponse(
+        status_code=exc.status_code,
+        content={'detail': exc.error}
+    )

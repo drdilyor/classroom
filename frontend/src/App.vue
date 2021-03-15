@@ -18,6 +18,10 @@ export default {
   components: {
     Header, Footer
   },
+  created() {
+    // created hook is used because mounted is called after children are rendered
+    this.$auth.init()
+  },
   mounted() {
     M.AutoInit()
   }
