@@ -54,18 +54,18 @@ async def init(app: FastAPI):
     )
     await Tortoise.generate_schemas()
 
-    #register_tortoise(app, config=TORTOISE_ORM, generate_schemas=True)
     app.mount('/admin', admin_app)
 
     await admin_app.init(
         admin_secret="test",
         site=Site(
-            name="FastAPI-Admin DEMO",
-            login_footer="FASTAPI ADMIN - FastAPI Admin Dashboard",
-            login_description="FastAPI Admin Dashboard",
+            name="Classroom",
+            login_footer="Classroom - a simple E-Learning platform",
+            login_description="Classroom admin",
             locale="en-US",
-            locale_switcher=True,
             theme_switcher=True,
+            footer='Classroom - a simple E-Learning platform<br>Fork me on '
+                   '<a href="https://github.com/drdilyor/classroom" target="_blank">GitHub</a>'
         ),
     )
 
