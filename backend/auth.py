@@ -1,16 +1,17 @@
 import json
-from functools import wraps
 from typing import Optional
 
 from fastapi import Header, Depends
 from jose import jwt
-from urllib.request import urlopen
 
 from util import abort
 
 AUTH0_DOMAIN = 'drdilyor.us.auth0.com'
 ALGORITHMS = ['RS256']
 API_AUDIENCE = 'classroomapi'
+
+jwks = json.load(open('auth.jwks.json', 'rb'))
+
 
 class AuthError(Exception):
     """A standardized way to communicate auth failure modes"""
@@ -52,8 +53,7 @@ def get_token_auth_header(authorization: Optional[str] = Header(None)):
 
 
 def verify_decode_jwt(token):
-    jsonurl = urlopen(f'https://{AUTH0_DOMAIN}/.well-known/jwks.json')
-    jwks = json.loads(jsonurl.read())
+    global jwks
     unverified_header = jwt.get_unverified_header(token)
     rsa_key = {}
     if 'kid' not in unverified_header:
