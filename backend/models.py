@@ -1,3 +1,7 @@
+from fastapi import FastAPI
+from fastapi_admin.factory import app as admin_app
+from fastapi_admin.models import AbstractUser
+from fastapi_admin.site import Site
 from tortoise.models import Model
 from tortoise.fields import *
 from tortoise import Tortoise
@@ -39,12 +43,32 @@ class LessonViewed(Model):
     lesson = ForeignKeyField('models.Lesson', index=True, related_name='viewed_lessons')
 
 
-async def init():
+class AdminUser(AbstractUser):
+    pass
+
+
+async def init(app: FastAPI):
     await Tortoise.init(
         db_url='sqlite://db.sqlite3',
         modules={'models': ['models']},
     )
     await Tortoise.generate_schemas()
+
+    #register_tortoise(app, config=TORTOISE_ORM, generate_schemas=True)
+    app.mount('/admin', admin_app)
+
+    await admin_app.init(
+        admin_secret="test",
+        site=Site(
+            name="FastAPI-Admin DEMO",
+            login_footer="FASTAPI ADMIN - FastAPI Admin Dashboard",
+            login_description="FastAPI Admin Dashboard",
+            locale="en-US",
+            locale_switcher=True,
+            theme_switcher=True,
+        ),
+    )
+
 
 __all__ = [
     'init',

@@ -1,3 +1,4 @@
 fastapi[all]
 tortoise-orm
 python-jose
+fastapi-admin
