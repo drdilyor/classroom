@@ -13,6 +13,7 @@ import schemas as s
 
 app = FastAPI()
 
+# CORS
 app.add_middleware(
     CORSMiddleware,
     allow_origins=['*'],
@@ -21,7 +22,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-asyncio.create_task(models.init())
+# Models and admin
+asyncio.create_task(models.init(app))
 
 
 def e404():
