@@ -9,7 +9,7 @@ import models
 from auth import requires_auth, AuthError
 from models import *
 import schemas as s
-
+from util import abort
 
 app = FastAPI()
 
@@ -57,6 +57,46 @@ async def is_user_enrolled(course_id: int, payload=Depends(requires_auth())):
             user_sub=payload['sub']
         )) is not None
     }
+
+
+@app.get('/enrolled-courses', response_model=List[s.Course])  # noqa
+async def get_enrolled_courses(payload=Depends(requires_auth())):
+    uid = payload['sub']
+    qs = await CourseMember.filter(user_sub=payload['sub']).prefetch_related('course')
+    return [i.course for i in qs]
+
+
+@app.put('/courses/{course_id}/enroll')
+async def enroll_course(course_id: int, payload=Depends(requires_auth())):
+    c = await Course.get_or_none(id=course_id) or e404()
+    _cm, created = await CourseMember.get_or_create(user_sub=payload['sub'], course=c)
+    return {'created': created}
+
+
+# Soon this will change
+app.get('/enrolled-courses/{course_id}', response_model=s.CourseDetailed)(get_course)
+
+
+@app.get('/enrolled-course-parts/{id}', response_model=s.CoursePartDetail)
+async def get_detailed_course_part(id: int, payload=Depends(requires_auth())):  # noqa
+    """Returns lessons as well"""
+    cp = await CoursePart.get_or_none(id=id).prefetch_related('lessons') or e404()
+    cm = await CourseMember.get_or_none(
+        user_sub=payload['sub'],
+        course_id=cp.course_id,
+    ) or e404()
+    print(payload['sub'])
+    lessons = await cp.lessons
+    for L in lessons:
+        L.is_viewed = await LessonViewed.get_or_none(lesson=L, user_sub=payload['sub']) is not None
+    return s.CoursePartDetail(**cp.__dict__, lessons=lessons)
+
+
+@app.put('/lessons/{lesson_id}/viewed')
+async def view_lesson(lesson_id: int, payload=Depends(requires_auth())):
+    lesson = await Lesson.get_or_none(id=lesson_id) or abort(404)
+    _lv, created = await LessonViewed.get_or_create(user_sub=payload['sub'], lesson=lesson)
+    return {'created': created}
 
 
 @app.get('/headers')
