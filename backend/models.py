@@ -4,7 +4,7 @@ from fastapi_admin.models import AbstractUser
 from fastapi_admin.site import Site
 from tortoise.models import Model
 from tortoise.fields import *
-from tortoise import Tortoise
+from tortoise import Tortoise, run_async
 
 class Course(Model):
     id = IntField(pk=True)
@@ -35,6 +35,7 @@ class CourseMember(Model):
     id = IntField(pk=True)
     user_sub = CharField(80, index=True)
     course = ForeignKeyField('models.Course', index=True, related_name='members')
+    created_at = DatetimeField(auto_now_add=True)
 
 
 class LessonViewed(Model):
@@ -47,13 +48,15 @@ class AdminUser(AbstractUser):
     pass
 
 
-async def init(app: FastAPI):
+async def init_tortoise():
     await Tortoise.init(
         db_url='sqlite://db.sqlite3',
         modules={'models': ['models']},
     )
     await Tortoise.generate_schemas()
 
+
+async def init_admin(app: FastAPI):
     app.mount('/admin', admin_app)
 
     await admin_app.init(
@@ -69,9 +72,19 @@ async def init(app: FastAPI):
         ),
     )
 
+async def init(app: FastAPI):
+    await init_tortoise()
+    await init_admin(app)
+
+
+if __name__ == '__main__':
+    run_async(init_tortoise())
+
 
 __all__ = [
     'init',
+    'init_tortoise',
+    'init_admin',
     'Course',
     'CoursePart',
     'Lesson',
