@@ -61,7 +61,6 @@ async def is_user_enrolled(course_id: int, payload=Depends(requires_auth())):
 
 @app.get('/enrolled-courses', response_model=List[s.Course])  # noqa
 async def get_enrolled_courses(payload=Depends(requires_auth())):
-    uid = payload['sub']
     qs = await CourseMember.filter(user_sub=payload['sub']).prefetch_related('course')
     return [i.course for i in qs]
 
