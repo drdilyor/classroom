@@ -11,7 +11,6 @@
 <script>
 import Header from './components/Header.vue'
 import Footer from './components/Footer.vue'
-import M from 'materialize-css'
 
 export default {
   name: 'App',

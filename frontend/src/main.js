@@ -5,6 +5,8 @@ import App from './App.vue'
 import router from './routes'
 import auth from './auth'
 
+window.M = require('materialize-css')
+
 Vue.config.productionTip = false
 Vue.prototype.$backend = 'http://localhost:8000'
 Vue.prototype.$auth = auth
