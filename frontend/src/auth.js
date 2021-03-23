@@ -23,6 +23,7 @@ const auth = {
   },
 
   payload: null,
+  inited: false,
 
   init() {
     const jwt = localStorage.getItem('jwt')
@@ -32,6 +33,7 @@ const auth = {
       auth.payload = auth.decodeJwt(jwt)
       console.log({payload: auth.payload});
     }
+    this.inited = true
   },
 
   decodeJwt(token) {
@@ -65,6 +67,7 @@ const auth = {
   },
 
   loggedIn() {
+    if (!this.inited) this.init()
     return this.payload != null
   },
 
