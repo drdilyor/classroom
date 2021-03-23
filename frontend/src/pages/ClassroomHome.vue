@@ -92,11 +92,7 @@ $color-gray: rgba(0, 0, 0, 0.14);
 @media #{$large-and-up} {
   .classroom-home-header,
   .app-classroom main {
-<<<<<<< HEAD
     padding-left: 16rem;
-=======
-    padding-left: 300px;
->>>>>>> 757546cc8b2f8207f8854fe64967851b184144f3
   }
 }
 
@@ -109,13 +105,10 @@ $color-gray: rgba(0, 0, 0, 0.14);
     margin: 0;
   }
 }
-<<<<<<< HEAD
 
 .my-side-nav {
   width: 16rem;
   box-shadow: none;
   border-right: 1px solid $color-gray;
 }
-=======
->>>>>>> 757546cc8b2f8207f8854fe64967851b184144f3
 </style>
