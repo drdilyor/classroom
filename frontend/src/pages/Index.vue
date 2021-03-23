@@ -1,5 +1,5 @@
 <template>
-  <div id="app app-index">
+  <div id="app" class="app-index">
     <Header></Header>
     <main>
       <RouterView></RouterView>
@@ -22,17 +22,17 @@ export default {
 
 <style>
 
-#app-index {
+.app-index {
   display: flex;
   flex-direction: column;
   justify-content: stretch;
 }
 
-html, body, #app-index {
+html, body, .app-index {
   height: 100%;
 }
 
-#app-index main {
+.app-index main {
   flex: 1;
 }
 </style>

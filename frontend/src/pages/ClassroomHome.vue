@@ -1,13 +1,30 @@
 <template>
-  <div id="app">
-    <header>
+  <div id="app" class="app-classroom">
+    <header class="classroom-home-header">
+      <div class="small-top-nav">
+        <!-- Snippet taken from materializecss.com -->
+        <div class="container">
+          <div class="row">
+            <div class="col s12" style="display: flex; align-items: center">
+              <a
+                href="#"
+                data-target="nav-mobile"
+                class="sidenav-trigger fix-micon hide-on-large-only"
+              ><i class="material-icons">menu</i></a>
+              <h1>Home</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="nav-mobile" class="sidenav sidenav-fixed z-depth-0 my-side-nav">
+      </div>
     </header>
     <main>
       <div class="container">
-        <h1>Home</h1>
-        <div v-for="c in courses" :key="c.id">
-          <h2>{{ c.title }}</h2>
-          <p>{{ c.description }}</p>
+        <div class="row">
+          <div class="col s12">
+            <ClassroomCourseCard v-for="c in courses" :course="c" :key="c.id"></ClassroomCourseCard>
+          </div>
         </div>
       </div>
     </main>
@@ -15,7 +32,12 @@
 </template>
 
 <script>
+import ClassroomCourseCard from './ClassroomCourseCard.vue'
+
 export default {
+  components: {
+    ClassroomCourseCard,
+  },
   data() { return {
     loading: true,
     error: null,
@@ -46,3 +68,31 @@ export default {
   },
 }
 </script>
+
+<style lang="scss">
+@import "../assets/scss/materializevariables";
+$color-gray: rgba(0, 0, 0, 0.14);
+
+@media #{$large-and-up} {
+  .classroom-home-header,
+  .app-classroom main {
+    padding-left: 16rem;
+  }
+}
+
+.small-top-nav {
+  padding: 20px /* margin-bottom of .row */ 1em 0;
+  border-bottom: 1px solid $color-gray;
+
+  & h1 {
+    font-size: 1rem;
+    margin: 0;
+  }
+}
+
+.my-side-nav {
+  width: 16rem;
+  box-shadow: none;
+  border-right: 1px solid $color-gray;
+}
+</style>
