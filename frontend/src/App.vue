@@ -1,11 +1,5 @@
 <template>
-  <div id="app">
-    <Header></Header>
-    <main>
-      <RouterView></RouterView>
-    </main>
-    <Footer></Footer>
-  </div>
+  <RouterView></RouterView>
 </template>
 
 <script>
@@ -17,7 +11,7 @@ export default {
   components: {
     Header, Footer
   },
-  created() {
+  beforeCreate() {
     // created hook is used because mounted is called after children are rendered
     this.$auth.init()
   },
@@ -26,19 +20,3 @@ export default {
   }
 }
 </script>
-
-<style>
-#app {
-  display: flex;
-  flex-direction: column;
-  justify-content: stretch;
-}
-
-html, body, #app {
-  height: 100%;
-}
-
-main {
-  flex: 1;
-}
-</style>

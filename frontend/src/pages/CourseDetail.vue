@@ -25,10 +25,16 @@
       <!-- Enroll button -->
       <div class="col s12">
         <p v-if="$auth.loggedIn()">
-          <button class="btn waves-effect waves-light" v-if="!courseEnrolled" @click="enroll">
+          <button
+            v-if="!courseEnrolled"
+            class="btn waves-effect waves-light"
+            @click="enroll">
             Enroll<i class="material-icons right">arrow_forward</i>
           </button>
-          <router-link class="btn waves-effect waves-light" :to="'/classroom/course/'+courseId">
+          <router-link
+            v-else
+            :to="'/classroom/course/'+courseId"
+            class="btn waves-effect waves-light">
             Go to course<i class="material-icons right">arrow_forward</i>
           </router-link>
         </p>

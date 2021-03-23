@@ -7,35 +7,58 @@ import { registerRouter } from "./auth";
 Vue.use(Router)
 
 // Routes
+import Index from './pages/Index.vue'
 import Home from './pages/Home.vue'
 import CourseExplore from './pages/CourseExplore.vue'
 import CourseDetail from './pages/CourseDetail.vue'
 import Profile from './pages/Profile.vue'
+import ClassroomHome from './pages/ClassroomHome.vue'
 import NotFound from './pages/404.vue'
 
 export default registerRouter(new Router({
   mode: 'history',
   routes: [
+    { path: '/', component: Index,
+      children: [
+      {
+        path: '',
+        name: 'home',
+        component: Home,
+      },
+      {
+        path: 'courses',
+        name: 'courses',
+        component: CourseExplore,
+      },
+      {
+        path: 'courses/:id',
+        name: 'courseDetail',
+        component: CourseDetail,
+      },
+      {
+        path: 'profile',
+        name: 'profile',
+        component: Profile,
+      },
+    ]},
     {
-      path: '/',
-      name: 'home',
-      component: Home,
+      path: '/classroom',
+      name: 'classroom',
+      component: ClassroomHome,
+      meta: {requiresAuth: true}
     },
-    {
-      path: '/courses',
-      name: 'courses',
-      component: CourseExplore,
-    },
-    {
-      path: '/courses/:id',
-      name: 'courseDetail',
-      component: CourseDetail,
-    },
-    {
-      path: '/profile',
-      name: 'profile',
-      component: Profile,
-    },
+    // {
+    //   path: '/classroom/course/:id',
+    //   name: 'learnCourse',
+    //   component: ,
+    //   meta: {requiresAuth: true}
+    // },
+    // {
+    //   path: '/lesson/:id',
+    //   name: 'learnLesson',
+    //   component: ,
+    //   meta: {requiresAuth: true}
+    // }
     {
       path: '/login-required',
       name: 'loginrequired',
