@@ -9,37 +9,21 @@
               <a
                 href="#"
                 data-target="nav-mobile"
-<<<<<<< HEAD
                 class="sidenav-trigger fix-micon hide-on-large-only"
-=======
-                class="sidenav-trigger fix-micon"
->>>>>>> 757546cc8b2f8207f8854fe64967851b184144f3
               ><i class="material-icons">menu</i></a>
               <h1>Home</h1>
             </div>
           </div>
         </div>
       </div>
-<<<<<<< HEAD
       <div id="nav-mobile" class="sidenav sidenav-fixed z-depth-0 my-side-nav">
-=======
-      <div id="nav-mobile" class="sidenav sidenav-fixed">
->>>>>>> 757546cc8b2f8207f8854fe64967851b184144f3
       </div>
     </header>
     <main>
       <div class="container">
         <div class="row">
-<<<<<<< HEAD
           <div class="col s12">
             <ClassroomCourseCard v-for="c in courses" :course="c" :key="c.id"></ClassroomCourseCard>
-=======
-          <div class="col">
-            <div v-for="c in courses" :key="c.id">
-              <h2>{{ c.title }}</h2>
-              <p>{{ c.description }}</p>
-            </div>
->>>>>>> 757546cc8b2f8207f8854fe64967851b184144f3
           </div>
         </div>
       </div>
