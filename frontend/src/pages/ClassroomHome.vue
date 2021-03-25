@@ -7,7 +7,7 @@
           <div class="row">
             <div class="col s12" style="display: flex; align-items: center">
               <a
-                href="#"
+                href="javascript:void(0)"
                 data-target="nav-mobile"
                 class="sidenav-trigger fix-micon hide-on-large-only"
               ><i class="material-icons">menu</i></a>
@@ -17,6 +17,7 @@
         </div>
       </div>
       <div id="nav-mobile" class="sidenav sidenav-fixed z-depth-0 my-side-nav">
+        <ClassroomSidenav />
       </div>
     </header>
     <main>
@@ -33,11 +34,13 @@
 </template>
 
 <script>
-import ClassroomCourseCard from './ClassroomCourseCard.vue'
+import ClassroomCourseCard from '../components/ClassroomCourseCard.vue'
+import ClassroomSidenav from '../components/ClassroomSidenav.vue'
 
 export default {
   components: {
     ClassroomCourseCard,
+    ClassroomSidenav,
   },
   data() { return {
     loading: true,
