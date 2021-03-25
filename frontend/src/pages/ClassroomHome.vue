@@ -22,6 +22,7 @@
     <main>
       <div class="container">
         <div class="row">
+          <h2 class="col s-12 caps-header">Current enrollments</h2>
           <div class="col s12">
             <ClassroomCourseCard v-for="c in courses" :course="c" :key="c.id"></ClassroomCourseCard>
           </div>
@@ -42,6 +43,7 @@ export default {
     loading: true,
     error: null,
     courses: [],
+    mSidenav: null,
   } },
   methods: {
     async fetchData() {
@@ -65,6 +67,15 @@ export default {
   },
   created() {
     this.fetchData()
+  },
+  mounted() {
+    // initialize sidenav
+    const elems = document.querySelectorAll('.app-classroom .sidenav')
+    this.mSidenav = M.Sidenav.init(elems, {})[0]
+    console.log(this.mSidenav)
+  },
+  beforeDestroy() {
+    this.mSidenav.destroy()
   },
 }
 </script>
@@ -94,5 +105,11 @@ $color-gray: rgba(0, 0, 0, 0.14);
   width: 16rem;
   box-shadow: none;
   border-right: 1px solid $color-gray;
+}
+
+.caps-header {
+  font-size: 1rem;
+  color: darken($secondary-color, 15%);
+  text-transform: uppercase;
 }
 </style>
