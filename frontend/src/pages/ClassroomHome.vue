@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="app-classroom">
-    <header class="classroom-home-header">
+    <header>
       <div class="small-top-nav">
         <!-- Snippet taken from materializecss.com -->
         <div class="container">
@@ -22,7 +22,14 @@
     </header>
     <main>
       <div class="container">
-        <div class="row">
+        <div v-if="loading">
+          <div class="progress"><div class="indeterminate"></div></div>
+          <p>Loading...</p>
+        </div>
+        <p v-else-if="error">
+          <strong>Error</strong>: something went wrong :(
+        </p>
+        <div v-else class="row">
           <h2 class="col s-12 caps-header">Current enrollments</h2>
           <div class="col s12">
             <ClassroomCourseCard v-for="c in courses" :course="c" :key="c.id"></ClassroomCourseCard>
@@ -36,12 +43,14 @@
 <script>
 import ClassroomCourseCard from '../components/ClassroomCourseCard.vue'
 import ClassroomSidenav from '../components/ClassroomSidenav.vue'
+import ClassroomCommon from '../components/ClassroomCommon.js'
 
 export default {
   components: {
     ClassroomCourseCard,
     ClassroomSidenav,
   },
+  mixins: [ClassroomCommon],
   data() { return {
     loading: true,
     error: null,
@@ -71,15 +80,6 @@ export default {
   created() {
     this.fetchData()
   },
-  mounted() {
-    // initialize sidenav
-    const elems = document.querySelectorAll('.app-classroom .sidenav')
-    this.mSidenav = M.Sidenav.init(elems, {})[0]
-    console.log(this.mSidenav)
-  },
-  beforeDestroy() {
-    this.mSidenav.destroy()
-  },
 }
 </script>
 
@@ -88,7 +88,7 @@ export default {
 $color-gray: rgba(0, 0, 0, 0.14);
 
 @media #{$large-and-up} {
-  .classroom-home-header,
+  .app-classroom header,
   .app-classroom main {
     padding-left: 16rem;
   }
