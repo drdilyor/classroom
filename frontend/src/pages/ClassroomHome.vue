@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="app-classroom">
-    <header>
+    <header class="classroom-home-header">
       <div class="small-top-nav">
         <!-- Snippet taken from materializecss.com -->
         <div class="container">
@@ -20,7 +20,7 @@
         <ClassroomSidenav />
       </div>
     </header>
-    <main>
+    <main class="classroom-home-main">
       <div class="container">
         <div v-if="loading">
           <div class="progress"><div class="indeterminate"></div></div>
@@ -88,8 +88,8 @@ export default {
 $color-gray: rgba(0, 0, 0, 0.14);
 
 @media #{$large-and-up} {
-  .app-classroom header,
-  .app-classroom main {
+  .classroom-home-header,
+  .classroom-home-main {
     padding-left: 16rem;
   }
 }
