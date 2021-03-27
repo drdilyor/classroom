@@ -1,21 +1,22 @@
 <template>
-  <div class="nav-groups">
+  <div class="nav-groups" :class="{small}">
     <ul>
       <li>
         <router-link class="brand-logo" to="/" target="_blank">
-          <img src="/assets/img/logo.png" alt="&lt;A&gt;Code">
+          <img v-if="small" src="/assets/img/logo-small.png" alt="&lt;A&gt;">
+          <img v-else src="/assets/img/logo.png" alt="&lt;A&gt;Code">
         </router-link>
       </li>
       <li>
         <router-link to="/classroom">
           <i class="material-icons">home</i>
-          Home
+          <span>Home</span>
         </router-link>
       </li>
       <li>
         <router-link to="/courses">
           <i class="material-icons">dashboard</i>
-          Catalog
+          <span>Catalog</span>
         </router-link>
       </li>
     </ul>
@@ -23,13 +24,13 @@
       <li>
         <router-link to="/classroom/settings">
           <i class="material-icons">settings</i>
-          Settings
+          <span>Settings</span>
         </router-link>
       </li>
       <li>
         <a href="javascript:void(0)" @click="logout">
           <i class="material-icons">arrow_backward</i>
-          Log out
+          <span>Log out</span>
         </a>
       </li>
     </ul>
@@ -38,6 +39,12 @@
 
 <script>
 export default {
+  props: {
+    small: {
+      type: Boolean,
+      default: false,
+    }
+  },
   methods: {
     logout() {
       this.$auth.logout()
@@ -72,4 +79,41 @@ a {
 a span:last-child {
   flex: 1;
 }
+
+.small {
+  width: 48px;
+}
+
+.small .brand-logo {
+  font-size: 1.3em;
+}
+
+.small li,
+.small a {
+  width: 48px !important;
+  height: 48px !important;
+}
+.small a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  padding-top: 8px;
+}
+.small a > * {
+  float: none !important;
+}
+.small .material-icons {
+  height: 24px;
+  margin: 0 !important;
+  float: none !important;
+  line-height: 24px;
+}
+.small a span {
+  height: 16px;
+  font-size: 10px;
+  line-height: 16px;
+  text-transform: uppercase;
+}
+
 </style>

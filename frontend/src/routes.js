@@ -13,6 +13,7 @@ import CourseExplore from './pages/CourseExplore.vue'
 import CourseDetail from './pages/CourseDetail.vue'
 import Profile from './pages/Profile.vue'
 import ClassroomHome from './pages/ClassroomHome.vue'
+import ClassroomCourse from './pages/ClassroomCourse.vue'
 import NotFound from './pages/404.vue'
 
 export default registerRouter(new Router({
@@ -47,12 +48,12 @@ export default registerRouter(new Router({
       component: ClassroomHome,
       meta: {requiresAuth: true}
     },
-    // {
-    //   path: '/classroom/course/:id',
-    //   name: 'learnCourse',
-    //   component: ,
-    //   meta: {requiresAuth: true}
-    // },
+    {
+      path: '/classroom/course/:id',
+      name: 'learnCourse',
+      component: ClassroomCourse,
+      meta: {requiresAuth: true}
+    },
     // {
     //   path: '/lesson/:id',
     //   name: 'learnLesson',
