@@ -27,12 +27,8 @@ const auth = {
 
   init() {
     const jwt = localStorage.getItem('jwt')
-    console.log('init');
-    console.log({jwt});
-    if (jwt) {
+    if (jwt)
       auth.payload = auth.decodeJwt(jwt)
-      console.log({payload: auth.payload});
-    }
     this.inited = true
   },
 
@@ -43,15 +39,10 @@ const auth = {
     ).join(''))
     var result = JSON.parse(base64)
 
-    console.log('decoded jwt')
-    console.log({result, token})
-
     return result
   },
 
   setJwt(jwt) {
-    console.log('set jwt');
-    console.log({jwt});
     try {
       auth.payload = auth.decodeJwt(jwt)
     } catch {
