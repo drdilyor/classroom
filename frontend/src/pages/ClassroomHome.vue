@@ -84,10 +84,9 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../assets/scss/materializevariables";
 $color-gray: rgba(0, 0, 0, 0.14);
 
-@media #{$large-and-up} {
+@media screen and (max-width: 992px) {
   .classroom-home-header,
   .classroom-home-main {
     padding-left: 16rem;
@@ -113,7 +112,7 @@ $color-gray: rgba(0, 0, 0, 0.14);
 
 .caps-header {
   font-size: 1rem;
-  color: darken($secondary-color, 15%);
+  color: var(--bs-secondary);
   text-transform: uppercase;
 }
 </style>

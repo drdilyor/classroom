@@ -99,7 +99,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../assets/scss/materializevariables";
 #nav-mobile-2 {
   width: auto !important;
 }
@@ -135,7 +134,7 @@ export default {
   padding-top: calc(.5em * 2 + 1.6em * 1.5);
 }
 
-@media #{$large-and-up} {
+@media screen and (max-width: 992px) {
   .course-top-nav-wrapper {
     left: 48px;
   }
@@ -144,7 +143,7 @@ export default {
   }
 }
 
-@media #{$medium-and-up} and (min-height: 640px) {
+@media screen and (max-width: 992px) and (min-height: 640px) {
   .classroom-course-main {
     padding-top: 16em;
   }

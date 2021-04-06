@@ -24,7 +24,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../assets/scss/materializevariables.scss';
 .card {
   display: flex;
   flex-direction: column;
@@ -45,10 +44,10 @@ p {
   margin-bottom: 0;
 }
 .course-link {
-  color: darken($secondary-color, 15%);
+  color: var(--bs-secondary);
 }
 
-@media #{$large-and-up} {
+@media screen and (max-width: 992px) {
   .card {
     flex-direction: row;
     align-items: center;

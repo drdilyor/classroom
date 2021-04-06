@@ -126,7 +126,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../assets/scss/materializevariables.scss';
 .course-part-list {
   margin-top: 2rem;
 }
@@ -145,7 +144,7 @@ export default {
     left: $size / 2 * -1;
     display: block;
     border-radius: 50%;
-    background: $primary-color;
+    background: var(--bs-primary);
   }
 
   & > * {
