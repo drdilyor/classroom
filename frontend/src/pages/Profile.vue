@@ -4,7 +4,7 @@
     <div v-if="$auth.loggedIn()">
       <p>You are logged in</p>
       <pre style="overflow: auto">{{ $auth.getJwt() }}</pre>
-      <p><button @click="$auth.logout(), $forceUpdate()" class="btn waves-effect waves-light">Log out</button></p>
+      <p><button @click="$auth.logout(), $forceUpdate()" class="btn">Log out</button></p>
     </div>
     <div v-else>
       <p>You aren't logged in currently</p>
