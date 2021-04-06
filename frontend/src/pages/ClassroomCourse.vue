@@ -18,7 +18,6 @@
     </header>
     <main class="classroom-course-main">
       <div class="container">
-        <p v-for="i in [1,2,3,4,5,6,7,8,9,10]">Elit iste ea dolorum magni repudiandae! Recusandae esse atque officia perspiciatis eius minus sapiente. Ab sit nulla accusamus commodi optio quaerat debitis recusandae? Alias commodi placeat ducimus velit esse! Ipsa saepe dolore distinctio recusandae hic. Facilis tenetur iusto odio harum ipsa? Delectus placeat quia ut quasi officiis Excepturi commodi explicabo</p>
         <!-- Error -->
         <div v-if="error">
           <h1>Oops...</h1>
@@ -30,6 +29,13 @@
           <h1>Loading...</h1>
           <div class="progress"><div class="indeterminate"></div></div>
         </div>
+        <div v-else>
+          <CoursePartCard
+            v-for="(cp, index) in course.course_parts"
+            :key="cp.id"
+            :part="cp"
+            :i="index+1"/>
+        </div>
       </div>
     </main>
   </div>
@@ -38,9 +44,10 @@
 <script>
 import ClassroomCommon from '../components/ClassroomCommon.js'
 import ClassroomSidenav from '../components/ClassroomSidenav.vue'
+import CoursePartCard from '../components/ClassroomCoursePartCard.vue'
 
 export default {
-  components: {ClassroomSidenav},
+  components: {ClassroomSidenav, CoursePartCard},
   mixins: [ClassroomCommon],
   data() { return {
     loading: true,
@@ -56,12 +63,12 @@ export default {
   methods: {
     async fetchData() {
       try {
-        const res = await fetch(`${this.$backend}/courses/${this.$route.params.id}`)
+        const res = await fetch(`${this.$backend}/enrolled-courses/${this.$route.params.id}`)
         const data = await res.json()
         this.course = data
         console.log(data)
         if (res.status != 200)
-          this.error = res.status
+          this.error = `${res.status}: ${res.statusText}`
         else
           this.loading = false
       }
@@ -77,7 +84,6 @@ export default {
       )
       if (window.scrollY > 160) el.classList.add('small')
       else el.classList.remove('small')
-      console.log(window.scrollY)
     }
   },
   created() {
@@ -99,6 +105,7 @@ export default {
 }
 
 .course-top-nav-wrapper {
+  z-index: 10;
   position: fixed;
   right: 0;
   top: 0;

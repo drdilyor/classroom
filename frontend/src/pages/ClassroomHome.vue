@@ -95,6 +95,7 @@ $color-gray: rgba(0, 0, 0, 0.14);
 }
 
 .small-top-nav {
+  position: relative;
   padding: 20px /* margin-bottom of .row */ 1em 0;
   border-bottom: 1px solid $color-gray;
 
