@@ -3,7 +3,7 @@
     <h1>Welcome to &lt;A&gt;Code</h1>
     <p>An open source E-Learning platform!</p>
     <p>
-      <LinkButton to="/courses" ricon="arrow_forward">Explore Courses</LinkButton>
+      <LinkButton to="/courses" class="btn-secondary" ricon="arrow_forward">Explore Courses</LinkButton>
     </p>
   </div>
 </template>

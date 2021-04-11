@@ -14,41 +14,43 @@
 
     <!-- Content -->
     <div class="row" v-else>
-      <div class="col s12 l8">
+      <div class="col-12 col-lg-5">
         <h1>{{ course.title }}</h1>
         <p>{{ course.description }}</p>
       </div>
-      <div class="col s12 l4 course-image">
-        <p><img class="responsive-img" :src="course.image_link" alt="Course image"></p>
+      <div class="col-12 col-lg-7 course-image">
+        <p><img class="img-fluid" :src="course.image_link" alt="Course image"></p>
       </div>
 
       <!-- Enroll button -->
-      <div class="col s12">
+      <div class="col-12">
         <p v-if="$auth.loggedIn()">
-          <button
+          <icon-button
             v-if="!courseEnrolled"
-            class="btn waves-effect waves-light"
+            class="btn-secondary"
+            ricon="arrow_forward"
             @click="enroll">
-            Enroll<i class="material-icons right">arrow_forward</i>
-          </button>
-          <router-link
+            Enroll
+          </icon-button>
+          <link-button
             v-else
             :to="'/classroom/course/'+courseId"
-            class="btn waves-effect waves-light">
-            Go to course<i class="material-icons right">arrow_forward</i>
-          </router-link>
+            class="btn-secondary"
+            ricon="arrow_forward">
+            Go to course
+          </link-button>
         </p>
 
         <p v-else>
           Login to enroll
-          <button class="btn waves-effect waves-light" @click="$auth.login">
-          Login<i class="material-icons right">arrow_forward</i>
-          </button>
+          <icon-button class="btn-primary ms-2" @click="$auth.login">
+          Login
+          </icon-button>
         </p>
       </div>
 
       <!-- Syllabus -->
-      <div class="col s12">
+      <div class="col-12">
         <h2 class="no-mt">Syllabus</h2>
         <p>To optimize your chances of success we have divided the course into following parts</p>
         <div class="course-part-list">
@@ -63,8 +65,13 @@
 </template>
 
 <script>
+import IconButton from '../components/ui/IconButton.vue'
 
 export default {
+  components: {
+    LinkButton: require('@/components/ui/IconLinkButton.vue').default,
+    IconButton,
+  },
   data() { return {
     loading: true,
     error: null,
