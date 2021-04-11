@@ -3,7 +3,7 @@
     <div class="container-fluid">
       <router-link to="/" class="navbar-brand">&lt;A&gt;Code</router-link>
       <div class="collapse navbar-collapse">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <ul class="navbar-nav me-auto mb-lg-0">
           <li v-for="link in navLinks" :key="link.to" class="nav-item">
             <router-link :to="link.to" class="nav-link" exact-active-class="active">{{ link.name }}</router-link>
           </li>
