@@ -4,16 +4,21 @@
       <h3>{{ course.title }}</h3>
       <p class="grey-text text-darken-2">{{ course.description }}</p>
     </div>
-    <router-link
+    <icon-link-button
       :to="'/classroom/course/'+course.id"
-      class="btn-flat waves-effect course-link">
-      Program home<i class="material-icons right">arrow_forward</i>
-    </router-link>
+      class="btn-outline-secondary border-0"
+      ricon="arrow_forward">
+      Program home</icon-link-button>
   </div>
 </template>
 
 <script>
+import IconLinkButton from '@/components/ui/IconLinkButton.vue'
+
 export default {
+  components: {
+    IconLinkButton,
+  },
   props: {
     course: {
       type: Object,
