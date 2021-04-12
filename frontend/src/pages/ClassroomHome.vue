@@ -18,8 +18,8 @@
         </p>
         <div v-else class="row">
           <h2 class="col-12 caps-header">Current enrollments</h2>
-          <div class="col-12">
-            <ClassroomCourseCard v-for="c in courses" :course="c" :key="c.id"></ClassroomCourseCard>
+          <div class="col-12" :key="c.id" v-for="c in courses">
+            <ClassroomCourseCard :course="c"></ClassroomCourseCard>
           </div>
         </div>
       </main>
@@ -76,7 +76,7 @@ export default {
   height: 100%;
   &-content {
     @media screen and (max-width: 992.9px) {
-      flex-shrink: 0;
+      // flex-shrink: 0; // This breaks the page on mobile
       min-width: calc(99vw - 1px);
     }
   }
