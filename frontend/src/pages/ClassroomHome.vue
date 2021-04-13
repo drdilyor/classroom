@@ -2,8 +2,10 @@
   <div id="app" class="app-classroom">
     <classroom-sidenav class="flex-shrink-0" :show="showSidenav" />
     <div class="flex-grow-1 app-classroom-content">
-      <header class="navbar-light shadow py-2 mb-4"> <!-- Reuse bootstrap's toggler icon -->
-        <span class="navbar-toggler-icon ms-2 d-lg-none d-inline-block" @click="showSidenav = !showSidenav"/>
+      <header class="shadow py-2 mb-4 d-flex"> <!-- Reuse bootstrap's toggler icon -->
+        <i class="material-icons ms-2 d-lg-none d-inline-block" @click="showSidenav = !showSidenav">
+          menu
+        </i>
         <span class="ps-2">
           Home
         </span>
@@ -77,7 +79,6 @@ export default {
   &-content {
     @media screen and (max-width: 992.9px) {
       // flex-shrink: 0; // This breaks the page on mobile
-      min-width: calc(99vw - 1px);
     }
   }
 }
@@ -87,4 +88,5 @@ export default {
   color: var(--bs-secondary);
   text-transform: uppercase;
 }
+
 </style>
