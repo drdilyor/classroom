@@ -48,6 +48,7 @@ export default {
   border-right: 1px solid rgba(0, 0, 0, .125);
 
   visibility: hidden;
+  overflow: auto;
   background: white;
   transition: width .3s; /* (1) */
 

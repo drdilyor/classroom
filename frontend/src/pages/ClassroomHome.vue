@@ -11,19 +11,22 @@
         </span>
       </header>
       <main class="overflow-auto container">
-        <div v-if="loading">
-          <div class="progress"><div class="indeterminate"></div></div>
-          <p>Loading...</p>
-        </div>
-        <p v-else-if="error">
-          <strong>Error</strong>: something went wrong :(
-        </p>
-        <div v-else class="row">
-          <h2 class="col-12 caps-header">Current enrollments</h2>
-          <div class="col-12" :key="c.id" v-for="c in courses">
-            <ClassroomCourseCard :course="c"></ClassroomCourseCard>
+        <!-- no .container here and the class is added to main instead
+        Because that causes overflow errors
+        -->
+          <div v-if="loading">
+            <div class="progress"><div class="indeterminate"></div></div>
+            <p>Loading...</p>
           </div>
-        </div>
+          <p v-else-if="error">
+            <strong>Error</strong>: something went wrong :(
+          </p>
+          <div v-else class="row">
+            <h2 class="col-12 caps-header">Current enrollments</h2>
+            <div class="col-12" :key="c.id" v-for="c in courses">
+              <ClassroomCourseCard :course="c"></ClassroomCourseCard>
+            </div>
+          </div>
       </main>
     </div>
   </div>
@@ -77,6 +80,7 @@ export default {
   align-items: stretch;
   height: 100%;
   &-content {
+    overflow: auto;
     @media screen and (max-width: 992.9px) {
       // flex-shrink: 0; // This breaks the page on mobile
     }
