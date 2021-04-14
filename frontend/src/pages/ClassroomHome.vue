@@ -1,61 +1,51 @@
 <template>
   <div id="app" class="app-classroom">
-    <header class="classroom-home-header">
-      <div class="small-top-nav">
-        <!-- Snippet taken from materializecss.com -->
-        <div class="container">
-          <div class="row">
-            <div class="col s12" style="display: flex; align-items: center">
-              <a
-                href="javascript:void(0)"
-                data-target="nav-mobile"
-                class="sidenav-trigger fix-micon hide-on-large-only"
-              ><i class="material-icons">menu</i></a>
-              <h1>Home</h1>
+    <classroom-sidenav class="flex-shrink-0" :show="showSidenav" />
+    <div class="flex-grow-1 app-classroom-content">
+      <header class="shadow py-2 mb-4 d-flex">
+        <i class="material-icons ms-2 d-lg-none d-inline-block" @click="showSidenav = !showSidenav">
+          menu
+        </i>
+        <span class="ps-2">
+          Home
+        </span>
+      </header>
+      <main class="overflow-auto container">
+        <!-- no .container here and the class is added to main instead
+        Because that causes overflow errors
+        -->
+          <div v-if="loading">
+            <div class="progress"><div class="indeterminate"></div></div>
+            <p>Loading...</p>
+          </div>
+          <p v-else-if="error">
+            <strong>Error</strong>: something went wrong :(
+          </p>
+          <div v-else class="row">
+            <h2 class="col-12 caps-header">Current enrollments</h2>
+            <div class="col-12" :key="c.id" v-for="c in courses">
+              <ClassroomCourseCard :course="c"></ClassroomCourseCard>
             </div>
           </div>
-        </div>
-      </div>
-      <div id="nav-mobile" class="sidenav sidenav-fixed z-depth-0 my-side-nav">
-        <ClassroomSidenav />
-      </div>
-    </header>
-    <main class="classroom-home-main">
-      <div class="container">
-        <div v-if="loading">
-          <div class="progress"><div class="indeterminate"></div></div>
-          <p>Loading...</p>
-        </div>
-        <p v-else-if="error">
-          <strong>Error</strong>: something went wrong :(
-        </p>
-        <div v-else class="row">
-          <h2 class="col s-12 caps-header">Current enrollments</h2>
-          <div class="col s12">
-            <ClassroomCourseCard v-for="c in courses" :course="c" :key="c.id"></ClassroomCourseCard>
-          </div>
-        </div>
-      </div>
-    </main>
+      </main>
+    </div>
   </div>
 </template>
 
 <script>
 import ClassroomCourseCard from '../components/ClassroomCourseCard.vue'
 import ClassroomSidenav from '../components/ClassroomSidenav.vue'
-import ClassroomCommon from '../components/ClassroomCommon.js'
 
 export default {
   components: {
     ClassroomCourseCard,
     ClassroomSidenav,
   },
-  mixins: [ClassroomCommon],
   data() { return {
     loading: true,
     error: null,
     courses: [],
-    mSidenav: null,
+    showSidenav: false,
   } },
   methods: {
     async fetchData() {
@@ -84,35 +74,23 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../assets/scss/materializevariables";
-$color-gray: rgba(0, 0, 0, 0.14);
 
-@media #{$large-and-up} {
-  .classroom-home-header,
-  .classroom-home-main {
-    padding-left: 16rem;
+.app-classroom {
+  display: flex;
+  align-items: stretch;
+  height: 100%;
+  &-content {
+    overflow: auto;
+    @media screen and (max-width: 992.9px) {
+      // flex-shrink: 0; // This breaks the page on mobile
+    }
   }
-}
-
-.small-top-nav {
-  padding: 20px /* margin-bottom of .row */ 1em 0;
-  border-bottom: 1px solid $color-gray;
-
-  & h1 {
-    font-size: 1rem;
-    margin: 0;
-  }
-}
-
-.my-side-nav {
-  width: 16rem;
-  box-shadow: none;
-  border-right: 1px solid $color-gray;
 }
 
 .caps-header {
   font-size: 1rem;
-  color: darken($secondary-color, 15%);
+  color: var(--bs-secondary);
   text-transform: uppercase;
 }
+
 </style>

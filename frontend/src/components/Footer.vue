@@ -1,16 +1,12 @@
 <template>
-  <footer class="page-footer text-center">
-    <div class="container">
-      <h5 class="white-text">&lt;A&gt;Code</h5>
-      <ul>
-        <li><a class="grey-text text-lighten-3" href="http://github.com/drdilyor/classroom">GitHub</a></li>
-        <li><a class="grey-text text-lighten-3" href="http://t.me/drdilyor">Telegram</a></li>
-      </ul>
-    </div>
-    <div class="footer-copyright">
-      <div class="container">
-      © 2021 Dilyorbek Valijonov
-      </div>
+  <footer class="bg-light pt-4">
+    <div class="container text-center">
+      <h5>&lt;A&gt;Code</h5>
+        <a class="grey-text text-lighten-3" href="http://github.com/drdilyor/classroom">GitHub</a>
+        <!-- spacer -->
+        <span class="ms-2"/>
+        <a class="grey-text text-lighten-3" href="http://t.me/drdilyor">Telegram</a>
+      <p class="mt-2">© 2021 Dilyorbek Valijonov</p>
     </div>
   </footer>
 </template>

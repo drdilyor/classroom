@@ -1,19 +1,33 @@
 <template>
-  <div class="card z-depth-1">
-    <div class="body">
+  <div class="
+    position-relative
+    d-flex
+    flex-column
+    flex-lg-row
+    align-items-start
+    align-items-lg-center
+    justify-content-lg-between
+    shadow-sm p-2 mb-2
+    border rounded">
+    <div class="course-card-body">
       <h3>{{ course.title }}</h3>
       <p class="grey-text text-darken-2">{{ course.description }}</p>
     </div>
-    <router-link
+    <icon-link-button
       :to="'/classroom/course/'+course.id"
-      class="btn-flat waves-effect course-link">
-      Program home<i class="material-icons right">arrow_forward</i>
-    </router-link>
+      class="btn-outline-secondary border-0"
+      ricon="arrow_forward">
+      Program home</icon-link-button>
   </div>
 </template>
 
 <script>
+import IconLinkButton from '@/components/ui/IconLinkButton.vue'
+
 export default {
+  components: {
+    IconLinkButton,
+  },
   props: {
     course: {
       type: Object,
@@ -24,38 +38,35 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../assets/scss/materializevariables.scss';
-.card {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 1em;
-}
-
-.body {
-  padding-bottom: 1em;
-}
-
-h3 {
-  margin: 0;
-  font-size: 1.618em;
-}
-p {
-  margin-top: .5em;
-  margin-bottom: 0;
-}
-.course-link {
-  color: darken($secondary-color, 15%);
-}
-
-@media #{$large-and-up} {
-  .card {
-    flex-direction: row;
-    align-items: center;
-  }
-  .body {
-    flex: 5;
-    padding-bottom: 0;
-  }
-}
+// .course-card {
+//   display: flex;
+//   flex-direction: column;
+//   align-items: flex-start;
+//   padding: 1em;
+//   min-height: 8rem;
+// 
+//   &-body {
+//     padding-bottom: 1em;
+//   }
+// }
+// 
+// .course-card h3 {
+//   margin: 0;
+//   font-size: 1.618em;
+// }
+// 
+// .course-link {
+//   color: var(--bs-secondary);
+// }
+// 
+// @media screen and (max-width: 992px) {
+//   .course-card {
+//     flex-direction: row;
+//     align-items: center;
+//     &-body {
+//       flex: 5;
+//       padding-bottom: 0;
+//     }
+//   }
+// }
 </style>
