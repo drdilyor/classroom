@@ -1,15 +1,12 @@
 <template>
-  <div class="card z-depth-1">
-    <span class="caps-header">Lesson {{i}}</span>
+  <router-link tag="div" class="classroom-course-part-card border rounded shadow-sm" to="#">
+    <span class="caps-header mb-2">Lesson {{i}}</span>
     <h3>{{ part.title }}</h3>
-    <p>{{ part.description }}</p>
-    <div>
-      <a href="javascript:void(0)" class="btn-small waves-effect waves-light">
-        Continue<i class="material-icons right">arrow_forward</i>
-      </a>
-    </div>
-    <hr>
-  </div>
+    <p class="flex-grow-1">{{ part.description }}</p>
+    <button class="btn btn-outline-secondary d-inline-flex" to="#">
+      Continue <i class="material-icons ms-2">arrow_forward</i>
+    </button>
+  </router-link>
 </template>
 
 <script>
@@ -27,19 +24,15 @@ export default {
 }
 </script>
 
-<style scoped>
-.card {
+<style>
+.classroom-course-part-card {
+  position: relative;
   display: flex;
   flex-direction: column;
-  min-height: 24em;
-  padding: 2em;
-}
-.card p {
-  flex: 1;
-}
-
-h3 {
-  margin: 0;
-  font-size: 1.3em;
+  align-items: flex-start;
+  min-height: 18rem;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  cursor: pointer;
 }
 </style>

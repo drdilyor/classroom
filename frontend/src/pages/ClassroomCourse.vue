@@ -2,8 +2,8 @@
   <div id="app" class="app-classroom">
     <classroom-sidenav class="flex-shrink-0" :show="showSidenav" />
     <div class="flex-grow-1 app-classroom-content p-relative">
-      <header class="shadow classroom-course-header" ref="header">
-        <div class="container h-100 d-flex align-items-center">
+      <header class="shadow classroom-course-header mb-4">
+        <div class="container py-2 d-flex align-items-center">
           <i class="material-icons d-lg-none pe-1" @click="showSidenav = !showSidenav">menu</i>
           <span class="flex-grow-1 title m-0 ps-1">{{ course.title }}</span>
           <a class="btn btn-sm btn-primary" :href="resumeLink">Resume</a>
@@ -70,24 +70,10 @@ export default {
         this.loading = false
       }
     },
-    collapseTopNav() {
-      // const el = document.querySelector(
-      //   '.app-classroom .course-top-nav-wrapper'
-      // )
-      const el = this.$refs.header
-      if (window.scrollY > 160) el.classList.add('small')
-      else el.classList.remove('small')
-    }
   },
   created() {
     this.fetchData()
   },
-  mounted() {
-    window.addEventListener('scroll', this.collapseTopNav, {passive: true})
-  },
-  beforeDestroy() {
-    window.removeEventListener('scroll', this.collapseTopNav)
-  }
 }
 </script>
 
@@ -95,36 +81,7 @@ export default {
 
 $header-height: .5em * 2 + 1em * 1.5;
 
-.classroom-course-header {
-  position: fixed;
-  z-index: 10;
-  right: 0;
-  left: 0;
-  padding: .5rem 0;
-  background: white;
-  transition: all .3s;
 
-  .sidenav.show ~ .app-classroom-content > & {
-    left: 18rem; /* Sidenav width */
-  }
-  .title {
-    font-size: 1rem;
-  }
-}
-.classroom-course-main {
-  padding-top: $header-height + 2em;
-}
-
-@media screen and (min-width: 992px) and (min-height: 480px) {
-  .classroom-course-header:not(.small) {
-    height: 16rem;
-    left: 18rem; /* Sidenav width */
-    .title {
-      font-size: 3.2rem;
-      font-weight: 200;
-    }
-  }
-}
 
 // #nav-mobile-2 {
 //   width: auto !important;

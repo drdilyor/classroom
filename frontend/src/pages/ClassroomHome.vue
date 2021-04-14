@@ -2,7 +2,7 @@
   <div id="app" class="app-classroom">
     <classroom-sidenav class="flex-shrink-0" :show="showSidenav" />
     <div class="flex-grow-1 app-classroom-content">
-      <header class="shadow py-2 mb-4 d-flex"> <!-- Reuse bootstrap's toggler icon -->
+      <header class="shadow py-2 mb-4 d-flex">
         <i class="material-icons ms-2 d-lg-none d-inline-block" @click="showSidenav = !showSidenav">
           menu
         </i>
