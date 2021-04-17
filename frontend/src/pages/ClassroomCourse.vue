@@ -54,21 +54,15 @@ export default {
   },
   methods: {
     async fetchData() {
-      try {
-        const res = await fetch(`${this.$backend}/enrolled-courses/${this.$route.params.id}`)
-        const data = await res.json()
+      this.$api.get(`/enrolled-courses/${this.$route.params.id}`)
+      .then(data => {
         this.course = data
-        console.log(data)
-        if (res.status != 200)
-          this.error = `${res.status}: ${res.statusText}`
-        else
-          this.loading = false
-      }
-      catch (err) {
-        console.log(err)
+        this.loading = false
+      })
+      .catch (err => {
         this.error = err
         this.loading = false
-      }
+      })
     },
   },
   created() {

@@ -110,17 +110,12 @@ export default {
     enroll(e) {
       console.assert(this.$auth.loggedIn())
       e.target.disabled = true
-      fetch(`${this.$backend}/courses/${this.courseId}/enroll`, {
-        method: 'PUT',
-        headers: {Authorization: 'Bearer ' + this.$auth.getJwt()},
-      })
-      .then(res => res.json())
+      this.$api.request('PUT', `${this.$backend}/courses/${this.courseId}/enroll`)
       .then(data => {
         M.toast({html: 'Enrolled successfull!'})
         this.$router.push('/classroom')
       })
       .catch(err => {
-        console.error(err)
         M.toast({html: 'Something went wrong!'})
         e.target.disabled = false
       })

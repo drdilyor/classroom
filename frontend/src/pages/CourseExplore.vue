@@ -35,8 +35,7 @@ export default {
     error: false,
   } },
   created() {
-    fetch(this.$backend + '/courses')
-    .then(res => res.json())
+    this.$api.get('/courses')
     .then(data => {
       this.courses = data
       this.loading = false
