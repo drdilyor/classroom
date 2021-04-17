@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 
 from pydantic import BaseModel
 
@@ -34,11 +34,14 @@ class Lesson(BaseModel):
     class Config:
         orm_mode = True
 
-
 class CourseDetailed(Course):
     course_parts: List[CoursePart]
 
 
-class CoursePartDetail(CoursePart):
+class CoursePartDetailed(CoursePart):
     lessons: List[Lesson]
+
+class CourseVeryDetailed(Course):
+    course_parts: List[CoursePartDetailed]
+
 

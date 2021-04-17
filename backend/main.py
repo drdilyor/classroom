@@ -72,24 +72,34 @@ async def enroll_course(course_id: int, payload=Depends(requires_auth())):
     return {'created': created}
 
 
-# Soon this will change
-app.get('/enrolled-courses/{course_id}', response_model=s.CourseDetailed)(get_course)
-
-
-@app.get('/enrolled-course-parts/{id}', response_model=s.CoursePartDetail)
-async def get_detailed_course_part(id: int, payload=Depends(requires_auth())):  # noqa
-    """Returns lessons as well"""
-    cp = await CoursePart.get_or_none(id=id).prefetch_related('lessons') or e404()
-    cm = await CourseMember.get_or_none(
+@app.get('/enrolled-courses/{id}', response_model=s.CourseVeryDetailed)
+async def enrolled_course(id: int, payload=Depends(requires_auth())):  # noqa
+    print('start')
+    # check if user is enrolled
+    member = await CourseMember.get_or_none(
         user_sub=payload['sub'],
-        course_id=cp.course_id,
-    ) or e404()
-    print(payload['sub'])
-    lessons = await cp.lessons
-    for L in lessons:
-        L.is_viewed = await LessonViewed.get_or_none(lesson=L, user_sub=payload['sub']) is not None
-    return s.CoursePartDetail(**cp.__dict__, lessons=lessons)
+        course_id=id,
+    ) or abort(403)
 
+    query = Course.filter(id=id).prefetch_related('course_parts__lessons')
+
+    course: Course = await query.get_or_none() or e404()
+    parts = await course.course_parts
+
+    course_dict = {**course.__dict__}
+    # 'cause pydantic doesn't await on Course.lessons
+    course_dict['course_parts'] = [await format_course_part(i, payload['sub']) for i in parts]
+
+    return course_dict
+
+async def format_course_part(part, sub):
+    part_dict = {**part.__dict__}
+    part_dict['lessons'] = []
+
+    for L in await part.lessons:  # noqa
+        L.is_viewed = await LessonViewed.get_or_none(lesson=L, user_sub=sub) is not None
+        part_dict['lessons'].append(L)
+    return part_dict
 
 @app.put('/lessons/{lesson_id}/viewed')
 async def view_lesson(lesson_id: int, payload=Depends(requires_auth())):

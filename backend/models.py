@@ -12,6 +12,8 @@ class Course(Model):
     description = TextField()
     image_link = CharField(200)
 
+    course_parts: ReverseRelation['CoursePart']
+
     def __str__(self):
         return self.title
 
