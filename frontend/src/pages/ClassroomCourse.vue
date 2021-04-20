@@ -2,6 +2,12 @@
   <div id="app" class="app-classroom">
     <classroom-sidenav class="flex-shrink-0" :show="showSidenav" />
     <div class="flex-grow-1 app-classroom-content p-relative">
+      <!-- Loading -->
+      <div v-if="course === null">
+        <h1>Loading...</h1>
+        <div class="progress"><div class="indeterminate"></div></div>
+      </div>
+      <template v-else>
       <header class="shadow classroom-course-header mb-4">
         <div class="container py-2 d-flex align-items-center">
           <i class="material-icons d-lg-none pe-1" @click="showSidenav = !showSidenav">menu</i>
@@ -11,18 +17,7 @@
       </header>
       <main class="overflow-auto classroom-course-main">
         <div class="container">
-          <!-- Error -->
-          <div v-if="error">
-            <h1>Oops...</h1>
-            <p>Something went wrong</p>
-          </div>
-
-          <!-- Loading -->
-          <div v-else-if="loading">
-            <h1>Loading...</h1>
-            <div class="progress"><div class="indeterminate"></div></div>
-          </div>
-          <div v-else>
+          <div>
             <CoursePartCard
               v-for="(cp, index) in course.course_parts"
               :key="cp.id"
@@ -31,6 +26,7 @@
           </div>
         </div>
       </main>
+      </template>
     </div>
   </div>
 </template>
@@ -42,31 +38,31 @@ import CoursePartCard from '../components/ClassroomCoursePartCard.vue'
 export default {
   components: {ClassroomSidenav, CoursePartCard},
   data() { return {
-    loading: true,
-    error: null,
-    course: {},
     showSidenav: false,
   } },
   computed: {
     resumeLink() {
       return 'javascript:void(0)'
-    }
+    },
+    course() {
+      const res = this.$store.getters.currentCourse 
+      console.log({res})
+      return res
+    },
   },
   methods: {
     async fetchData() {
-      this.$api.get(`/enrolled-courses/${this.$route.params.id}`)
-      .then(data => {
-        this.course = data
-        this.loading = false
-      })
-      .catch (err => {
-        this.error = err
+      this.$api.get('/enrolled-courses/'+this.$route.params.id)
+      .then(course => {
+        this.$store.dispatch('setCourse', course)
+        this.course = course
         this.loading = false
       })
     },
   },
   created() {
-    this.fetchData()
+    //this.fetchData()
+    this.$store.dispatch('setCourse', this.$route.params.id)
   },
 }
 </script>
