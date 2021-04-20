@@ -2,30 +2,28 @@
   <div id="app" class="app-classroom">
     <classroom-sidenav class="flex-shrink-0" :show="showSidenav" />
     <div class="flex-grow-1 app-classroom-content p-relative">
+          
       <!-- Loading -->
-      <div v-if="course === null">
-        <h1>Loading...</h1>
-        <div class="progress"><div class="indeterminate"></div></div>
+      <div v-if="!course">
+        <Loading/>
       </div>
       <template v-else>
-      <header class="shadow classroom-course-header mb-4">
-        <div class="container py-2 d-flex align-items-center">
-          <i class="material-icons d-lg-none pe-1" @click="showSidenav = !showSidenav">menu</i>
-          <span class="flex-grow-1 title m-0 ps-1">{{ course.title }}</span>
-          <a class="btn btn-sm btn-primary" :href="resumeLink">Resume</a>
-        </div>
-      </header>
-      <main class="overflow-auto classroom-course-main">
-        <div class="container">
-          <div>
+        <header class="shadow classroom-course-header mb-4">
+          <div class="container py-2 d-flex align-items-center">
+            <i class="material-icons d-lg-none pe-1" @click="showSidenav = !showSidenav">menu</i>
+            <span class="flex-grow-1 title m-0 ps-1">{{ course.title }}</span>
+            <a class="btn btn-sm btn-primary" :href="resumeLink">Resume</a>
+          </div>
+        </header>
+        <main class="overflow-auto classroom-course-main">
+          <div class="container">
             <CoursePartCard
               v-for="(cp, index) in course.course_parts"
               :key="cp.id"
               :part="cp"
               :i="index+1"/>
           </div>
-        </div>
-      </main>
+        </main>
       </template>
     </div>
   </div>
@@ -34,9 +32,10 @@
 <script>
 import ClassroomSidenav from '../components/ClassroomSidenav.vue'
 import CoursePartCard from '../components/ClassroomCoursePartCard.vue'
+import Loading from '../components/Loading.vue'
 
 export default {
-  components: {ClassroomSidenav, CoursePartCard},
+  components: {ClassroomSidenav, CoursePartCard, Loading},
   data() { return {
     showSidenav: false,
   } },
