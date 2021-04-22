@@ -1,4 +1,6 @@
 import asyncio
+import logging
+import os
 from typing import List
 
 from fastapi import FastAPI, HTTPException, Depends, Request
@@ -10,6 +12,12 @@ from auth import requires_auth, AuthError
 from models import *
 import schemas as s
 from util import abort
+
+logging.basicConfig(level=getattr(
+    logging,
+    os.environ.get('LOG_LEVEL', 'DEBUG').upper(),
+    logging.DEBUG,
+))
 
 app = FastAPI()
 
