@@ -49,22 +49,8 @@ export default {
   } },
   methods: {
     async fetchData() {
-      try {
-        const res = await fetch(`${this.$backend}/enrolled-courses`, {
-          headers: {Authorization: 'Bearer '+this.$auth.getJwt()}
-        })
-        const data = await res.json()
-        this.courses = data
-        //console.log(data)
-        if (res.status != 200)
-          this.error = res.status
-      }
-      catch (err) {
-        this.error = err
-      }
-      finally {
-        this.loading = false
-      }
+      this.courses = await this.$api.get('/enrolled-courses')
+      this.loading = false
     },
   },
   created() {

@@ -117,6 +117,7 @@ export default {
         if (data.created)
         this.$toasted.show('Enrolled successfull!', {
           icon: {name: 'done'},
+          duration: 3000,
           action: {
             text: 'GREAT',
             onClick: (e, toast) => toast.goAway(0),

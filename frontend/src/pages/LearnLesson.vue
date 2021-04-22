@@ -9,7 +9,7 @@
         <header class="shadow classroom-course-header mb-4">
           <div class="container py-2 d-flex align-items-center">
             <i class="material-icons d-lg-none pe-1" @click="showSidenav = !showSidenav">menu</i>
-            Title
+            {{ lesson.title }}
           </div>
         </header>
         <main class="overflow-auto classroom-course-main">
@@ -36,8 +36,19 @@ export default {
       return this.$store.getters.currentLesson
     }
   },
-  created() {
-    this.$store.dispatch('setLesson', +this.$route.params.id)
+  methods: {
+    onCreated() {
+      const id = +this.$route.params.id
+      this.$store.dispatch('setLesson', id)
+      this.$store.dispatch('lessonViewed', id)
+    }
   },
+  created() {
+    this.onCreated()
+  },
+  beforeRouteUpdate(to, from, next) {
+    next()
+    this.onCreated()
+  }
 }
 </script>
