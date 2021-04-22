@@ -12,10 +12,6 @@ export default {
   props: {
     licon: {type: String, required: false},
     ricon: {type: String, required: false},
-    to: {
-      type: String,
-      required: true,
-    }
   }
 }
 </script>

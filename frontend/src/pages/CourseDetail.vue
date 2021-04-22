@@ -29,7 +29,7 @@
             v-if="!courseEnrolled"
             class="btn-secondary"
             ricon="arrow_forward"
-            @click="enroll">
+            @click.native="enroll">
             Enroll
           </icon-button>
           <link-button
@@ -43,7 +43,7 @@
 
         <p v-else>
           Login to enroll
-          <icon-button class="btn-primary ms-2" @click="$auth.login">
+          <icon-button class="btn-primary ms-2" @click.native="$auth.login">
           Login
           </icon-button>
         </p>
@@ -66,10 +66,11 @@
 
 <script>
 import IconButton from '../components/ui/IconButton.vue'
+import LinkButton from '@/components/ui/IconLinkButton.vue'
 
 export default {
   components: {
-    LinkButton: require('@/components/ui/IconLinkButton.vue').default,
+    LinkButton,
     IconButton,
   },
   data() { return {
@@ -108,15 +109,23 @@ export default {
       }
     },
     enroll(e) {
+      console.log('enroll');
       console.assert(this.$auth.loggedIn())
       e.target.disabled = true
-      this.$api.request('PUT', `${this.$backend}/courses/${this.courseId}/enroll`)
+      this.$api.request('PUT', `/courses/${this.courseId}/enroll`)
       .then(data => {
-        M.toast({html: 'Enrolled successfull!'})
+        if (data.created)
+        this.$toasted.show('Enrolled successfull!', {
+          icon: {name: 'done'},
+          action: {
+            text: 'GREAT',
+            onClick: (e, toast) => toast.goAway(0),
+          },
+        })
         this.$router.push('/classroom')
       })
       .catch(err => {
-        M.toast({html: 'Something went wrong!'})
+        this.$toasted.show('Something went wrong!', {icon: {name: 'error'}})
         e.target.disabled = false
       })
     },
