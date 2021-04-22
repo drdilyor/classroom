@@ -22,7 +22,6 @@ class CoursePart(BaseModel):
     class Config:
         orm_mode = True
 
-
 class Lesson(BaseModel):
     id: int
     title: str
@@ -33,6 +32,12 @@ class Lesson(BaseModel):
 
     class Config:
         orm_mode = True
+
+class LessonInfo(BaseModel):
+    id: int
+    title: str
+    course_part_id: int
+    course_id: int
 
 class CourseDetailed(Course):
     course_parts: List[CoursePart]

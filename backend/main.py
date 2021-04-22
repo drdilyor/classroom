@@ -101,6 +101,19 @@ async def format_course_part(part, sub):
         part_dict['lessons'].append(L)
     return part_dict
 
+
+@app.get('/lessons/{lesson_id}', response_model=s.LessonInfo)
+async def get_lesson_info(
+    lesson_id: int,
+    payload=Depends(requires_auth()),
+):
+    lesson = await Lesson.get_or_none(id=lesson_id) or e404()
+    return {
+        **lesson.__dict__,
+        'course_id': (await lesson.course_part).course_id,
+    }
+
+
 @app.put('/lessons/{lesson_id}/viewed')
 async def view_lesson(lesson_id: int, payload=Depends(requires_auth())):
     lesson = await Lesson.get_or_none(id=lesson_id) or abort(404)
