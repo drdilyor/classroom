@@ -11,6 +11,9 @@
         <h2>{{ course_part_title }}</h2>
       </div>
     </router-link>
+    <ul v-if="part" class="lesson-list">
+      <li v-for="lesson in part.lessons" :key="lesson.id">{{ lesson.title }}</li>
+    </ul>
   </div>
 </template>
 
@@ -28,6 +31,11 @@ export default {
       default() { return {
         title: 'blah',
       } }
+    },
+  },
+  computed: {
+    part() {
+      return this.$store.getters.currentPart
     },
   }
 }

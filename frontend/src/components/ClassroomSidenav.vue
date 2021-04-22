@@ -3,25 +3,17 @@
     class="sidenav"
     :class="{show}" :style="{visibility: show}">
     <slot>
-      <router-link class="sidenav-brand" to="/">&lt;A&gt;code</router-link>
-      <ul class="flex-grow-1 mb-0">
-        <li><icon-link :btn="false" to="/classroom" licon="home">
-          Home</icon-link></li>
-        <li><icon-link :btn="false" to="/courses" licon="dashboard">
-          Catalog</icon-link></li>
-      </ul>
-      <ul class="mb-0">
-        <li><icon-link :btn="false" to="/profile" licon="person">Profile</icon-link></li>
-      </ul>
+      <classroom-sidenav-default/>
     </slot>
   </div>
 </template>
 
 <script>
+import IconLink from '@/components/ui/IconLinkButton.vue'
+import ClassroomSidenavDefault from './ClassroomSidenavDefault.vue'
+
 export default {
-  components: {
-    IconLink: require('@/components/ui/IconLinkButton.vue').default,
-  },
+  components: {IconLink, ClassroomSidenavDefault},
   props: {
     show: {
       type: Boolean,
@@ -66,24 +58,5 @@ export default {
     transition: width .3s, visibility 0s .3s; /* (1) */
   }
   
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  li {
-    padding: 1rem 3rem;
-  }
-  a {
-    width: 100%;
-    text-decoration: none;
-    color: black;
-  }
-  .sidenav-brand {
-    display: block;
-    padding: .5rem 0;
-    background: var(--bs-light);
-    font-size: 1.6rem;
-    text-align: center;
-  }
 }
 </style>
