@@ -34,6 +34,20 @@ export default {
     currentCourse(state) {
       return state.currentCourse
     },
+    currentPart(state) {
+      if (state.currentLessonId === null || state.currentCourse === null)
+        return null
+      let result = null
+      for (const part of state.currentCourse.course_parts) {
+        for (const lesson of part.lessons) {
+          if (lesson.id === state.currentLessonId) {
+            return part
+          }
+        }
+      }
+      console.log({currentPart: result})
+      return result
+    },
     currentLesson(state, { getLesson }) {
       return getLesson(state.currentLessonId)
     },
