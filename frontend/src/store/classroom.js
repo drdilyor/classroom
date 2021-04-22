@@ -10,7 +10,9 @@ export default {
     }
   },
   actions: {
-    async setCourse({ commit }, courseId) {
+    async setCourse({ commit, getters }, courseId) {
+      if (getters.currentCourse?.id == courseId)
+        return
       commit('setCourse', null)
       api.get('/enrolled-courses/'+courseId)
       .then(course => commit('setCourse', course))
