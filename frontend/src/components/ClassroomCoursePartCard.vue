@@ -35,7 +35,7 @@ export default {
     },
     nextLessonLink() {
       const next = this.nextLesson
-      console.log({next})
+      //console.log({next})
       return next ? '/classroom/lesson/' + next : '#'
     }
   }

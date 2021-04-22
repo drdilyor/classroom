@@ -85,12 +85,12 @@ export default {
         const res = await fetch(`${this.$backend}/courses/${this.courseId}`)
         const data = await res.json()
         this.course = data
-        console.log(data)
+        //console.log(data)
         if (res.status != 200)
           this.error = res.status
 
         if (this.$auth.loggedIn()) {
-          console.log('logged in')
+          //console.log('logged in')
           this.courseEnrolled = (await (await
             fetch(`${this.$backend}/courses/${this.courseId}/is-enrolled`, {
               headers: {Authorization: 'Bearer ' + this.$auth.getJwt()}

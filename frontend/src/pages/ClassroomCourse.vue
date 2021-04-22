@@ -32,10 +32,9 @@
 <script>
 import ClassroomSidenav from '../components/ClassroomSidenav.vue'
 import CoursePartCard from '../components/ClassroomCoursePartCard.vue'
-import Loading from '../components/Loading.vue'
 
 export default {
-  components: {ClassroomSidenav, CoursePartCard, Loading},
+  components: {ClassroomSidenav, CoursePartCard},
   data() { return {
     showSidenav: false,
   } },
@@ -45,7 +44,7 @@ export default {
     },
     course() {
       const res = this.$store.getters.currentCourse 
-      console.log({res})
+      //console.log({res})
       return res
     },
   },

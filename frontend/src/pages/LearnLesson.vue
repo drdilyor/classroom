@@ -4,17 +4,21 @@
       <lesson-sidenav/>
     </classroom-sidenav>
     <div class="flex-grow-1 app-classroom-content p-relative">
-      <header class="shadow classroom-course-header mb-4">
-        <div class="container py-2 d-flex align-items-center">
-          <i class="material-icons d-lg-none pe-1" @click="showSidenav = !showSidenav">menu</i>
-          Title
-        </div>
-      </header>
-      <main class="overflow-auto classroom-course-main">
-        <div class="container">
-          Lesson page
-        </div>
-      </main>
+      <Loading v-if="!lesson"/>
+      <template v-else>
+        <header class="shadow classroom-course-header mb-4">
+          <div class="container py-2 d-flex align-items-center">
+            <i class="material-icons d-lg-none pe-1" @click="showSidenav = !showSidenav">menu</i>
+            Title
+          </div>
+        </header>
+        <main class="overflow-auto classroom-course-main">
+          <div class="container">
+            Lesson {{ lesson.id }}
+          </div>
+        </main>
+      </template>
+      
     </div>
   </div>
 </template>
@@ -27,8 +31,13 @@ export default {
   data() { return {
     showSidenav: false,
   } },
+  computed: {
+    lesson() {
+      return this.$store.getters.currentLesson
+    }
+  },
   created() {
-    this.$store.dispatch('setLesson', this.$route.params.id)
+    this.$store.dispatch('setLesson', +this.$route.params.id)
   },
 }
 </script>

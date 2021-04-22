@@ -55,7 +55,7 @@ export default {
         })
         const data = await res.json()
         this.courses = data
-        console.log(data)
+        //console.log(data)
         if (res.status != 200)
           this.error = res.status
       }

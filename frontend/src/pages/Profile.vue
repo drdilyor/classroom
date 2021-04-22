@@ -16,7 +16,6 @@
 <script>
 export default {
   created() {
-    console.log(this.$route.hash);
     const match = this.$route.hash.match(/^#access_token=(.*?)&/)
 
     if (match) {

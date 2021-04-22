@@ -22,12 +22,12 @@ const api = {
     }
     if (auth.loggedIn())
       fetchArgs.headers.Authorization = `Bearer ${auth.getJwt()}`
-    console.log({fetchArgs})
+    //console.log({fetchArgs})
     try {
       const res = await fetch(`${api.backend}/${endpoint}`, Object.assign(fetchArgs, options))
       switch(res.status) {
         case 200:
-          console.log('ok')
+          //console.log('ok')
           break
         case 401:
           // Error with JWT, obtain a new one

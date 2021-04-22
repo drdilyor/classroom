@@ -7,10 +7,13 @@ import auth from './auth'
 import api from './api'
 import store from './store'
 
+import Loading from '@/components/Loading.vue'
+
 Vue.config.productionTip = false
 Vue.prototype.$backend = 'http://localhost:8000'
 Vue.prototype.$auth = auth
 Vue.prototype.$api = api
+Vue.component('Loading', Loading)
 
 new Vue({
   router,
