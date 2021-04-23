@@ -13,12 +13,13 @@
           </div>
         </header>
         <main class="overflow-auto classroom-course-main">
-          <div class="container">
-            Lesson {{ lesson.id }}
+          <div class="container lesson-content">
+            <vue-markdown class="content" :key="'md'+markdownComponentKey">
+              {{ lesson.content }}
+            </vue-markdown>
           </div>
         </main>
       </template>
-      
     </div>
   </div>
 </template>
@@ -30,9 +31,11 @@ export default {
   components: {ClassroomSidenav, LessonSidenav},
   data() { return {
     showSidenav: false,
+    markdownComponentKey: 0,
   } },
   computed: {
     lesson() {
+      console.log('lesson!')
       return this.$store.getters.currentLesson
     }
   },
@@ -40,7 +43,11 @@ export default {
     onCreated() {
       const id = +this.$route.params.id
       this.$store.dispatch('setLesson', id)
-      this.$store.dispatch('lessonViewed', id)
+      .then(() => {
+        this.markdownComponentKey += 1
+        if (this.lesson && !this.lesson.is_viewed)
+          this.$store.dispatch('lessonViewed', id)
+      })
     }
   },
   created() {

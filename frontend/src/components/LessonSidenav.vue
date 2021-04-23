@@ -13,7 +13,7 @@
     </router-link>
     <ul v-if="part" class="lesson-list">
       <router-link
-        v-for="lesson in part.lessons" :key="lesson.id"
+        v-for="(lesson, i) in part.lessons" :key="lesson.id"
         tag="li"
         :to="'/classroom/lesson/'+lesson.id"
         exact-active-class="active"
@@ -21,7 +21,9 @@
         <i class="material-icons lesson-status" :class="{done: lesson.is_viewed}">
           {{ lesson.is_viewed ? 'done' : 'circle' }}
         </i>
-        <span class="lesson">{{ lesson.title }}</span>
+        <span class="lesson">
+          {{ i+1 }}. {{ lesson.title }}
+        </span>
       </router-link>
     </ul>
   </div>

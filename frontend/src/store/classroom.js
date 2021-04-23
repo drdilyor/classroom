@@ -22,7 +22,7 @@ export default {
     async setCourse({ commit, getters }, courseId) {
       if (getters.currentCourse?.id == courseId)
         return
-      console.log('setCourse cache miss '+courseId);
+      //console.log('setCourse cache miss '+courseId);
       commit('setCourse', null)
       api.get('/enrolled-courses/'+courseId)
       .then(course => commit('setCourse', course))
@@ -30,7 +30,7 @@ export default {
     
     async setLesson({ commit, getters, dispatch }, lessonId) {
       commit('setLessonId', lessonId)
-      console.log('setLesson '+lessonId)
+      //console.log('setLesson '+lessonId)
       if (typeof(getters.getLesson(lessonId)) === 'object')
         return
       dispatch('setCourse', (await api.get('/lessons/'+lessonId)).course_id)
@@ -63,7 +63,7 @@ export default {
         }
       }
       
-      console.log({currentPart: result})
+      //console.log({currentPart: result})
       return result
     },
     currentLesson(state, { getLesson }) {

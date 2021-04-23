@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueToasted from 'vue-toasted';
+import VueMarkdown from 'vue-markdown';
 import './assets/styles/styles.scss'
 
 import App from './App.vue'
@@ -12,7 +13,9 @@ import Loading from '@/components/Loading.vue'
 
 Vue.use(VueToasted, {
     iconPack : 'material',
-});
+})
+
+Vue.component('vue-markdown', VueMarkdown)
 
 Vue.config.productionTip = false
 Vue.prototype.$backend = 'http://localhost:8000'
