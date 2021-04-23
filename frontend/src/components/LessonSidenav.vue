@@ -21,7 +21,7 @@
         <i class="material-icons lesson-status" :class="{done: lesson.is_viewed}">
           {{ lesson.is_viewed ? 'done' : 'circle' }}
         </i>
-        <span class="lesson overflow-hidden">{{ lesson.title }}</span>
+        <span class="lesson">{{ lesson.title }}</span>
       </router-link>
     </ul>
   </div>
@@ -60,6 +60,7 @@ export default {
   height: 100%;
   h2 {
     font-size: 1em;
+    margin: 0;
   }
   a {
     text-decoration: none;
@@ -74,6 +75,7 @@ export default {
   list-style-type: none;
   padding: 0;
   margin-bottom: 0;
+  overflow: auto;
   li {
     display: flex;
     align-items: center;
@@ -90,6 +92,12 @@ export default {
       color: black;
     }
   }
+  .lesson {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
   .lesson-status {
     flex-shrink: 0;
     width: 48px;
