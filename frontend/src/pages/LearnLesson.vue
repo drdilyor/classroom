@@ -25,7 +25,7 @@
             <vue-markdown class="content" :key="'md'+markdownComponentKey">
               {{ lesson.content }}
             </vue-markdown>
-            <div class="footer d-flex justify-content-end p-4">
+            <div class="footer d-flex justify-content-end py-4">
               <icon-link-button
                 v-if="nextLesson !== null"
                 class="btn-outline-primary"
@@ -37,7 +37,8 @@
                 v-else
                 class="btn-outline-success"
                 :to="'/classroom/course/'+$store.getters.currentCourse.id"
-                ricon="done">
+                ricon="done"
+                @click.native="partDone">
                 Done
               </icon-link-button>
             </div>
@@ -85,6 +86,16 @@ export default {
         this.markdownComponentKey += 1
         if (this.lesson && !this.lesson.is_viewed)
           this.$store.dispatch('lessonViewed', id)
+      })
+    },
+    partDone() {
+      this.$toasted.show('Congratulations! Keep moving on', {
+        icon: {name: 'trending_up'},
+        duration: 3000,
+          action: {
+            text: 'GREAT',
+            onClick: (e, toast) => toast.goAway(0),
+          },
       })
     }
   },
