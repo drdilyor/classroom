@@ -25,6 +25,22 @@
             <vue-markdown class="content" :key="'md'+markdownComponentKey">
               {{ lesson.content }}
             </vue-markdown>
+            <div class="footer d-flex justify-content-end p-4">
+              <icon-link-button
+                v-if="nextLesson !== null"
+                class="btn-outline-primary"
+                :to="nextLesson"
+                ricon="arrow_forward">
+                Next
+              </icon-link-button>
+              <icon-link-button
+                v-else
+                class="btn-outline-success"
+                :to="'/classroom/course/'+$store.getters.currentCourse.id"
+                ricon="done">
+                Done
+              </icon-link-button>
+            </div>
           </div>
         </main>
       </template>
@@ -35,8 +51,9 @@
 <script>
 import ClassroomSidenav from '@/components/ClassroomSidenav.vue'
 import LessonSidenav from '@/components/LessonSidenav.vue'
+import IconLinkButton from '../components/ui/IconLinkButton.vue'
 export default {
-  components: {ClassroomSidenav, LessonSidenav},
+  components: {ClassroomSidenav, LessonSidenav, IconLinkButton},
   data() { return {
     showSidenav: false,
     markdownComponentKey: 0,
@@ -45,6 +62,19 @@ export default {
     lesson() {
       console.log('lesson!')
       return this.$store.getters.currentLesson
+    },
+    nextLesson() {
+      const part = this.$store.getters.currentPart
+      const lesson = this.lesson
+      const lessonIndex = part.lessons.findIndex(L => L.id == lesson.id)
+      if (lessonIndex === part.lessons.length - 1)
+        // last lesson
+        return null
+      else
+        return String(part.lessons[lessonIndex + 1].id)
+    },
+    nextPart() {
+      return "2"
     }
   },
   methods: {
