@@ -12,7 +12,11 @@
           <div class="container py-2 d-flex align-items-center">
             <i class="material-icons d-lg-none pe-1" @click="showSidenav = !showSidenav">menu</i>
             <span class="flex-grow-1 title m-0 ps-1">{{ course.title }}</span>
-            <a class="btn btn-sm btn-primary" :href="resumeLink">Resume</a>
+            <router-link
+              v-if="resumeLesson !== null"
+              class="btn btn-sm btn-primary"
+              :to="'/classroom/lesson/'+resumeLesson.id"
+              :title="resumeLesson.title">Resume</router-link>
           </div>
         </header>
         <main class="overflow-auto classroom-course-main">
@@ -39,8 +43,12 @@ export default {
     showSidenav: false,
   } },
   computed: {
-    resumeLink() {
-      return 'javascript:void(0)'
+    resumeLesson() {
+      for (const part of this.course.course_parts)
+        for (const lesson of part.lessons)
+          if (!lesson.is_viewed)
+            return lesson
+      return null
     },
     course() {
       const res = this.$store.getters.currentCourse 
