@@ -6,14 +6,22 @@
     <div class="flex-grow-1 app-classroom-content p-relative">
       <Loading v-if="!lesson"/>
       <template v-else>
-        <header class="shadow classroom-course-header mb-4">
+        <header class="shadow classroom-lesson-header mb-4">
           <div class="container py-2 d-flex align-items-center">
             <i class="material-icons d-lg-none pe-1" @click="showSidenav = !showSidenav">menu</i>
-            {{ lesson.title }}
+            <strong>{{ lesson.title }}</strong>
           </div>
         </header>
         <main class="overflow-auto classroom-course-main">
           <div class="container lesson-content">
+            <div class="video-wrapper">
+              <iframe
+                class="video"
+                width="640"
+                height="360"
+                allowfullscreen="1"
+                :src="`https://www.youtube.com/embed/${lesson.video}`"/>
+            </div>
             <vue-markdown class="content" :key="'md'+markdownComponentKey">
               {{ lesson.content }}
             </vue-markdown>
@@ -59,3 +67,21 @@ export default {
   }
 }
 </script>
+
+<style>
+.classroom-lesson-header .container,
+.lesson-content {
+  max-width: 640px;
+}
+.lesson-content .video-wrapper {
+  position: relative;
+  height: 360px;
+  max-width: 640px;
+  margin: 0 auto; /* is this really needed? */
+}
+.lesson-content .video {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+</style>
