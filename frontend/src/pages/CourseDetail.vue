@@ -83,20 +83,11 @@ export default {
   methods: {
     async fetchData() {
       try {
-        const res = await fetch(`${this.$backend}/courses/${this.courseId}`)
-        const data = await res.json()
-        this.course = data
-        //console.log(data)
-        if (res.status != 200)
-          this.error = res.status
-
+        this.course = await this.$api.get(`/courses/${this.courseId}`)
         if (this.$auth.loggedIn()) {
-          //console.log('logged in')
-          this.courseEnrolled = (await (await
-            fetch(`${this.$backend}/courses/${this.courseId}/is-enrolled`, {
-              headers: {Authorization: 'Bearer ' + this.$auth.getJwt()}
-            })
-          ).json()).is_enrolled
+          this.courseEnrolled = (await this.$api.get(
+            `/courses/${this.courseId}/is-enrolled`
+          )).is_enrolled
           this.loading = false
         }
         else {

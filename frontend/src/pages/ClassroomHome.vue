@@ -69,6 +69,7 @@ export default {
     overflow: auto;
     @media screen and (max-width: 992.9px) {
       flex-shrink: 0; // This breaks the page on mobile
+      max-width: calc(100% - 2px);
     }
   }
 }

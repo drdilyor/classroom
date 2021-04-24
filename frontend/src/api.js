@@ -5,7 +5,7 @@ function required() {
 }
 
 const api = {
-  backend: 'http://localhost:8000',
+  backend: require('@/environment').backend,
   get(...args) {
     return api.request('GET', ...args)
   },
