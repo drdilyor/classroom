@@ -1,3 +1,5 @@
+import os
+
 from fastapi import FastAPI
 from fastapi_admin.factory import app as admin_app
 from fastapi_admin.models import AbstractUser
@@ -51,8 +53,10 @@ class AdminUser(AbstractUser):
 
 
 async def init_tortoise():
+    db_url = os.environ.get('DATABASE', 'sqlite://db.sqlite3')
+    print(f'{db_url=}')
     await Tortoise.init(
-        db_url='sqlite://db.sqlite3',
+        db_url=db_url,
         modules={'models': ['models']},
     )
     await Tortoise.generate_schemas()
