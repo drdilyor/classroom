@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="app-index">
     <Header></Header>
-    <main>
+    <main class="site-main">
       <RouterView></RouterView>
     </main>
     <Footer></Footer>
@@ -34,5 +34,11 @@ html, body, .app-index {
 
 .app-index main {
   flex: 1;
+}
+</style>
+
+<style>
+.site-main {
+  padding: 0 1em;
 }
 </style>

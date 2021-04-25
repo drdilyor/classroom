@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container content">
     <!-- Error -->
     <div v-if="error">
       <h1>Server error</h1>
@@ -13,52 +13,52 @@
     </div>
 
     <!-- Content -->
-    <div class="row" v-else>
-      <div class="col-12 col-lg-5">
+    <div class="columns is-vcentered" v-else>
+      <div class="column is-5">
         <h1>{{ course.title }}</h1>
         <p>{{ course.description }}</p>
       </div>
-      <div class="col-12 col-lg-7 course-image">
+      <div class="column is-7">
         <p><img class="img-fluid" :src="course.image_link" alt="Course image"></p>
       </div>
 
       <!-- Enroll button -->
-      <div class="col-12">
+    </div>
+    <div class="columns">
+      <div class="column is-half is-offset-one-quarter">
         <p v-if="$auth.loggedIn()">
-          <icon-button
+          <b-button
             v-if="!courseEnrolled"
-            class="btn-secondary"
-            ricon="arrow_forward"
-            @click.native="enroll">
+            type="is-primary is-fullwidth"
+            @click="enroll">
             Enroll
-          </icon-button>
-          <link-button
+          </b-button>
+          <b-button
             v-else
-            :to="'/classroom/course/'+courseId"
-            class="btn-secondary"
-            ricon="arrow_forward">
-            Go to course
-          </link-button>
+            tag="router-link"
+            type="is-primary is-light is-fullwidth"
+            :to="'/classroom/course/'+courseId">
+            Go to course  
+          </b-button>
         </p>
-
-        <p v-else>
-          Login to enroll
-          <icon-button class="btn-primary ms-2" @click.native="$auth.login">
-          Login
-          </icon-button>
-        </p>
+        <template v-else>
+          <p class="has-text-centered">
+            Login to enroll
+          </p>
+          <b-button type="is-primary is-fullwidth" @click="$auth.login">
+            Login
+          </b-button>
+        </template>
       </div>
+    </div>
 
       <!-- Syllabus -->
-      <div class="col-12">
-        <h2 class="no-mt">Syllabus</h2>
-        <p>To optimize your chances of success we have divided the course into following parts</p>
-        <div class="course-part-list">
-          <div class="course-part" v-for="cpart in course.course_parts" :key="cpart.id">
-            <h3 class="course-part-header">{{ cpart.title }}</h3>
-            <p>{{ cpart.description }}</p>
-          </div>
-        </div>
+    <h2 class="no-mt">Syllabus</h2>
+    <p>To optimize your chances of success we have divided the course into following parts</p>
+    <div class="course-part-list">
+      <div class="course-part" v-for="cpart in course.course_parts" :key="cpart.id">
+        <h3 class="course-part-header">{{ cpart.title }}</h3>
+        <p>{{ cpart.description }}</p>
       </div>
     </div>
   </div>
@@ -147,7 +147,7 @@ export default {
     left: $size / 2 * -1;
     display: block;
     border-radius: 50%;
-    background: var(--bs-primary);
+    background: #7957d5;
   }
 
   & > * {
