@@ -9,3 +9,9 @@
     </div>
   </footer>
 </template>
+
+<style>
+.footer {
+  margin-top: 1em;
+}
+</style>
