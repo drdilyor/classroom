@@ -1,14 +1,17 @@
 <template>
-  <div class="container">
+  <div class="container content">
     <h1>Profile</h1>
     <div v-if="$auth.loggedIn()">
       <p>You are logged in</p>
-      <pre style="overflow: auto">{{ $auth.getJwt() }}</pre>
-      <p><button @click="logout" class="btn btn-secondary">Log out</button></p>
+      <pre>{{ $auth.getJwt() }}</pre>
+      <div class="buttons">
+        <b-button type="is-warning" @click="logout">Log out</b-button>
+        <b-button type="is-warning is-light" @click="$auth.logoutHard">Log out hard</b-button>
+      </div>
     </div>
     <div v-else>
       <p>You aren't logged in currently</p>
-      <p><button @click="$auth.login" class="btn btn-primary">Login</button></p>
+      <b-button @click="$auth.login" type="is-primary" outlined>Login</b-button>
     </div>
   </div>
 </template>
