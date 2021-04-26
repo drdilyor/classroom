@@ -71,6 +71,9 @@ export default {
   > header {
     display: flex;
     align-items: center;
+    margin-bottom: 1.5rem;
+    // .box's (bulma) box-shadow
+    box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1), 0 0px 0 1px rgba(10, 10, 10, 0.02);
   }
   .navbar-burger {
     margin-left: 0;
@@ -82,6 +85,9 @@ export default {
   display: flex;
   align-items: stretch;
   height: 100%;
+  &-content {
+    flex: 1;
+  }
 }
 // mobile
 @media screen and (max-width: 1023.9px) {
