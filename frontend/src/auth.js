@@ -61,7 +61,6 @@ const auth = {
     if (!this.inited) this.init()
     return this.payload != null
   },
-
   login() {
     let callbackUrl = `https://${location.host}/profile`
     window.location = `https://${auth.config.domain}/authorize?audience=${auth.config.audience}&response_type=token&client_id=${auth.config.clientId}&redirect_uri=${callbackUrl}`
@@ -70,6 +69,10 @@ const auth = {
   logout() {
     localStorage.removeItem('jwt')
     auth.payload = null
+  },
+
+  logoutHard() {
+    window.location = `https://${auth.config.domain}/logout`
   },
 
   can(perm) {
