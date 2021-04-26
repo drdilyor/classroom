@@ -3,7 +3,18 @@
     <div class="sidenav" v-show="desktop || show">
       <div class="overlay"/>
       <slot>
-        <classroom-sidenav-default/>
+        <!-- <classroom-sidenav-default/> -->
+        <router-link to="/" class="has-background-light has-text-centered is-size-4 py-3">&lt;A&gt;code</router-link>
+        <nav class="sidenav-default-nav p-4">
+          <div class="buttons sidenav-default-buttons">
+            <b-button tag="router-link" to="/classroom" type="is-primary" size="is-medium" icon-left="home" inverted>Home</b-button>
+            <b-button tag="router-link" to="/courses" type="is-primary" size="is-medium" icon-left="view-dashboard" inverted>Catalog</b-button>
+          </div>
+          <span class="flex-1"/>
+          <div class="buttons sidenav-default-buttons">
+            <b-button tag="router-link" to="/courses" type="is-primary" size="is-medium" icon-left="view-dashboard" inverted>Catalog</b-button>
+          </div>
+        </nav>
       </slot>
     </div>
   </transition>
@@ -60,5 +71,21 @@ export default {
 .sidenav.slide-left-enter,
 .sidenav.slide-left-leave-active {
   margin-left: -18rem;
+}
+
+.sidenav-default-nav {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.sidenav-default-buttons {
+  display: grid;
+  justify-content: stretch;
+  > .button {
+    justify-content: left;
+  }
+  > .button:not(:hover) {
+    color: #363636;
+  }
 }
 </style>
