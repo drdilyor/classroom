@@ -77,26 +77,18 @@ export default {
   }
 }
 
+// mobile and desktop
+.app-classroom {
+  display: flex;
+  align-items: stretch;
+  height: 100%;
+}
 // mobile
 @media screen and (max-width: 1023.9px) {
-  .app-classroom {
-    display: flex;
-    align-items: stretch;
-    height: 100%;
-
-    &-content {
-      flex: 1 0;
-      min-width: 100%;
-      width: 100%;
-    }
-  }
-}
-
-// desktop 
-@media screen and (min-width: 1024px) {
-  .app-classroom {
-    display: flex;
-    align-items: stretch;
+  .app-classroom-content {
+    flex: 1 0;
+    min-width: 100%;
+    width: 100%;
   }
 }
 
