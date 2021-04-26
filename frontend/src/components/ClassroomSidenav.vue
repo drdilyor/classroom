@@ -1,11 +1,12 @@
 <template>
-  <div
-    class="sidenav"
-    :class="{show}" :style="{visibility: show}">
-    <slot>
-      <classroom-sidenav-default/>
-    </slot>
-  </div>
+  <transition name="slide-left">
+    <div class="sidenav" v-show="desktop || show">
+      <div class="overlay"/>
+      <slot>
+        <classroom-sidenav-default/>
+      </slot>
+    </div>
+  </transition>
 </template>
 
 <script>
@@ -20,11 +21,21 @@ export default {
       default: true,
     }
   },
+  data() { return {
+    desktop: false,
+  } },
   methods: {
     logout() {
       this.$auth.logout()
-      windOw.location = '/'
+      window.location = '/'
+    },
+    onResize() {
+      this.desktop = window.innerWidth > 1024
     }
+  },
+  mounted() {
+    this.onResize()
+    window.addEventListener('resize', this.onResize)
   }
 }
 </script>
@@ -36,27 +47,18 @@ export default {
   z-index: 1040;
   display: flex;
   flex-direction: column;
-  width: 0;
+  width: 18rem;
   border-right: 1px solid rgba(0, 0, 0, .125);
 
-  visibility: hidden;
   overflow: auto;
   background: white;
-  transition: width .3s; /* (1) */
 
-  @media screen and (max-width: 991.9px) {
-    &.show {
-      width: 18rem;
-      visibility: visible;
-      transition: width .3s, visibility 0s .3s; /* (1) */
-    }
-  }
-  @media screen and (min-width: 992px) {
-    width: 18rem;
-    height: 100%;
-    visibility: visible;
-    transition: width .3s, visibility 0s .3s; /* (1) */
-  }
-  
+  visibility: visible;
+  transition: margin-left .3s, visibility 0s .3s; /* (1) */
+}
+
+.sidenav.slide-left-enter,
+.sidenav.slide-left-leave-active {
+  margin-left: -18rem;
 }
 </style>
