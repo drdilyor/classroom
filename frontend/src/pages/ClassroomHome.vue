@@ -4,9 +4,8 @@
     <div class="app-classroom-content">
       <header>
         <navbar-burger :is-open="showSidenav" @click="showSidenav = !showSidenav"/>
-        <span class="ps-2">
-          Home
-        </span>
+        <span style="height: 3.25rem" class="ml-4 is-hidden-touch"></span>
+        Home
       </header>
       <main class="overflow-auto container">
         <!-- no .container here and the class is added to main instead
@@ -93,35 +92,13 @@ export default {
   }
 }
 
-// .app-classroom {
-  // display: flex;
-  // align-items: stretch;
-  // height: 100%;
-  // &-content {
-  //   flex-grow: 1;
-  //   overflow: auto;
-  //   @media screen and (max-width: 1023.9px) {
-  //     flex-shrink: 0; // This breaks the page on mobile
-  //     max-width: calc(100% - 2px) !important;
-  //   }
-  //   > header {
-  //     display: flex;
-  //     align-items: center;
-  //     min-height: 3.25rem;
-  //     margin-bottom: 1.5rem;
-  //     // (!) .box's shadow
-  //     box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1), 0 0px 0 1px rgba(10, 10, 10, 0.02);
-  //     border-radius: 0;
-
-  //     @media screen and (min-width: 1024px) {
-  //       padding-left: 1.25rem;
-  //     }
-  //   }
-  //   .navbar-burger {
-  //     margin-left: 0;
-  //   }
-  // }
-// }
+// desktop 
+@media screen and (min-width: 1024px) {
+  .app-classroom {
+    display: flex;
+    align-items: stretch;
+  }
+}
 
 .app-classroom main {
   padding: 0 1em;
@@ -129,7 +106,7 @@ export default {
 
 .caps-header {
   font-size: 1rem;
-  color: var(--bs-secondary);
+  color: #778;
   text-transform: uppercase;
 }
 
