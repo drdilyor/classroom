@@ -106,13 +106,15 @@ export default {
       this.$api.request('PUT', `/courses/${this.courseId}/enroll`)
       .then(data => {
         if (data.created)
-        this.$toasted.show('Enrolled successfull!', {
-          icon: {name: 'done'},
+        this.$buefy.snackbar.open({
           duration: 3000,
-          action: {
-            text: 'GREAT',
-            onClick: (e, toast) => toast.goAway(0),
-          },
+          message: 'Enrolled successfully!',
+          position: 'is-top-right',
+          actionText: 'GREAT',
+          queue: false,
+          onAction: function() {
+            this.close()
+          }
         })
         this.$router.push('/classroom')
       })

@@ -90,14 +90,17 @@ export default {
       })
     },
     partDone() {
-      this.$toasted.show('Congratulations! Keep moving on', {
-        icon: {name: 'trending_up'},
+      this.$buefy.snackbar.open({
         duration: 3000,
-          action: {
-            text: 'GREAT',
-            onClick: (e, toast) => toast.goAway(0),
-          },
+        message: 'Congratulations! Keep moving on',
+        position: 'is-top-right',
+        actionText: 'GREAT',
+        queue: false,
+        onAction: function() {
+          this.close()
+        }
       })
+      this.$router.push('/classroom/course/'+this.$store.getters.currentCourse.id)
     }
   },
   created() {
