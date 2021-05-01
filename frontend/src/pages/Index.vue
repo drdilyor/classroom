@@ -28,7 +28,13 @@ export default {
   justify-content: stretch;
 }
 
+html {
+  overflow: auto !important;
+}
+
 html, body, .app-index {
+  /* I'm not sure why but using `%` instead of `vh`
+     is showing double scrollbars on desktop */
   height: 100%;
 }
 
