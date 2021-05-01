@@ -1,24 +1,17 @@
 <template>
-  <div class="
-    position-relative
-    d-flex
-    flex-column
-    flex-lg-row
-    align-items-start
-    align-items-lg-center
-    justify-content-lg-between
-    shadow-sm p-2 mb-2
-    border rounded">
-    <div class="course-card-body">
-      <h3>{{ course.title }}</h3>
-      <p class="grey-text text-darken-2">{{ course.description }}</p>
+  <router-link tag="div" class="card p-4 pointer" :to="'/classroom/course/'+course.id">
+    <div class="content columns is-align-items-center">
+      <div class="column">
+        <h4>{{ course.title }}</h4>
+        <p>{{ course.description }}</p>
+      </div>
+      <div class="column is-narrow">
+        <b-button type="is-primary is-light">
+          Program home
+        </b-button>
+      </div>
     </div>
-    <icon-link-button
-      :to="'/classroom/course/'+course.id"
-      class="btn-outline-secondary border-0"
-      ricon="arrow_forward">
-      Program home</icon-link-button>
-  </div>
+  </router-link>
 </template>
 
 <script>
@@ -38,35 +31,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// .course-card {
-//   display: flex;
-//   flex-direction: column;
-//   align-items: flex-start;
-//   padding: 1em;
-//   min-height: 8rem;
-// 
-//   &-body {
-//     padding-bottom: 1em;
-//   }
-// }
-// 
-// .course-card h3 {
-//   margin: 0;
-//   font-size: 1.618em;
-// }
-// 
-// .course-link {
-//   color: var(--bs-secondary);
-// }
-// 
-// @media screen and (max-width: 992px) {
-//   .course-card {
-//     flex-direction: row;
-//     align-items: center;
-//     &-body {
-//       flex: 5;
-//       padding-bottom: 0;
-//     }
-//   }
-// }
 </style>
