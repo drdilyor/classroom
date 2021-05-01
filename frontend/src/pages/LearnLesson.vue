@@ -1,18 +1,17 @@
 <template>
   <div id="app" class="app-classroom">
-    <classroom-sidenav class="flex-shrink-0 bg-light" :show="showSidenav">
-      <lesson-sidenav/>
+    <classroom-sidenav class="has-background-light" :show="showSidenav">
+      <lesson-sidenav />
     </classroom-sidenav>
     <div class="flex-grow-1 app-classroom-content p-relative">
-      <Loading v-if="!lesson"/>
+      <Loading v-if="!lesson" />
       <template v-else>
-        <header class="shadow classroom-lesson-header mb-4">
-          <div class="container py-2 d-flex align-items-center">
-            <i class="material-icons d-lg-none pe-1" @click="showSidenav = !showSidenav">menu</i>
-            <strong>{{ lesson.title }}</strong>
-          </div>
+        <header class="classroom-lesson-header has-background-light">
+          <navbar-burger :is-opened="showSidenav" @click="showSidenav = !showSidenav" />
+          <span class="spacer" />
+          <h1 class="is-flex-grow-1 subtitle is-4 has-text-centered">{{ lesson.title }}</h1>
         </header>
-        <main class="overflow-auto classroom-course-main">
+        <main class="overflow-auto">
           <div class="container lesson-content">
             <div class="video-wrapper">
               <iframe
@@ -25,22 +24,23 @@
             <vue-markdown class="content" :key="'md'+markdownComponentKey">
               {{ lesson.content }}
             </vue-markdown>
-            <div class="footer d-flex justify-content-end py-4">
-              <icon-link-button
+            <div class="py-4 is-flex is-justify-content-end">
+              <b-button
+              tag="router-link"
                 v-if="nextLesson !== null"
-                class="btn-outline-primary"
+                type="is-primary is-outlined"
                 :to="nextLesson"
-                ricon="arrow_forward">
+                icon-right="arrow-right">
                 Next
-              </icon-link-button>
-              <icon-link-button
+              </b-button>
+              <b-button
                 v-else
-                class="btn-outline-success"
+                type="is-success is-outlined"
                 :to="'/classroom/course/'+$store.getters.currentCourse.id"
-                ricon="done"
+                icon-right="check"
                 @click.native="partDone">
                 Done
-              </icon-link-button>
+              </b-button>
             </div>
           </div>
         </main>
@@ -50,11 +50,12 @@
 </template>
 
 <script>
+import NavbarBurger from 'buefy/src/components/navbar/NavbarBurger.vue'
 import ClassroomSidenav from '@/components/ClassroomSidenav.vue'
 import LessonSidenav from '@/components/LessonSidenav.vue'
-import IconLinkButton from '../components/ui/IconLinkButton.vue'
+
 export default {
-  components: {ClassroomSidenav, LessonSidenav, IconLinkButton},
+  components: {NavbarBurger, ClassroomSidenav, LessonSidenav},
   data() { return {
     showSidenav: false,
     markdownComponentKey: 0,
@@ -110,9 +111,8 @@ export default {
 </script>
 
 <style>
-.classroom-lesson-header .container,
 .lesson-content {
-  max-width: 640px;
+  max-width: 640px !important;
 }
 .lesson-content .video-wrapper {
   position: relative;
