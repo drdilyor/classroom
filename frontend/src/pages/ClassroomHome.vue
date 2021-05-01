@@ -18,12 +18,12 @@
           <p v-else-if="error">
             <strong>Error</strong>: something went wrong :(
           </p>
-          <div v-else class="row">
-            <h2 class="col-12 caps-header">Current enrollments</h2>
-            <div class="col-12" :key="c.id" v-for="c in courses">
-              <ClassroomCourseCard :course="c"></ClassroomCourseCard>
+          <template v-else>
+            <h2 class="subtitle">Current enrollments</h2>
+            <div v-for="c in courses" :key="c.id">
+              <ClassroomCourseCard :course="c"/>
             </div>
-          </div>
+          </template>
       </main>
     </div>
   </div>
@@ -100,12 +100,6 @@ export default {
 
 .app-classroom main {
   padding: 0 1em;
-}
-
-.caps-header {
-  font-size: 1rem;
-  color: #778;
-  text-transform: uppercase;
 }
 
 </style>
