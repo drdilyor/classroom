@@ -17,7 +17,12 @@
             </figure>
           </div>
           <div class="card-content content">
-            {{ course.description }}
+            <div class="title is-4">
+              {{ course.title }}
+            </div>
+            <p>
+              {{ course.description }}
+            </p>
           </div>
           <footer class="card-footer">
             <router-link class="card-footer-item" :to="'/courses/'+course.id">
