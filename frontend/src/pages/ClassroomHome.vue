@@ -3,8 +3,8 @@
     <classroom-sidenav :show="showSidenav" />
     <div class="app-classroom-content">
       <header>
-        <navbar-burger :is-open="showSidenav" @click="showSidenav = !showSidenav"/>
-        <span style="height: 3.25rem" class="ml-4 is-hidden-touch"></span>
+        <navbar-burger :is-opened="showSidenav" @click="showSidenav = !showSidenav"/>
+        <span class="spacer"/>
         Home
       </header>
       <main class="overflow-auto container">
@@ -77,6 +77,12 @@ export default {
   }
   .navbar-burger {
     margin-left: 0;
+  }
+  @media screen and (min-width: 1024px) {
+    .spacer {
+      height: 3.25rem;
+      margin-left: 1rem;
+    }
   }
 }
 
