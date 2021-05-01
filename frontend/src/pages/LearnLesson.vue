@@ -3,7 +3,7 @@
     <classroom-sidenav class="has-background-light" :show="showSidenav">
       <lesson-sidenav />
     </classroom-sidenav>
-    <div class="flex-grow-1 app-classroom-content p-relative">
+    <div class="flex-grow-1 app-classroom-content">
       <Loading v-if="!lesson" />
       <template v-else>
         <header class="classroom-lesson-header has-background-light">

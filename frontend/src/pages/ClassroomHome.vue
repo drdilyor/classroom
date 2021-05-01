@@ -68,6 +68,8 @@ export default {
   flex-shrink: 0;
 }
 .app-classroom-content {
+  overflow: auto;
+  max-height: 100%;
   > header {
     display: flex;
     align-items: center;
