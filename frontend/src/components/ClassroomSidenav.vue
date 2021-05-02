@@ -12,7 +12,7 @@
           </div>
           <span class="flex-1"/>
           <div class="buttons sidenav-default-buttons">
-            <b-button tag="router-link" to="/courses" type="is-primary" size="is-medium" icon-left="view-dashboard" inverted>Catalog</b-button>
+            <b-button tag="router-link" to="/profile" type="is-primary" size="is-medium" icon-left="account" inverted>Profile</b-button>
           </div>
         </nav>
       </slot>
@@ -21,11 +21,7 @@
 </template>
 
 <script>
-import IconLink from '@/components/ui/IconLinkButton.vue'
-import ClassroomSidenavDefault from './ClassroomSidenavDefault.vue'
-
 export default {
-  components: {IconLink, ClassroomSidenavDefault},
   props: {
     show: {
       type: Boolean,
