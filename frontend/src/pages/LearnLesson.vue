@@ -3,7 +3,7 @@
     <classroom-sidenav class="has-background-light" :show="showSidenav">
       <lesson-sidenav />
     </classroom-sidenav>
-    <div class="flex-grow-1 app-classroom-content">
+    <div class="flex-grow-1 app-classroom-content" ref="content">
       <Loading v-if="!lesson" />
       <template v-else>
         <header class="classroom-lesson-header has-background-light">
@@ -109,6 +109,7 @@ export default {
   beforeRouteUpdate(to, from, next) {
     next()
     this.onCreated()
+    this.$refs.content.scrollTo(NaN, 0)
   }
 }
 </script>
