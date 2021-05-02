@@ -1,5 +1,5 @@
 <template>
-  <router-link tag="div" class="card p-4 pointer" :to="'/classroom/course/'+course.id">
+  <router-link tag="div" class="card p-4 pointer mb-4" :to="'/classroom/course/'+course.id">
     <div class="content columns is-align-items-center">
       <div class="column">
         <h4>{{ course.title }}</h4>

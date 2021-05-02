@@ -13,54 +13,56 @@
     </div>
 
     <!-- Content -->
-    <div class="columns is-vcentered" v-else>
-      <div class="column is-5">
-        <h1>{{ course.title }}</h1>
-        <p>{{ course.description }}</p>
-      </div>
-      <div class="column is-7">
-        <p><img class="img-fluid" :src="course.image_link" alt="Course image"></p>
-      </div>
+    <template v-else>
+      <div class="columns is-vcentered">
+        <div class="column is-5">
+          <h1>{{ course.title }}</h1>
+          <p>{{ course.description }}</p>
+        </div>
+        <div class="column is-7">
+          <p><img class="img-fluid" :src="course.image_link" alt="Course image"></p>
+        </div>
 
-      <!-- Enroll button -->
-    </div>
-    <div class="columns">
-      <div class="column is-half is-offset-one-quarter">
-        <p v-if="$auth.loggedIn()">
-          <b-button
-            v-if="!courseEnrolled"
-            type="is-primary is-fullwidth"
-            @click="enroll">
-            Enroll
-          </b-button>
-          <b-button
-            v-else
-            tag="router-link"
-            type="is-primary is-light is-fullwidth"
-            :to="'/classroom/course/'+courseId">
-            Go to course  
-          </b-button>
-        </p>
-        <template v-else>
-          <p class="has-text-centered">
-            Login to enroll
+        <!-- Enroll button -->
+      </div>
+      <div class="columns">
+        <div class="column is-half is-offset-one-quarter">
+          <p v-if="$auth.loggedIn()">
+            <b-button
+              v-if="!courseEnrolled"
+              type="is-primary is-fullwidth"
+              @click="enroll">
+              Enroll
+            </b-button>
+            <b-button
+              v-else
+              tag="router-link"
+              type="is-primary is-light is-fullwidth"
+              :to="'/classroom/course/'+courseId">
+              Go to course  
+            </b-button>
           </p>
-          <b-button type="is-primary is-fullwidth" @click="$auth.login">
-            Login
-          </b-button>
-        </template>
+          <template v-else>
+            <p class="has-text-centered">
+              Login to enroll
+            </p>
+            <b-button type="is-primary is-fullwidth" @click="$auth.login">
+              Login
+            </b-button>
+          </template>
+        </div>
       </div>
-    </div>
 
-      <!-- Syllabus -->
-    <h2 class="no-mt">Syllabus</h2>
-    <p>To optimize your chances of success we have divided the course into following parts</p>
-    <div class="course-part-list">
-      <div class="course-part" v-for="cpart in course.course_parts" :key="cpart.id">
-        <h3 class="course-part-header">{{ cpart.title }}</h3>
-        <p>{{ cpart.description }}</p>
+        <!-- Syllabus -->
+      <h2 class="no-mt">Syllabus</h2>
+      <p>To optimize your chances of success we have divided the course into following parts</p>
+      <div class="course-part-list">
+        <div class="course-part" v-for="cpart in course.course_parts" :key="cpart.id">
+          <h3 class="course-part-header">{{ cpart.title }}</h3>
+          <p>{{ cpart.description }}</p>
+        </div>
       </div>
-    </div>
+    </template>
   </div>
 </template>
 
