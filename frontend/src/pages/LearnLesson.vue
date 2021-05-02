@@ -75,9 +75,6 @@ export default {
       else
         return String(part.lessons[lessonIndex + 1].id)
     },
-    nextPart() {
-      return "2"
-    }
   },
   methods: {
     onCreated() {
