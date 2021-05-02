@@ -8,8 +8,13 @@ from tortoise.models import Model
 from tortoise.fields import *
 from tortoise import Tortoise, run_async
 
-class Course(Model):
+class ID:
     id = IntField(pk=True)
+
+    def __repr__(self):
+        return f'<{self.__class__.__name___} {self.id}>'
+
+class Course(ID, Model):
     title = CharField(200)
     description = TextField()
     image_link = CharField(200)
@@ -20,32 +25,40 @@ class Course(Model):
         return self.title
 
 
-class CoursePart(Model):
-    id = IntField(pk=True)
+class CoursePart(ID, Model):
     title = CharField(200)
     description = TextField()
     course = ForeignKeyField('models.Course', index=True, related_name='course_parts')
 
+    def __str__(self):
+        return f'{self.course_id}: {self.title}'
 
-class Lesson(Model):
-    id = IntField(pk=True)
+
+class Lesson(ID, Model):
     title = CharField(max_length=200)
     video = CharField(50)
     content = TextField()
     course_part = ForeignKeyField('models.CoursePart', index=True, related_name='lessons')
 
+    def __str__(self):
+        return self.title
 
-class CourseMember(Model):
-    id = IntField(pk=True)
+
+class CourseMember(ID, Model):
     user_sub = CharField(80, index=True)
     course = ForeignKeyField('models.Course', index=True, related_name='members')
     created_at = DatetimeField(auto_now_add=True)
 
+    def __repr__(self):
+        return f'<CourseMember {self.course_id} {self.user_sub}>'
 
-class LessonViewed(Model):
-    id = IntField(pk=True)
+
+class LessonViewed(ID, Model):
     user_sub = CharField(80, index=True)
     lesson = ForeignKeyField('models.Lesson', index=True, related_name='viewed_lessons')
+
+    def __repr__(self):
+        return f'<LessonViewed {self.lesson} {self.user_sub}>'
 
 
 class AdminUser(AbstractUser):
