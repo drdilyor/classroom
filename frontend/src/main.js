@@ -1,5 +1,6 @@
 import Vue from 'vue'
-import VueToasted from 'vue-toasted';
+import Buefy from 'buefy';
+import 'buefy/dist/buefy.css'
 import VueMarkdown from 'vue-markdown';
 import './assets/styles/styles.scss'
 
@@ -11,10 +12,7 @@ import store from './store'
 
 import Loading from '@/components/Loading.vue'
 
-Vue.use(VueToasted, {
-    iconPack : 'material',
-})
-
+Vue.use(Buefy)
 Vue.component('vue-markdown', VueMarkdown)
 
 Vue.config.productionTip = false

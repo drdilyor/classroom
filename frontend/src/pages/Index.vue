@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="app-index">
     <Header></Header>
-    <main>
+    <main class="site-main">
       <RouterView></RouterView>
     </main>
     <Footer></Footer>
@@ -28,11 +28,23 @@ export default {
   justify-content: stretch;
 }
 
+html {
+  overflow: auto !important;
+}
+
 html, body, .app-index {
+  /* I'm not sure why but using `%` instead of `vh`
+     is showing double scrollbars on desktop */
   height: 100%;
 }
 
 .app-index main {
   flex: 1;
+}
+</style>
+
+<style>
+.site-main {
+  padding: 0 1em;
 }
 </style>

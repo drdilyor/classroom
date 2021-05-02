@@ -3,24 +3,20 @@
     <router-link
       tag="a"
       :to="'/classroom/course/' + part.course_id"
-      class="border-bottom lesson-sidenav-header"
-      style="cursor: pointer"
+      class="lesson-sidenav-header pointer"
     >
-      <i class="material-icons p-0 text-secondary" style="font-size: 64px">arrow_left</i>
-      <div class="d-flex align-items-center flex-grow-1">
-        <h2>{{ title }}</h2>
-      </div>
+      <b-icon icon="arrow-left" />
+      <h2>{{ title }}</h2>
     </router-link>
-    <ul v-if="part" class="lesson-list">
+
+    <ul v-if="part" class="lesson-list p-2">
       <router-link
         v-for="(lesson, i) in part.lessons" :key="lesson.id"
         tag="li"
         :to="'/classroom/lesson/'+lesson.id"
-        exact-active-class="active"
-      >
-        <i class="material-icons lesson-status" :class="{done: lesson.is_viewed}">
-          {{ lesson.is_viewed ? 'done' : 'circle' }}
-        </i>
+        class="button is-light is-fullwidth is-justify-content-left pl-0 mb-2"
+        exact-active-class="is-primary">
+        <i class="mdi lesson-status" :class="lesson.is_viewed ? 'mdi-check done has-text-success' : 'mdi-circle'" />
         <span class="lesson">
           {{ i+1 }}. {{ lesson.title }}
         </span>
@@ -70,6 +66,12 @@ export default {
   }
   &-header {
     display: flex;
+    align-items: center;
+    padding-left: .5em;
+    border-bottom: 1px solid #888;
+    > h2 {
+      padding-left: .5em;
+    }
   }
 }
 .lesson-list {
@@ -78,22 +80,22 @@ export default {
   padding: 0;
   margin-bottom: 0;
   overflow: auto;
-  li {
-    display: flex;
-    align-items: center;
-    height: 3em;
-    border-left: 4px solid transparent;
-    color: rgba(0, 0, 0, .5);
-    cursor: pointer;
-    transition: color .2s;
-    &:hover {
-      color: rgba(0, 0, 0, .7);
-    }
-    &.active {
-      border-left-color: var(--bs-primary);
-      color: black;
-    }
-  }
+  // li {
+    // display: flex;
+    // align-items: center;
+    // height: 3em;
+    // border-left: 4px solid transparent;
+    // color: rgba(0, 0, 0, .5);
+    // cursor: pointer;
+    // transition: color .2s;
+    // &:hover {
+      // color: rgba(0, 0, 0, .7);
+    // }
+    // &.active {
+      // border-left-color: var(--bs-primary);
+      // color: black;
+    // }
+  // }
   .lesson {
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -108,7 +110,6 @@ export default {
     color: var(--bs-gray);
     &.done {
       font-size: 24px;
-      color: var(--bs-success);
     }
   }
 }

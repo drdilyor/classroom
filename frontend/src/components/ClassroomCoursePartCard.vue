@@ -1,11 +1,11 @@
 <template>
-  <router-link tag="div" class="classroom-course-part-card border rounded shadow-sm" :to="nextLessonLink">
-    <span class="caps-header mb-2">Lesson {{i}}</span>
-    <h3>{{ part.title }}</h3>
-    <p class="flex-grow-1">{{ part.description }}</p>
-    <button class="btn btn-outline-secondary d-inline-flex">
-      Continue <i class="material-icons ms-2">arrow_forward</i>
-    </button>
+  <router-link tag="div" class="classroom-course-part-card card" :to="nextLessonLink">
+    <span class="subtitle is-5 has-text-grey">Lesson {{i}}</span>
+    <h3 class="title pt-2">{{ part.title }}</h3>
+    <p class="is-flex-grow-1">{{ part.description }}</p>
+    <b-button type="is-primary is-light" icon-right="arrow-right">
+      Continue
+    </b-button>
   </router-link>
 </template>
 

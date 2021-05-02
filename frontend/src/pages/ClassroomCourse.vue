@@ -1,23 +1,26 @@
 <template>
   <div id="app" class="app-classroom">
     <classroom-sidenav class="flex-shrink-0" :show="showSidenav" />
-    <div class="flex-grow-1 app-classroom-content p-relative">
-          
+    <div class="app-classroom-content">
       <!-- Loading -->
       <div v-if="!course">
         <Loading/>
       </div>
       <template v-else>
-        <header class="shadow classroom-course-header mb-4">
-          <div class="container py-2 d-flex align-items-center">
-            <i class="material-icons d-lg-none pe-1" @click="showSidenav = !showSidenav">menu</i>
-            <span class="flex-grow-1 title m-0 ps-1">{{ course.title }}</span>
-            <router-link
-              v-if="resumeLesson !== null"
-              class="btn btn-sm btn-primary"
-              :to="'/classroom/lesson/'+resumeLesson.id"
-              :title="resumeLesson.title">Resume</router-link>
+        <header>
+          <navbar-burger :is-opened="showSidenav" @click="showSidenav = !showSidenav" />
+          <span class="spacer" />
+          <div class="is-flex-grow-1">
+            <h1 class="is-hidden-mobile subtitle is-4">{{ course.title }}</h1>
           </div>
+          <b-button
+            v-if="resumeLesson !== null"
+            tag="router-link"
+            type="is-primary"
+            :to="'/classroom/lesson/'+resumeLesson.id"
+            :title="resumeLesson.title">
+            Resume
+          </b-button>
         </header>
         <main class="overflow-auto classroom-course-main">
           <div class="container">
@@ -34,11 +37,12 @@
 </template>
 
 <script>
+import NavbarBurger from 'buefy/src/components/navbar/NavbarBurger.vue'
 import ClassroomSidenav from '../components/ClassroomSidenav.vue'
 import CoursePartCard from '../components/ClassroomCoursePartCard.vue'
 
 export default {
-  components: {ClassroomSidenav, CoursePartCard},
+  components: {NavbarBurger, ClassroomSidenav, CoursePartCard},
   data() { return {
     showSidenav: false,
   } },
@@ -72,60 +76,3 @@ export default {
   },
 }
 </script>
-
-<style lang="scss">
-
-$header-height: .5em * 2 + 1em * 1.5;
-
-
-
-// #nav-mobile-2 {
-//   width: auto !important;
-// }
-// 
-// .course-top-nav-wrapper {
-//   z-index: 10;
-//   position: sticky;
-//   right: 0;
-//   top: 0;
-//   left: 0;
-//   height: calc(.5em * 2 + 1.6em * 1.5);
-//   padding: .5em;
-//   background: white;
-//   transition: height .3s ease;
-// }
-// .course-top-nav {
-//   height: 100%;
-//   display: flex;
-//   align-items: center;
-// 
-//   & .sidenav-trigger {
-//     align-self: flex-start;
-//   }
-//   
-//   & h1 {
-//     font-size: 1.6em;
-//     padding: 0;
-//     margin: 0;
-//   }
-// }
-// 
-// .classroom-course-main {
-//   padding-top: calc(.5em * 2 + 1.6em * 1.5);
-// }
-// 
-// @media screen and (max-width: 992px) and (min-height: 640px) {
-//   .classroom-course-main {
-//     padding-top: 16em;
-//   }
-//   .course-top-nav-wrapper:not(.small) {
-//     height: 16em;
-//     box-shadow: 0 0 40px rgba(0, 0, 0, .25);
-//     
-//     & h1 {
-//       font-size: 3.2em;
-//       font-weight: 200;
-//     }
-//   }
-// }
-</style>

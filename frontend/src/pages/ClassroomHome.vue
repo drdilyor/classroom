@@ -1,14 +1,11 @@
 <template>
   <div id="app" class="app-classroom">
-    <classroom-sidenav class="flex-shrink-0" :show="showSidenav" />
-    <div class="flex-grow-1 app-classroom-content">
-      <header class="shadow py-2 mb-4 d-flex">
-        <i class="material-icons ms-2 d-lg-none d-inline-block" @click="showSidenav = !showSidenav">
-          menu
-        </i>
-        <span class="ps-2">
-          Home
-        </span>
+    <classroom-sidenav :show="showSidenav" />
+    <div class="app-classroom-content">
+      <header>
+        <navbar-burger :is-opened="showSidenav" @click="showSidenav = !showSidenav"/>
+        <span class="spacer"/>
+        Home
       </header>
       <main class="overflow-auto container">
         <!-- no .container here and the class is added to main instead
@@ -21,23 +18,25 @@
           <p v-else-if="error">
             <strong>Error</strong>: something went wrong :(
           </p>
-          <div v-else class="row">
-            <h2 class="col-12 caps-header">Current enrollments</h2>
-            <div class="col-12" :key="c.id" v-for="c in courses">
-              <ClassroomCourseCard :course="c"></ClassroomCourseCard>
+          <template v-else>
+            <h2 class="subtitle">Current enrollments</h2>
+            <div v-for="c in courses" :key="c.id">
+              <ClassroomCourseCard :course="c"/>
             </div>
-          </div>
+          </template>
       </main>
     </div>
   </div>
 </template>
 
 <script>
+import NavbarBurger from 'buefy/src/components/navbar/NavbarBurger.vue'
 import ClassroomCourseCard from '../components/ClassroomCourseCard.vue'
 import ClassroomSidenav from '../components/ClassroomSidenav.vue'
 
 export default {
   components: {
+    NavbarBurger,
     ClassroomCourseCard,
     ClassroomSidenav,
   },
@@ -61,23 +60,54 @@ export default {
 
 <style lang="scss">
 
+// general
+.app-classroom {
+  height: 100%;
+}
+.app-classroom > .sidenav {
+  flex-shrink: 0;
+}
+.app-classroom-content {
+  overflow: auto;
+  max-height: 100%;
+  > header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    // .box's (bulma) box-shadow
+    box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1), 0 0px 0 1px rgba(10, 10, 10, 0.02);
+  }
+  .navbar-burger {
+    margin-left: 0;
+  }
+  @media screen and (min-width: 1024px) {
+    .spacer {
+      height: 3.25rem;
+      margin-left: 1rem;
+    }
+  }
+}
+
+// mobile and desktop
 .app-classroom {
   display: flex;
   align-items: stretch;
   height: 100%;
   &-content {
-    overflow: auto;
-    @media screen and (max-width: 992.9px) {
-      flex-shrink: 0; // This breaks the page on mobile
-      max-width: calc(100% - 2px);
-    }
+    flex: 1;
+  }
+}
+// mobile
+@media screen and (max-width: 1023.9px) {
+  .app-classroom-content {
+    flex: 1 0;
+    min-width: 100%;
+    width: 100%;
   }
 }
 
-.caps-header {
-  font-size: 1rem;
-  color: var(--bs-secondary);
-  text-transform: uppercase;
+.app-classroom main {
+  padding: 0 1em;
 }
 
 </style>

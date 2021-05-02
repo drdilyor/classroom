@@ -1,30 +1,48 @@
 <template>
-  <div
-    class="sidenav"
-    :class="{show}" :style="{visibility: show}">
-    <slot>
-      <classroom-sidenav-default/>
-    </slot>
-  </div>
+  <transition name="slide-left">
+    <div class="sidenav" v-show="desktop || show">
+      <div class="overlay"/>
+      <slot>
+        <!-- <classroom-sidenav-default/> -->
+        <router-link to="/" class="has-background-light has-text-centered is-size-4 py-3">&lt;A&gt;code</router-link>
+        <nav class="sidenav-default-nav p-4">
+          <div class="buttons sidenav-default-buttons">
+            <b-button tag="router-link" to="/classroom" type="is-primary" size="is-medium" icon-left="home" inverted>Home</b-button>
+            <b-button tag="router-link" to="/courses" type="is-primary" size="is-medium" icon-left="view-dashboard" inverted>Catalog</b-button>
+          </div>
+          <span class="flex-1"/>
+          <div class="buttons sidenav-default-buttons">
+            <b-button tag="router-link" to="/profile" type="is-primary" size="is-medium" icon-left="account" inverted>Profile</b-button>
+          </div>
+        </nav>
+      </slot>
+    </div>
+  </transition>
 </template>
 
 <script>
-import IconLink from '@/components/ui/IconLinkButton.vue'
-import ClassroomSidenavDefault from './ClassroomSidenavDefault.vue'
-
 export default {
-  components: {IconLink, ClassroomSidenavDefault},
   props: {
     show: {
       type: Boolean,
       default: true,
     }
   },
+  data() { return {
+    desktop: false,
+  } },
   methods: {
     logout() {
       this.$auth.logout()
-      windOw.location = '/'
+      window.location = '/'
+    },
+    onResize() {
+      this.desktop = window.innerWidth > 1024
     }
+  },
+  mounted() {
+    this.onResize()
+    window.addEventListener('resize', this.onResize)
   }
 }
 </script>
@@ -36,27 +54,34 @@ export default {
   z-index: 1040;
   display: flex;
   flex-direction: column;
-  width: 0;
+  width: 18rem;
   border-right: 1px solid rgba(0, 0, 0, .125);
 
-  visibility: hidden;
   overflow: auto;
   background: white;
-  transition: width .3s; /* (1) */
 
-  @media screen and (max-width: 991.9px) {
-    &.show {
-      width: 18rem;
-      visibility: visible;
-      transition: width .3s, visibility 0s .3s; /* (1) */
-    }
+  visibility: visible;
+  transition: margin-left .3s, visibility 0s .3s; /* (1) */
+}
+
+.sidenav.slide-left-enter,
+.sidenav.slide-left-leave-active {
+  margin-left: -18rem;
+}
+
+.sidenav-default-nav {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.sidenav-default-buttons {
+  display: grid;
+  justify-content: stretch;
+  > .button {
+    justify-content: left;
   }
-  @media screen and (min-width: 992px) {
-    width: 18rem;
-    height: 100%;
-    visibility: visible;
-    transition: width .3s, visibility 0s .3s; /* (1) */
+  > .button:not(:hover) {
+    color: #363636;
   }
-  
 }
 </style>
