@@ -121,7 +121,10 @@ export default {
         this.$router.push('/classroom')
       })
       .catch(err => {
-        this.$toasted.show('Something went wrong!', {icon: {name: 'error'}})
+        this.$buefy.snackbar.open({
+          message: 'Something went wrong!',
+          type: 'is-danger',
+        })
         e.target.disabled = false
       })
     },
