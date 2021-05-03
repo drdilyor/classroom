@@ -1,9 +1,9 @@
 <template>
   <router-link tag="div" class="classroom-course-part-card card" :to="nextLessonLink">
-    <span class="subtitle is-5 has-text-grey">Lesson {{i}}</span>
+    <span class="subtitle is-5 has-text-grey">Part {{i}}</span>
     <h3 class="title pt-2">{{ part.title }}</h3>
     <p class="is-flex-grow-1">{{ part.description }}</p>
-    <b-button type="is-primary is-light" icon-right="arrow-right">
+    <b-button class="mt-4" type="is-primary is-light" icon-right="arrow-right">
       Continue
     </b-button>
   </router-link>
