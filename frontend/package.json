@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "build": "vue-cli-service build",
+    "build-report": "vue-cli-service build --report"
   },
   "dependencies": {
     "babel-runtime": "^6.26.0",

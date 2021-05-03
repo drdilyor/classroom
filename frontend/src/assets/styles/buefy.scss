@@ -1,0 +1,89 @@
+@import "~bulma/sass/utilities/_all";
+
+// ***** buefy styles *****
+
+$primary: #8c67ef;
+$primary-light: findLightColor($primary);
+$primary-dark: findDarkColor($primary);
+$primary-invert: findColorInvert($primary);
+
+// Lists and maps
+$custom-colors: null !default;
+$custom-shades: null !default;
+
+// Setup $colors to use as bulma classes
+$colors: mergeColorMaps(
+  (
+    "white": (
+      $white,
+      $black,
+    ),
+    "black": (
+      $black,
+      $white,
+    ),
+    "light": (
+      $light,
+      $light-invert,
+    ),
+    "dark": (
+      $dark,
+      $dark-invert,
+    ),
+    "primary": (
+      $primary,
+      $primary-invert,
+      $primary-light,
+      $primary-dark,
+    ),
+    "link": (
+      $link,
+      $link-invert,
+      $link-light,
+      $link-dark,
+    ),
+    "info": (
+      $info,
+      $info-invert,
+      $info-light,
+      $info-dark,
+    ),
+    "success": (
+      $success,
+      $success-invert,
+      $success-light,
+      $success-dark,
+    ),
+    "warning": (
+      $warning,
+      $warning-invert,
+      $warning-light,
+      $warning-dark,
+    ),
+    "danger": (
+      $danger,
+      $danger-invert,
+      $danger-light,
+      $danger-dark,
+    ),
+  ),
+  $custom-colors
+);
+
+// Links
+$link: $primary;
+$link-invert: $primary-invert;
+$link-focus-border: $primary;
+
+// ***** end buefy styles *****
+
+@import "~bulma/sass/base/_all";
+@import "~bulma/sass/grid/_all";
+@import "~bulma/sass/helpers/_all";
+@import "~bulma/sass/elements/_all";
+@import "~bulma/sass/components/card";
+@import "~bulma/sass/components/navbar";
+@import "~bulma/sass/layout/footer";
+
+@import "~buefy/src/scss/components/navbar";
+@import "~buefy/src/scss/components/skeleton";
