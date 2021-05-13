@@ -1,8 +1,10 @@
 <template>
   <div id="app" class="app-index">
     <Header :class="isHome ? 'is-primary' : ''"></Header>
-    <main :class="{'site-main': !isHome}">
-      <RouterView></RouterView>
+    <main class="site-main">
+      <transition name="fade" mode="out-in">
+        <RouterView></RouterView>
+      </transition>
     </main>
     <Footer></Footer>
   </div>
@@ -59,10 +61,16 @@ html, body, .app-index {
 .app-index main {
   flex: 1;
 }
-</style>
 
-<style>
 .site-main {
   padding: 0 1em;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .2s linear;
+  overflow: hidden;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
 }
 </style>

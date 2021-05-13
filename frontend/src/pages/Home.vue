@@ -1,5 +1,5 @@
 <template>
-  <div style="margin-top: -1em"> <!-- Remove navbar margin -->
+  <div style="margin: -1em -1em 0"> <!-- Remove navbar margin -->
     <section class="hero is-primary is-halfheight">
       <div class="hero-body has-text-centered">
         <div class="container">
