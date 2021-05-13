@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="app-index">
-    <Header></Header>
-    <main class="site-main">
+    <Header :class="isHome ? 'is-primary' : ''"></Header>
+    <main :class="{'site-main': !isHome}">
       <RouterView></RouterView>
     </main>
     <Footer></Footer>
@@ -14,8 +14,26 @@ import Footer from '../components/Footer.vue'
 
 export default {
   components: {Header, Footer},
+  data() { return {
+    isHome: false,
+  } },
+  watch: {
+    $route() {
+      this.setIsHome()
+    },
+  },
+  methods: {
+    setIsHome() {
+      let url = this.$router.history.current.path
+      console.log({url})
+      this.isHome = ['/', ''].includes(url)
+    }
+  },
   beforeCreate() {
     this.$auth.init()
+  },
+  created() {
+    this.setIsHome()
   }
 }
 </script>
