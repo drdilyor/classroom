@@ -30,11 +30,25 @@
     </section>
     <section class="container section">
       <div class="columns">
-        <div v-for="promo in promos" :key="promo.title" class="column">
+        <div class="column">
           <div class="promo">
-            <b-icon class="has-text-primary" :icon="promo.icon" size="is-large" />
-            <h3 class="subtitle is-3">{{ promo.title }}</h3>
-            <p class="is-size-5">{{ promo.text }}</p>
+            <b-icon class="has-text-primary" icon="flash" size="is-large" />
+            <h3 class="subtitle is-3">Gain new skills quickly</h3>
+            <p class="is-size-5">We did our best to make sure our student will learn content as quickly as possible</p>
+          </div>
+        </div>
+        <div class="column">
+          <div class="promo">
+            <b-icon class="has-text-primary" icon="arrow-up-bold-circle" size="is-large" />
+            <h3 class="subtitle is-3">Learn up-to-date technologies</h3>
+            <p class="is-size-5">Unlike some other similar web sites, we offer fresh content only</p>
+          </div>
+        </div>
+        <div class="column">
+          <div class="promo">
+            <b-icon class="has-text-primary" icon="web" size="is-large" />
+            <h3 class="subtitle is-3">For uzbeks, by uzbeks</h3>
+            <p class="is-size-5">We are one of the very few learning platforms which have both uzbek content and quality</p>
           </div>
         </div>
       </div>
@@ -43,15 +57,15 @@
       <div class="container">
         <div class="columns has-text-centered">
           <div class="column">
-            <span class="is-size-3">{{ counts.courses }}</span>
+            <span class="is-size-3">2</span>
             <span class="heading">Courses</span>
           </div>
           <div class="column">
-            <span class="is-size-3">{{ counts.users }}</span>
+            <span class="is-size-3">10+</span>
             <span class="heading">Registered users</span>
           </div>
           <div class="column">
-            <span class="is-size-3">{{ counts.completed }}</span>
+            <span class="is-size-3">3</span>
             <span class="heading">Completed courses</span>
           </div>
         </div>
@@ -77,24 +91,6 @@
 <script>
 export default {
   data() { return {
-    promos: [{
-      icon: 'flash',
-      title: 'Gain new skills quickly',
-      text: 'We did our best to make sure our student will learn content as quickly as possible',
-    }, {
-      icon: 'arrow-up-bold-circle',
-      title: 'Learn up-to-date technologies',
-      text: 'Unlike some other similar web sites, we offer fresh content only'
-    }, {
-      icon: 'web',
-      title: 'For uzbeks, by uzbeks',
-      text: 'We are one of the very few learning platforms which have both uzbek content and quality'
-    }],
-    counts: {
-      courses: 2,
-      users: 10,
-      completed: 3,
-    }
   } },
 }
 </script>
