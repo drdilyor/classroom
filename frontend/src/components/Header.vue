@@ -42,6 +42,6 @@ export default {
 <style>
 .navbar {
   margin-bottom: 1em;
-  transition: all .3s;
+  transition: all .2s linear;
 }
 </style>
