@@ -8,6 +8,9 @@ class Course(BaseModel):
     title: str
     description: str
     image_link: str
+    language: str
+    author: str
+    estimated_time: int
 
     class Config:
         orm_mode = True

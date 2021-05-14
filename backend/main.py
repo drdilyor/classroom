@@ -45,15 +45,20 @@ async def index():
 
 @app.get('/courses', response_model=List[s.Course])  # noqa
 async def all_courses():
-    return await Course.all()
+    return [
+        { **c.__dict__,
+          'language': c.language.name,
+        } for c in await Course.all().select_related('language')
+    ]
 
 
 @app.get('/courses/{course_id}', response_model=s.CourseDetailed)
 async def get_course(course_id: int):
-    qs = Course.filter(id=course_id).prefetch_related('course_parts')
+    qs = Course.filter(id=course_id).prefetch_related('course_parts').select_related('language')
     c: Course = await qs.get_or_none() or e404()
     return {
         **c.__dict__,
+        'language': c.language.name,
         'course_parts': await c.course_parts,  # noqa
     }
 
@@ -69,8 +74,8 @@ async def is_user_enrolled(course_id: int, payload=Depends(requires_auth())):
 
 @app.get('/enrolled-courses', response_model=List[s.Course])  # noqa
 async def get_enrolled_courses(payload=Depends(requires_auth())):
-    qs = await CourseMember.filter(user_sub=payload['sub']).prefetch_related('course')
-    return [i.course for i in qs]
+    qs = await CourseMember.filter(user_sub=payload['sub']).select_related('course__language')
+    return [s.Course(**i.course.__dict__, language=i.course.language.name) for i in qs]
 
 
 @app.put('/courses/{course_id}/enroll')
@@ -89,16 +94,18 @@ async def enrolled_course(id: int, payload=Depends(requires_auth())):  # noqa
         course_id=id,
     ) or abort(403)
 
-    query = Course.filter(id=id).prefetch_related('course_parts__lessons')
+    query = Course.filter(id=id).prefetch_related('course_parts__lessons').select_related('language')
 
     course: Course = await query.get_or_none() or e404()
     parts = await course.course_parts
 
     course_dict = {**course.__dict__}
+    course_dict['language'] = course.language.name
     # 'cause pydantic doesn't await on Course.lessons
     course_dict['course_parts'] = [await format_course_part(i, payload['sub']) for i in parts]
 
     return course_dict
+
 
 async def format_course_part(part, sub):
     part_dict = {**part.__dict__}
