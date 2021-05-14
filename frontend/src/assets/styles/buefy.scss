@@ -75,19 +75,37 @@ $link: $primary;
 $link-invert: $primary-invert;
 $link-focus-border: $primary;
 
+$notification-colors: $colors;
+
 // ***** end buefy styles *****
 
 @import "~bulma/sass/base/_all";
 @import "~bulma/sass/grid/_all";
 @import "~bulma/sass/helpers/_all";
-@import "~bulma/sass/elements/_all";
+@import "~bulma/sass/elements/box";
+@import "~bulma/sass/elements/box";
+@import "~bulma/sass/elements/button";
+@import "~bulma/sass/elements/container";
+@import "~bulma/sass/elements/content";
+@import "~bulma/sass/elements/icon";
+@import "~bulma/sass/elements/other";
+@import "~bulma/sass/elements/title";
 @import "~bulma/sass/components/card";
 @import "~bulma/sass/components/navbar";
 @import "~bulma/sass/layout/footer";
-@import "~bulma/sass/layout/hero";
 @import "~bulma/sass/layout/section";
 
 @import "~buefy/src/scss/utils/variables";
 @import "~buefy/src/scss/utils/animations";
 @import "~buefy/src/scss/components/navbar";
 @import "~buefy/src/scss/components/notices";
+
+$colors: (
+  "primary": (
+    $primary,
+    $primary-invert,
+    $primary-light,
+    $primary-dark,
+  ),
+);
+@import "~bulma/sass/layout/hero";

@@ -24,7 +24,7 @@
             <vue-markdown class="content" :key="'md'+markdownComponentKey">
               {{ lesson.content }}
             </vue-markdown>
-            <div class="py-4 is-flex is-justify-content-end">
+            <div class="py-4 is-flex-mobile is-flex is-justify-content-end">
               <b-button
               tag="router-link"
                 v-if="nextLesson !== null"
