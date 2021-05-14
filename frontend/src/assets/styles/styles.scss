@@ -79,3 +79,16 @@
   }
 }
 // End copyright
+
+
+// Example:
+// .bar-info
+//   span hello
+//   span blah
+.bar-info > span {
+  padding-right: .5em;
+  &:not(:first-child) {
+    border-left: 1px solid #000;
+    padding-left: .5em;
+  }
+}

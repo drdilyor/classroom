@@ -1,42 +1,20 @@
 <template>
   <div class="container">
     <h1 class="title">Courses</h1>
-    <div v-if="loading" class="content">
-      <div class="progress"><div class="indeterminate"></div></div>
-      <p>Loading...</p>
-    </div>
-    <p v-else-if="error" class="content">
+    <p v-if="error" class="content">
       <strong>Error</strong>: something went wrong :(
     </p>
-    <div class="columns" v-else>
-      <div v-for="course in courses" class="column is-4" :key="course.id">
-        <div class="card">
-          <div class="card-image">
-            <figure class="image image-16by9">
-              <img :src="course.image_link" alt="Course image">
-            </figure>
-          </div>
-          <div class="card-content content">
-            <div class="title is-4">
-              {{ course.title }}
-            </div>
-            <p>
-              {{ course.description }}
-            </p>
-          </div>
-          <footer class="card-footer">
-            <router-link class="card-footer-item" :to="'/courses/'+course.id">
-              Details
-            </router-link>
-          </footer>
-        </div>
-      </div>
-    </div>
+    <Loading v-else-if="loading" class="content" />
+    <template v-else>
+      <explore-card v-for="course in courses" :course="course" :key="course.id" class="media"/>
+    </template>
   </div>
 </template>
 
 <script>
+import ExploreCard from '@/components/ExploreCard.vue'
 export default {
+  components: { ExploreCard },
   data() { return {
     courses: [],
     loading: true,
