@@ -18,11 +18,10 @@
             <b-button
               type="is-primary"
               size="is-large"
-              outlined
-              inverted
-              @click="$auth.login()"
+              outlined inverted
+              @click="$auth.loggedIn()?$router.push('/classroom'):$auth.login()"
               icon-left="account-box">
-              Register for free
+              {{ $auth.loggedIn() ? 'My classroom' : 'Register for free' }}
             </b-button>
           </p>
         </div>
