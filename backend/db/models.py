@@ -10,10 +10,18 @@ class ID:
     def __repr__(self):
         return f'<{self.__class__.__name___} {self.id}>'
 
+
+class Language(ID, Model):
+    name = CharField(20)
+
+
 class Course(ID, Model):
     title = CharField(200)
     description = TextField()
     image_link = CharField(200)
+    language = ForeignKeyField('models.Language', related_name='courses')
+    author = CharField(80)
+    estimated_time = IntField()
 
     course_parts: ReverseRelation['CoursePart']
 
@@ -60,6 +68,10 @@ class LessonViewed(ID, Model):
 class AdminUser(AbstractUser):
     pass
 
+
+async def init():
+    Language.UZBEK   = await Language.get_or_create(name='Uzbek')
+    Language.ENGLISH = await Language.get_or_create(name='English')
 
 
 __all__ = [

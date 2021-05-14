@@ -20,6 +20,7 @@ TORTOISE_ORM = {
 
 async def init_tortoise():
     await Tortoise.init(config=TORTOISE_ORM)
+    await models.init()
 
 
 async def init_admin(app: FastAPI):
