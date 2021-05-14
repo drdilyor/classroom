@@ -1,9 +1,5 @@
-import os
-
 from fastapi import FastAPI
-from fastapi_admin.factory import app as admin_app
 from fastapi_admin.models import AbstractUser
-from fastapi_admin.site import Site
 from tortoise.models import Model
 from tortoise.fields import *
 from tortoise import Tortoise, run_async
@@ -65,45 +61,8 @@ class AdminUser(AbstractUser):
     pass
 
 
-async def init_tortoise():
-    db_url = os.environ.get('DATABASE', 'sqlite://db.sqlite3')
-    print(f'{db_url=}')
-    await Tortoise.init(
-        db_url=db_url,
-        modules={'models': ['models']},
-    )
-    await Tortoise.generate_schemas()
-
-
-async def init_admin(app: FastAPI):
-    app.mount('/admin', admin_app)
-
-    await admin_app.init(
-        admin_secret="test",
-        site=Site(
-            name="Classroom",
-            login_footer="Classroom - a simple E-Learning platform",
-            login_description="Classroom admin",
-            locale="en-US",
-            theme_switcher=True,
-            footer='Classroom - a simple E-Learning platform<br>Fork me on '
-                   '<a href="https://github.com/drdilyor/classroom" target="_blank">GitHub</a>'
-        ),
-    )
-
-async def init(app: FastAPI):
-    await init_tortoise()
-    await init_admin(app)
-
-
-if __name__ == '__main__':
-    run_async(init_tortoise())
-
 
 __all__ = [
-    'init',
-    'init_tortoise',
-    'init_admin',
     'Course',
     'CoursePart',
     'Lesson',

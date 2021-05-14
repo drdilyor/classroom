@@ -7,9 +7,9 @@ from fastapi import FastAPI, HTTPException, Depends, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
-import models
+import db
 from auth import requires_auth, AuthError
-from models import *
+from db.models import *
 import schemas as s
 from util import abort
 
@@ -31,7 +31,7 @@ app.add_middleware(
 )
 
 # Models and admin
-asyncio.create_task(models.init(app))
+asyncio.create_task(db.init(app))
 
 
 def e404():

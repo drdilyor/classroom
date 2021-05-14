@@ -1,3 +1,4 @@
+aerich==0.5.3
 aiofiles==0.5.0
 aiomysql==0.0.21
 aiosqlite==0.16.1
@@ -11,6 +12,8 @@ cffi==1.14.5
 chardet==4.0.0
 click==7.1.2
 colorama==0.4.4
+ddlparse==1.9.0
+dictdiffer==0.8.1
 dnspython==2.1.0
 ecdsa==0.14.1
 email-validator==1.1.2
@@ -35,6 +38,7 @@ pycparser==2.20
 pydantic==1.8.1
 PyJWT==2.0.1
 PyMySQL==0.9.3
+pyparsing==2.4.7
 pypika-tortoise==0.1.0
 python-dotenv==0.17.0
 python-jose==3.2.0
