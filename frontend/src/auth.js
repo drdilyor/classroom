@@ -61,7 +61,9 @@ const auth = {
     if (!this.inited) this.init()
     return this.payload != null
   },
-  login() {
+  login(preserveUrl = true) {
+    if (preserveUrl)
+      localStorage.setItem('next', window.location.pathname)
     let callbackUrl = `https://${location.host}/profile`
     window.location = `https://${auth.config.domain}/authorize?audience=${auth.config.audience}&response_type=token&scope=openid profile email&client_id=${auth.config.clientId}&redirect_uri=${callbackUrl}`
   },

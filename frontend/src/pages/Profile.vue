@@ -58,6 +58,7 @@ export default {
     showJwt: false,
   } },
   created() {
+    let next;
     const match = this.$route.hash.match(/^#access_token=(.*?)&/)
 
     if (match) {
@@ -66,7 +67,10 @@ export default {
         const oldJwt = this.$auth.getJwt()
         this.$auth.setJwt(token)
         if (oldJwt !== token)
-          this.$router.go() // reload so navbar updates
+          if (next = localStorage.getItem('next'))
+            this.$router.push(next), localStorage.removeItem('next')
+          else
+            this.$router.go() // reload so navbar updates
         // fix me: the above line won't be required inthe future
         // when auth migrates to use vuex
       }
