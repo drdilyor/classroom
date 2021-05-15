@@ -16,7 +16,7 @@
         <h3 class="title is-5">Results ({{courses.length}})</h3>
         <p>{{ search }}<button class="delete ml-2" @click="search = ''" /></p>
       </div>
-      <explore-card v-for="course in courses" :course="course" :key="course.id" class="media"/>
+      <explore-card v-for="course in courses" :course="course" :key="course.id" />
     </template>
   </div>
 </template>

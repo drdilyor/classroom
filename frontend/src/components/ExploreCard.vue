@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="'/courses/'+course.id">
+  <router-link :to="'/courses/'+course.id" class="block">
     <article class="explore-card card">
       <div class="explore-card-left">
         <img class="explore-card-img" :src="course.image_link" alt="Course image">

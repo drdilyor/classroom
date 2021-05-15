@@ -15,12 +15,12 @@
     <!-- Content -->
     <template v-else>
       <div class="columns is-vcentered">
-        <div class="column is-5">
+        <div class="column">
           <h1>{{ course.title }}</h1>
           <p>{{ course.description }}</p>
         </div>
-        <div class="column is-7">
-          <p><img class="img-fluid" :src="course.image_link" alt="Course image"></p>
+        <div class="column is-narrow">
+          <img style="width: 100%" class="img-fluid" :src="course.image_link" alt="Course image">
         </div>
 
         <!-- Enroll button -->
