@@ -1,25 +1,27 @@
 <template>
-  <article class="explore-card card">
-    <div class="explore-card-left">
-      <img class="explore-card-img" :src="course.image_link" alt="Course image">
-    </div>
-    <div class="explore-card-content">
-      <div class="title is-4 mb-2">
-        {{ course.title }}
+  <router-link :to="'/courses/'+course.id">
+    <article class="explore-card card">
+      <div class="explore-card-left">
+        <img class="explore-card-img" :src="course.image_link" alt="Course image">
       </div>
-      <p class="is-flex-grow-1">
-        {{ course.description }}
-      </p>
-      <div class="explore-card-buttons">
-      <b-button tag="router-link" :to="'/courses/'+course.id" class="mt-2" type="is-primary">Course details</b-button>
+      <div class="explore-card-content">
+        <div class="title is-4 mb-2">
+          {{ course.title }}
+        </div>
+        <p class="is-flex-grow-1">
+          {{ course.description }}
+        </p>
+        <div class="explore-card-buttons">
+        <b-button class="mt-2" type="is-primary">Course details</b-button>
+        </div>
+        <div class="has-text-black mt-2 bar-info">
+          <span>By {{ course.author }}</span>
+          <span>Estimated time {{ course.estimated_time }} weeks</span>
+          <span>{{ course.language }}</span>
+        </div>
       </div>
-      <div class="has-text-black mt-2 bar-info">
-        <span>By {{ course.author }}</span>
-        <span>Estimated time {{ course.estimated_time }} weeks</span>
-        <span>{{ course.language }}</span>
-      </div>
-    </div>
-  </article>
+    </article>
+  </router-link>
 </template>
 
 <script>

@@ -6,6 +6,16 @@
     </p>
     <Loading v-else-if="loading" class="content" />
     <template v-else>
+      <div class="block control has-icons-right">
+        <input
+          v-model="search" type="search"
+          class="input" placeholder="Search">
+        <b-icon icon="magnify" class="is-right"/>
+      </div>
+      <div class="notification is-primary is-light" v-if="search">
+        <h3 class="title is-5">Results ({{courses.length}})</h3>
+        <p>{{ search }}<button class="delete ml-2" @click="search = ''" /></p>
+      </div>
       <explore-card v-for="course in courses" :course="course" :key="course.id" class="media"/>
     </template>
   </div>
@@ -13,17 +23,35 @@
 
 <script>
 import ExploreCard from '@/components/ExploreCard.vue'
+String.prototype.lower = String.prototype.toLowerCase
+
 export default {
   components: { ExploreCard },
   data() { return {
-    courses: [],
+    allCourses: [],
     loading: true,
     error: false,
+    search: this.$route.query.search || '',
   } },
+  computed: {
+    courses() {
+      return this.allCourses.filter(c =>
+        c.title.toLowerCase().includes(this.search.toLowerCase())
+      )
+    }
+  },
+  watch: {
+    search() {
+      this.$router.push({
+        path: this.$route.path,
+        query: this.search ? {search: this.search} : {}
+      })
+    }
+  },
   created() {
     this.$api.get('/courses')
     .then(data => {
-      this.courses = data
+      this.allCourses = data
       this.loading = false
     })
     .catch(err => {
@@ -33,58 +61,3 @@ export default {
   },
 }
 </script>
-
-<style lang="scss">
-// .explore-tile {
-//   height: 20rem;
-//   margin-bottom: 1rem;
-//   border-radius: 4px;
-//   box-shadow: 0 .25rem .5rem #00000044;
-
-//   &-image {
-//     height: 50%;
-//     img {
-//       height: 100%;
-//       width: 100%;
-//       object-fit: cover;
-//       border-top-left-radius: 4px;
-//       border-top-right-radius: 4px;
-//     }
-//   }
-  
-//   &-body {
-//     display: flex;
-//     height: 50%;
-//     flex-direction: column;
-//     padding: .5rem;
-//   }
-//   &-title {
-//     font-size: 1.6rem;
-//   }
-//   &-action {
-//     padding: .5rem;
-//     border-top: 1px solid #00000044;
-//     a {
-//       text-decoration: none;
-//       color: var(--bs-blue);
-//     }
-//   }
-// }
-
-// @media screen and (min-width: 992px) {
-//   .explore-tile {
-//     display: flex;
-//     flex-direction: row;
-//     height: 14rem;
-//     &-image {
-//       height: 100%;
-//       width: 20rem
-//     }
-//     &-body {
-//       height: 100%;
-//       flex-grow: 1;
-//     }
-//   }
-// }
-
-</style>

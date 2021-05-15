@@ -108,4 +108,6 @@ $colors: (
     $primary-dark,
   ),
 );
+@import "~bulma/sass/elements/notification";
+@import "~bulma/sass/form/all";
 @import "~bulma/sass/layout/hero";
