@@ -63,7 +63,7 @@ const auth = {
   },
   login() {
     let callbackUrl = `https://${location.host}/profile`
-    window.location = `https://${auth.config.domain}/authorize?audience=${auth.config.audience}&response_type=token&client_id=${auth.config.clientId}&redirect_uri=${callbackUrl}`
+    window.location = `https://${auth.config.domain}/authorize?audience=${auth.config.audience}&response_type=token&scope=openid profile email&client_id=${auth.config.clientId}&redirect_uri=${callbackUrl}`
   },
   
   logout() {
@@ -77,6 +77,26 @@ const auth = {
 
   can(perm) {
     return auth.payload.permissions.includes(perm)
+  },
+  
+  getProfile() {
+    console.assert(this.loggedIn())
+    return new Promise((resolve, reject) => {
+      fetch(`https://${auth.config.domain}/userinfo`, {
+        headers: {authorization: `Bearer ${auth.getJwt()}`}
+      })
+      .then(res => {
+        if (res.status !== 200) auth.login()
+        else return res.json()
+      })
+      .then(data => {
+        console.log(data)
+        resolve(data)
+      })
+      .catch(err => {
+        reject(err)
+      })
+    })
   }
 }
 

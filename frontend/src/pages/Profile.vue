@@ -1,9 +1,28 @@
 <template>
   <div class="container content">
-    <h1>Profile</h1>
+    <!-- Kinda hidden dev tools -->
+    <h1 @click="showJwt = true">Profile</h1>
     <div v-if="$auth.loggedIn()">
-      <p>You are logged in</p>
-      <pre>{{ $auth.getJwt() }}</pre>
+      <p v-if="error">Something went wrong when fetching your profile: {{ error }}</p>
+      <Loading v-else-if="profile === null"/>
+      <div v-else class="box">
+        <div class="columns is-vcentered">
+          <div class="column is-narrow has-text-centered">
+            <img class="is-rounded" :src="profile.picture" alt="">
+          </div>
+          <div class="column has-text-centered has-text-left-tablet">
+            <h2 class="title">{{ profile.name }}</h2>
+            <p class="subtitle mb-0">{{ profile.email }}
+              <b-icon v-if="profile.email_verified" class="has-text-success" icon="check" title="This email is verified" />
+            </p>
+            <p v-if="!profile.email_verified" class="has-text-danger">
+              Please verify your email
+            </p>
+          </div>
+        </div>
+      </div>
+      <pre v-if="showJwt">{{ $auth.getJwt() }}</pre>
+      <pre v-if="showJwt">{{ $auth.payload }}</pre>
       <div class="buttons">
         <b-button type="is-warning" @click="logout">Log out</b-button>
         <b-button type="is-warning is-light" @click="$auth.logoutHard">Log out hard</b-button>
@@ -18,6 +37,11 @@
 
 <script>
 export default {
+  data() { return {
+    profile: null,
+    error: null,
+    showJwt: false,
+  } },
   created() {
     const match = this.$route.hash.match(/^#access_token=(.*?)&/)
 
@@ -32,6 +56,10 @@ export default {
         // when auth migrates to use vuex
       }
     }
+
+    this.$auth.getProfile()
+    .then(data => this.profile = data)
+    .catch(err => this.error = err)
   },
   methods: {
     logout() {
