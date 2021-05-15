@@ -2,15 +2,30 @@
   <div class="container content">
     <!-- Kinda hidden dev tools -->
     <h1 @click="showJwt = true">Profile</h1>
+    
     <div v-if="$auth.loggedIn()">
       <p v-if="error">Something went wrong when fetching your profile: {{ error }}</p>
-      <Loading v-else-if="profile === null"/>
-      <div v-else class="box">
-        <div class="columns is-vcentered">
-          <div class="column is-narrow has-text-centered">
-            <img class="is-rounded" :src="profile.picture" alt="">
+      
+      <!-- Skeleton -->
+      <div v-else-if="profile === null" class="box">
+        <div class="columns is-vcentered has-text-centered">
+          <div class="column is-narrow">
+            <b-skeleton circle width="120px" height="120px" />
           </div>
-          <div class="column has-text-centered has-text-left-tablet">
+          <div class="column">
+            <b-skeleton size="is-large" width="20em" />
+            <b-skeleton class="subtitle" width="14em" />
+          </div>
+        </div>
+      </div>
+      
+      <!-- Profile -->
+      <div v-else class="box">
+        <div class="columns is-vcentered has-text-centered">
+          <div class="column is-narrow">
+            <img class=" is-rounded is-block" :src="profile.picture" width="120" height="120">
+          </div>
+          <div class="column has-text-left-tablet">
             <h2 class="title">{{ profile.name }}</h2>
             <p class="subtitle mb-0">{{ profile.email }}
               <b-icon v-if="profile.email_verified" class="has-text-success" icon="check" title="This email is verified" />
@@ -58,7 +73,7 @@ export default {
     }
 
     this.$auth.getProfile()
-    .then(data => this.profile = data)
+    .then(data => setTimeout(() => this.profile = data, 1000) )
     .catch(err => this.error = err)
   },
   methods: {
