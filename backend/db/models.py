@@ -14,6 +14,9 @@ class ID:
 class Language(ID, Model):
     name = CharField(20)
 
+    def __str__(self):
+        return self.name
+
 
 class Course(ID, Model):
     title = CharField(200)

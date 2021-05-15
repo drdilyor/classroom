@@ -24,6 +24,7 @@ async def init_tortoise():
 
 
 async def init_admin(app: FastAPI):
+    print('admin init')
     app.mount('/admin', admin_app)
 
     await admin_app.init(
