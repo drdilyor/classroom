@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS "author" (
     "name" VARCHAR(80) NOT NULL
 );;
 ALTER TABLE "course" ADD "author_id" INT;
-INSERT INTO "author" ("name") SELECT "author" FROM "course";
+INSERT INTO "author" ("name") SELECT "author" FROM "course" DISTINCT;
 UPDATE "course" set "author_id" = "author"."id" from "author" where "course"."author" = "author"."name";
 ALTER TABLE "course" DROP COLUMN "author";
 ALTER TABLE "course" ADD CONSTRAINT "fk_course_author_32d21668" FOREIGN KEY ("author_id") REFERENCES "author" ("id") ON DELETE CASCADE;
