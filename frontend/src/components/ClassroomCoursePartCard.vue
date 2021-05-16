@@ -1,11 +1,16 @@
 <template>
   <router-link tag="div" class="classroom-course-part-card card" :to="nextLessonLink">
-    <span class="subtitle is-5 has-text-grey">Part {{i}}</span>
-    <h3 class="title pt-2">{{ part.title }}</h3>
+    <span class="heading is-size-6">Part {{i}}</span>
+    <h3 class="title pt-2 is-4">{{ part.title }}</h3>
     <p class="is-flex-grow-1">{{ part.description }}</p>
-    <b-button class="mt-4" type="is-primary is-light" icon-right="arrow-right">
+    <b-button class="my-5 is-hidden-mobile" type="is-primary is-light" icon-right="arrow-right">
       Continue
     </b-button>
+    <footer>
+      <b-progress class="mb-0" :value="progress.percentage" size="is-small" type="is-success" />
+      <span class="ml-4 is-flex-grow-1">{{ progress.percentage }}%</span>
+      <span>{{ progress.all - progress.viewed }} left</span>
+    </footer>
   </router-link>
 </template>
 
@@ -37,7 +42,14 @@ export default {
       const next = this.nextLesson
       //console.log({next})
       return next ? '/classroom/lesson/' + next : '#'
-    }
+    },
+    progress() {
+      const lessons = this.part.lessons
+      const all = lessons.length
+      const viewed = lessons.filter(i => i.is_viewed).length
+      const percentage = viewed === 0 ? 100 : viewed / all * 100
+      return {all, viewed, percentage}
+    },
   }
 }
 </script>
@@ -48,9 +60,14 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  min-height: 18rem;
+  min-height: 20rem;
   padding: 2rem;
   margin-bottom: 2rem;
   cursor: pointer;
+}
+.classroom-course-part-card footer {
+  align-self: stretch;
+  display: flex;
+  align-items: center;
 }
 </style>

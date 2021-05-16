@@ -112,3 +112,14 @@ $colors: (
 @import "~bulma/sass/elements/notification";
 @import "~bulma/sass/form/all";
 @import "~bulma/sass/layout/hero";
+
+$colors: (
+  "success": (
+    $success,
+    $success-invert,
+    $success-light,
+    $success-dark,
+  ),
+);
+@import "~bulma/sass/elements/progress";
+@import "~buefy/src/scss/components/progress";
