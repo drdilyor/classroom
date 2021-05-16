@@ -11,14 +11,14 @@
           <span class="spacer" />
           <h1 class="is-flex-grow-1 subtitle is-4 has-text-centered">{{ lesson.title }}</h1>
         </header>
-        <main class="overflow-auto">
+        <main>
           <div class="container lesson-content">
             <div class="video-wrapper">
               <iframe
                 class="video"
                 width="640"
                 height="360"
-                allowfullscreen="1"
+                allowfullscreen
                 :src="`https://www.youtube.com/embed/${lesson.video}`"/>
             </div>
             <vue-markdown class="content" :key="'md'+markdownComponentKey">
@@ -28,14 +28,14 @@
               <b-button
               tag="router-link"
                 v-if="nextLesson !== null"
-                type="is-primary is-outlined"
+                type="is-primary is-light"
                 :to="nextLesson"
                 icon-right="arrow-right">
                 Next
               </b-button>
               <b-button
                 v-else
-                type="is-success is-outlined"
+                type="is-success is-light"
                 :to="'/classroom/course/'+$store.getters.currentCourse.id"
                 icon-right="check"
                 @click.native="partDone">
@@ -117,12 +117,14 @@ export default {
 }
 .lesson-content .video-wrapper {
   position: relative;
-  height: 360px;
   max-width: 640px;
   margin: 0 auto; /* is this really needed? */
+  padding-bottom: calc(9 / 16 * 100%);
+  margin-bottom: 1em;
 }
 .lesson-content .video {
   position: absolute;
+  left: 0; right: 0;
   width: 100%;
   height: 100%;
 }
