@@ -22,11 +22,10 @@
         <div class="column is-narrow">
           <img style="width: 100%" class="img-fluid" :src="course.image_link" alt="Course image">
         </div>
-
-        <!-- Enroll button -->
       </div>
       <div class="columns">
         <div class="column is-half is-offset-one-quarter">
+          <!-- Enroll button -->
           <p v-if="$auth.loggedIn()">
             <b-button
               v-if="!courseEnrolled"
@@ -56,25 +55,23 @@
         <!-- Syllabus -->
       <h2 class="no-mt">Syllabus</h2>
       <p>To optimize your chances of success we have divided the course into following parts</p>
-      <div class="course-part-list">
+      <div class="course-part-list mb-4">
         <div class="course-part" v-for="cpart in course.course_parts" :key="cpart.id">
           <h3 class="course-part-header">{{ cpart.title }}</h3>
           <p>{{ cpart.description }}</p>
         </div>
+      </div>
+      <div class="columns has-text-centered">
+        <div class="column"><h3>Language:</h3><p>The courses language is {{ course.language }}</p></div>
+        <div class="column"><h3>Taught by:</h3><p>The course is taught by {{ course.author }}</p></div>
+        <div class="column"><h3>Time:</h3><p>On average, it takes {{ course.estimated_time }} weeks</p></div>
       </div>
     </template>
   </div>
 </template>
 
 <script>
-import IconButton from '../components/ui/IconButton.vue'
-import LinkButton from '@/components/ui/IconLinkButton.vue'
-
 export default {
-  components: {
-    LinkButton,
-    IconButton,
-  },
   data() { return {
     loading: true,
     error: null,
