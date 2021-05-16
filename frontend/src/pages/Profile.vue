@@ -66,21 +66,23 @@ export default {
         const oldJwt = this.$auth.getJwt()
         this.$auth.setJwt(token)
         if (oldJwt !== token)
-          this.$router.go() // reload so navbar updates
+          this.$router.go(0) // reload so navbar updates
         // fix me: the above line won't be required inthe future
         // when auth migrates to use vuex
       }
     }
 
-    this.$auth.getProfile()
-    .then(data => this.profile = data)
-    .catch(err => this.error = err)
+    if (this.$auth.loggedIn()) {
+      this.$auth.getProfile()
+      .then(data => this.profile = data)
+      .catch(err => this.error = err)
+    }
   },
   methods: {
     logout() {
       this.$auth.logout()
       this.$router.push('/')
-      this.$router.go()
+      this.$router.go(0)
     }
   }
 }
