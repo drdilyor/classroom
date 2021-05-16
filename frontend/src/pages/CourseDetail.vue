@@ -7,10 +7,7 @@
     </div>
 
     <!-- Loading -->
-    <div v-else-if="loading">
-      <h1>Loading...</h1>
-      <div class="progress"><div class="indeterminate"></div></div>
-    </div>
+    <Loading v-else-if="loading" />
 
     <!-- Content -->
     <template v-else>

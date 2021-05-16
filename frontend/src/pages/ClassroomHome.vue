@@ -11,10 +11,7 @@
         <!-- no .container here and the class is added to main instead
         Because that causes overflow errors
         -->
-          <div v-if="loading">
-            <div class="progress"><div class="indeterminate"></div></div>
-            <p>Loading...</p>
-          </div>
+          <Loading v-if="loading" />
           <p v-else-if="error">
             <strong>Error</strong>: something went wrong :(
           </p>
