@@ -8,24 +8,24 @@
       
       <!-- Skeleton -->
       <div v-else-if="profile === null" class="box">
-        <div class="columns is-vcentered has-text-centered">
+        <div class="columns is-vcentered">
           <div class="column is-narrow">
             <b-skeleton circle width="120px" height="120px" />
           </div>
           <div class="column">
-            <b-skeleton size="is-large" width="20em" />
-            <b-skeleton class="subtitle" width="14em" />
+            <b-skeleton height="2em" width="20em" />
+            <b-skeleton height="1.25em" width="14em" />
           </div>
         </div>
       </div>
       
       <!-- Profile -->
       <div v-else class="box">
-        <div class="columns is-vcentered has-text-centered">
+        <div class="columns  is-vcentered">
           <div class="column is-narrow">
-            <img class=" is-rounded is-block" :src="profile.picture" width="120" height="120">
+            <img class=" is-rounded fix-img-space" :src="profile.picture" width="120" height="120" alt="Picture">
           </div>
-          <div class="column has-text-left-tablet">
+          <div class="column">
             <h2 class="title">{{ profile.name }}</h2>
             <p class="subtitle mb-0">{{ profile.email }}
               <b-icon v-if="profile.email_verified" class="has-text-success" icon="check" title="This email is verified" />
@@ -73,7 +73,7 @@ export default {
     }
 
     this.$auth.getProfile()
-    .then(data => setTimeout(() => this.profile = data, 1000) )
+    .then(data => this.profile = data)
     .catch(err => this.error = err)
   },
   methods: {
@@ -85,3 +85,9 @@ export default {
   }
 }
 </script>
+
+<style>
+.fix-img-space {
+  vertical-align: top;
+}
+</style>
