@@ -18,12 +18,16 @@ class Language(ID, Model):
         return self.name
 
 
+class Author(ID, Model):
+    name = CharField(80)
+
+
 class Course(ID, Model):
     title = CharField(200)
     description = TextField()
     image_link = CharField(200)
     language = ForeignKeyField('models.Language', related_name='courses')
-    author = CharField(80)
+    author = ForeignKeyField('models.Author', related_name='courses', null=True)
     estimated_time = IntField()
 
     course_parts: ReverseRelation['CoursePart']
