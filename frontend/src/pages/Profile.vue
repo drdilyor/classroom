@@ -23,7 +23,7 @@
       <div v-else class="box">
         <div class="columns  is-vcentered">
           <div class="column is-narrow">
-            <img class=" is-rounded fix-img-space" :src="profile.picture" width="120" height="120" alt="Picture">
+            <img class=" is-rounded fix-img-space" :src="profile.picture" width="120" height="120" alt="">
           </div>
           <div class="column">
             <h2 class="title">{{ profile.name }}</h2>
