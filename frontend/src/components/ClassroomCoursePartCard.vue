@@ -47,7 +47,7 @@ export default {
       const lessons = this.part.lessons
       const all = lessons.length
       const viewed = lessons.filter(i => i.is_viewed).length
-      const percentage = viewed === 0 ? 100 : viewed / all * 100
+      const percentage = Math.round(all === 0 ? 100 : viewed / all * 100)
       return {all, viewed, percentage}
     },
   }
