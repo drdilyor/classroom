@@ -1,4 +1,5 @@
 import auth from '@/auth'
+import {SnackbarProgrammatic as snackbar} from "buefy";
 
 function required() {
   throw TypeError()
@@ -31,6 +32,7 @@ const api = {
           break
         case 401:
           // Error with JWT, obtain a new one
+          snackbar.open('Error: token expired. Refreshing. Please wait...')
           auth.login()
           break
       }
