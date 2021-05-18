@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1 class="title">Courses</h1>
+    <h1 class="title">{{$t('courses')}}</h1>
     <p v-if="error" class="content">
       <strong>Error</strong>: something went wrong :(
     </p>
@@ -9,11 +9,11 @@
       <div class="block control has-icons-right">
         <input
           v-model="search" type="search"
-          class="input" placeholder="Search">
+          class="input" :placeholder="$t('search')">
         <b-icon icon="magnify" class="is-right"/>
       </div>
       <div class="notification is-primary is-light" v-if="search">
-        <h3 class="title is-5">Results ({{courses.length}})</h3>
+        <h3 class="title is-5">{{$t('results')}} ({{courses.length}})</h3>
         <p>{{ search }}<button class="delete ml-2" @click="search = ''" /></p>
       </div>
       <explore-card v-for="course in courses" :course="course" :key="course.id" />
@@ -47,6 +47,14 @@ export default {
         query: this.search ? {search: this.search} : {}
       })
     }
+  },
+  strings: {
+    en: {
+      courses: 'Courses',
+      search: 'Search',
+      results: 'Results',
+
+    },
   },
   created() {
     this.$api.get('/courses')
