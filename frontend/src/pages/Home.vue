@@ -3,8 +3,8 @@
     <section class="hero is-primary is-halfheight">
       <div class="hero-body has-text-centered">
         <div class="container">
-          <h1 class="title">Welcome to &lt;A&gt;Code</h1>
-          <p class="subtitle">An open source E-Learning platform!</p>
+          <h1 class="title">{{$t('welcome')}}</h1>
+          <p class="subtitle">{{$t('welcomeSubtitle')}}</p>
           <p class="buttons is-centered">
             <b-button
               tag="router-link"
@@ -13,7 +13,7 @@
               size="is-large"
               inverted
               icon-left="view-dashboard">
-              Explore courses
+              {{$t('btnExplore')}}
             </b-button>
             <b-button
               type="is-primary"
@@ -21,7 +21,7 @@
               outlined inverted
               @click="$auth.loggedIn()?$router.push('/classroom'):$auth.login()"
               icon-left="account-box">
-              {{ $auth.loggedIn() ? 'My classroom' : 'Register for free' }}
+              {{$t($auth.loggedIn() ? 'btnClassroom' : 'btnRegister')}}
             </b-button>
           </p>
         </div>
@@ -32,22 +32,22 @@
         <div class="column">
           <div class="promo">
             <b-icon class="has-text-primary" icon="flash" size="is-large" />
-            <h3 class="subtitle is-3">Gain new skills quickly</h3>
-            <p class="is-size-5">We did our best to make sure our student will learn content as quickly as possible</p>
+            <h3 class="subtitle is-3">{{$t('promoSkills')}}</h3>
+            <p class="is-size-5">{{$t('promoSkillsText')}}</p>
           </div>
         </div>
         <div class="column">
           <div class="promo">
             <b-icon class="has-text-primary" icon="arrow-up-bold-circle" size="is-large" />
-            <h3 class="subtitle is-3">Learn up-to-date technologies</h3>
-            <p class="is-size-5">Unlike some other similar web sites, we offer fresh content only</p>
+            <h3 class="subtitle is-3">{{$t('promoUptodate')}}</h3>
+            <p class="is-size-5">{{$t('promoUptodateText')}}</p>
           </div>
         </div>
         <div class="column">
           <div class="promo">
             <b-icon class="has-text-primary" icon="web" size="is-large" />
-            <h3 class="subtitle is-3">For uzbeks, by uzbeks</h3>
-            <p class="is-size-5">We are one of the very few learning platforms which have both uzbek content and quality</p>
+            <h3 class="subtitle is-3">{{$t('promoUzbeks')}}</h3>
+            <p class="is-size-5">{{$t('promoUzbeksText')}}</p>
           </div>
         </div>
       </div>
@@ -57,15 +57,15 @@
         <div class="columns has-text-centered">
           <div class="column">
             <span class="is-size-3">2</span>
-            <span class="heading">Courses</span>
+            <span class="heading">{{$t('dashboardCourses')}}</span>
           </div>
           <div class="column">
             <span class="is-size-3">10+</span>
-            <span class="heading">Registered users</span>
+            <span class="heading">{{$t('dashboardUsers')}}</span>
           </div>
           <div class="column">
             <span class="is-size-3">3</span>
-            <span class="heading">Completed courses</span>
+            <span class="heading">{{$t('dashboardCompleted')}}</span>
           </div>
         </div>
       </div>
@@ -74,11 +74,11 @@
       <div class="container">
         <div class="columns is-align-items-center">
           <div class="column has-text-centered-mobile">
-            <h2 class="title is-4">Sign up now</h2>
-            <p>Sign up today and build skills for tomorrow</p>
+            <h2 class="title is-4">{{$t('regTitle')}}</h2>
+            <p>{{$t('regText')}}</p>
           </div>
           <div class="column">
-            <b-button size="is-medium" expanded @click="$auth.login()">Open register page</b-button>
+            <b-button size="is-medium" expanded @click="$auth.login()">{{$t('regBtn')}}</b-button>
           </div>
         </div>
       </div>
@@ -91,6 +91,27 @@
 export default {
   data() { return {
   } },
+  strings: {
+    en: {
+      welcome: 'Welcome to <A>Code',
+      welcomeSubtitle: 'An open source E-Learning platform!',
+      btnExplore: 'Explore courses',
+      btnClassroom: 'My classroom',
+      btnRegister: 'Register for free',
+      promoSkills: 'Gain new skills quickly',
+      promoSkillsText: 'We did our best to make sure our student will learn content as quickly as possible',
+      promoUptodate: 'Learn up-to-date technologies',
+      promoUptodateText: 'Unlike some other similar web sites, we offer fresh content only',
+      promoUzbeks: 'For uzbeks, by uzbeks',
+      promoUzbeksText: 'We are one of the very few learning platforms which have both uzbek content and quality',
+      dashboardCourses: 'Courses',
+      dashboardUsers: 'Registered users',
+      dashboardCompleted: 'Completed courses',
+      regTitle: 'Sign up now',
+      regText: 'Sign up today and build skills for tomorrow',
+      regBtn: 'Open register page',
+    },
+  }
 }
 </script>
 
