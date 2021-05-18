@@ -25,15 +25,36 @@ export let locale = function() {
 /**
  * @param {String} name
  * @param {Object} args
- * @param {Object} strings
+ * @param {*} defaultValue
+ * @param {Object} stringz
  * @returns {String}
  */
-export function t(name, args, strings = strings) {
+export function t(name, args = null, defaultValue = null, stringz = strings) {
+  // optimize the simplest case
   /** @type {String} */
-  let message = strings[locale][name]
-  if (message && args) return message
-  if (!message) message = strings[defaultLocale]
-  if (!message) console.warn('[STRINGS] Error: key "'+name+'"Doesn\'t exist')
+  let message = stringz[locale] && stringz[locale][name]
+  if (message && !args) return message
+
+  let _
+  // fallback locale
+  if (!message
+    && locale !== defaultLocale
+    && (_ = stringz[defaultLocale])
+    && (_ = _[name]))
+      message = _
+  // in case nothing was found
+  if (!message) {
+    if (defaultValue === null) {
+      console.warn('[STRINGS] Error: key "' + name + '" doesn\'t exist')
+      return ''
+    }
+    else {
+      message = defaultValue
+    }
+  }
+
+  if (message && !args) return message
+
   return message.replaceAll(/{([a-zA-Z0-9])}/g, (a, key) => {
     return args[key]
   })
@@ -47,9 +68,9 @@ export default { install(Vue) {
        * @param {Object} args
        * @returns {String}
        */
-      $t(name, args) {
-        if (this.$options)
-          return t(name, args, this.$options) || t(name, args)
+      $t(name, args = null) {
+        if (this.$options.strings)
+          return t(name, args, '', this.$options.strings) || t(name, args)
         return t(name, args)
       }
     }
