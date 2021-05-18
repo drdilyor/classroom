@@ -2,7 +2,7 @@
   <router-link :to="'/courses/'+course.id" class="block is-block">
     <article class="explore-card card">
       <div class="explore-card-left">
-        <img class="explore-card-img" :src="course.image_link" alt="Course image">
+        <img class="explore-card-img" :src="course.image_link" :alt="$t('imgAlt')">
       </div>
       <div class="explore-card-content">
         <div class="title is-4 mb-2">
@@ -12,11 +12,11 @@
           {{ course.description }}
         </p>
         <div class="explore-card-buttons">
-        <b-button class="mt-2" type="is-primary">Course details</b-button>
+        <b-button class="mt-2" type="is-primary">{{$t('details')}}</b-button>
         </div>
         <div class="has-text-black mt-2 bar-info">
-          <span>By {{ course.author }}</span>
-          <span>Estimated time {{ course.estimated_time }} weeks</span>
+          <span>{{$t('by', [course.author])}}</span>
+          <span>{{$t('time', [course.estimated_time])}}</span>
           <span>{{ course.language }}</span>
         </div>
       </div>
@@ -26,7 +26,15 @@
 
 <script>
 export default {
-  props: {course: Object}
+  props: {course: Object},
+  strings: {
+    en: {
+      imgAlt: 'Course image',
+      details: 'Course details',
+      by: 'By {0}',
+      time: 'Estimated time {0} weeks',
+    },
+  },
 }
 </script>
 
