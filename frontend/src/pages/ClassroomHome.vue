@@ -5,9 +5,9 @@
       <header>
         <navbar-burger :is-opened="showSidenav" @click="showSidenav = !showSidenav"/>
         <span class="spacer"/>
-        Home
+        {{$t('home')}}
       </header>
-      <main class="overflow-auto container">
+      <main class="container">
         <!-- no .container here and the class is added to main instead
         Because that causes overflow errors
         -->
@@ -16,7 +16,7 @@
             <strong>Error</strong>: something went wrong :(
           </p>
           <template v-else>
-            <h2 class="subtitle">Current enrollments</h2>
+            <h2 class="subtitle">{{$t('enrollments')}}</h2>
             <div v-for="c in courses" :key="c.id">
               <ClassroomCourseCard :course="c"/>
             </div>
@@ -43,6 +43,12 @@ export default {
     courses: [],
     showSidenav: false,
   } },
+  strings: {
+    en: {
+      home: 'Home',
+      enrollments: 'Current enrollments',
+    },
+  },
   methods: {
     async fetchData() {
       this.courses = await this.$api.get('/enrolled-courses')
