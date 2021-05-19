@@ -41,7 +41,6 @@ export default {
       explore: 'Explore',
       classroom: 'Classroom',
       join: 'Join',
-      profile: 'Profile',
     },
   },
 }
