@@ -104,9 +104,9 @@ export default {
         if (data.created)
         this.$buefy.snackbar.open({
           duration: 3000,
-          message: 'Enrolled successfully!',
+          message: this.$t('enrolledSuccess'),
           position: 'is-top-right',
-          actionText: 'GREAT',
+          actionText: this.$t('enrolledSuccessAction'),
           queue: false,
           onAction: function() {
             this.close()
@@ -116,7 +116,7 @@ export default {
       })
       .catch(err => {
         this.$buefy.snackbar.open({
-          message: 'Something went wrong!',
+          message: this.$t('enrolledError'),
           type: 'is-danger',
         })
         e.target.disabled = false
@@ -127,6 +127,7 @@ export default {
     en: {
       enroll: 'Enroll',
       goCourse: 'Go to course',
+      loginToEnroll: 'Login to enroll',
       syllabus: 'Syllabus',
       syllabusText: 'To optimize your chances of success we have divided the course into following parts',
       language: 'Language',
@@ -135,6 +136,9 @@ export default {
       taughtByText: 'The course is taught by {0}',
       time: 'Time',
       timeText: 'On average, it takes {0} weeks',
+      enrolledSuccess: 'Enrolled successfully!',
+      enrolledSuccessAction: 'GREAT',
+      enrolledError: 'Something went wrong',
     },
   },
   created() {
