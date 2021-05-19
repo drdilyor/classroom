@@ -3,5 +3,5 @@ export default {
   login: 'Login',
   profile: 'Profile',
   home: 'Home',
-
+  loading: 'Loading',
 }
