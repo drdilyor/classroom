@@ -7,7 +7,7 @@
       </div>
       <div class="column is-narrow">
         <b-button type="is-primary is-light">
-          Program home
+          {{$t('programHome')}}
         </b-button>
       </div>
     </div>
@@ -25,6 +25,11 @@ export default {
     course: {
       type: Object,
       required: true,
+    },
+  },
+  strings: {
+    en: {
+      programHome: 'Program home',
     },
   },
 }
