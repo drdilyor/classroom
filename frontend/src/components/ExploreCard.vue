@@ -2,7 +2,7 @@
   <router-link :to="'/courses/'+course.id" class="block is-block">
     <article class="explore-card card">
       <div class="explore-card-left">
-        <img class="explore-card-img" :src="course.image_link" :alt="$t('imgAlt')">
+        <img class="explore-card-img" :src="course.image_link" :alt="$t('courseImage')">
       </div>
       <div class="explore-card-content">
         <div class="title is-4 mb-2">
@@ -29,7 +29,6 @@ export default {
   props: {course: Object},
   strings: {
     en: {
-      imgAlt: 'Course image',
       details: 'Course details',
       by: 'By {0}',
       time: 'Estimated time {0} weeks',

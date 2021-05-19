@@ -17,7 +17,7 @@
           <p>{{ course.description }}</p>
         </div>
         <div class="column is-narrow">
-          <img style="width: 100%" class="img-fluid" :src="course.image_link" alt="Course image">
+          <img style="width: 100%" class="img-fluid" :src="course.image_link" :alt="$t('courseImage')">
         </div>
       </div>
       <div class="columns">
@@ -28,30 +28,30 @@
               v-if="!courseEnrolled"
               type="is-primary is-fullwidth"
               @click="enroll">
-              Enroll
+              {{$t('enroll')}}
             </b-button>
             <b-button
               v-else
               tag="router-link"
               type="is-primary is-light is-fullwidth"
               :to="'/classroom/course/'+courseId">
-              Go to course  
+              {{$t('goCourse')}}
             </b-button>
           </p>
           <template v-else>
             <p class="has-text-centered">
-              Login to enroll
+              {{$t('loginToEnroll')}}
             </p>
             <b-button type="is-primary is-fullwidth" @click="$auth.login">
-              Login
+              {{$t('login')}}
             </b-button>
           </template>
         </div>
       </div>
 
         <!-- Syllabus -->
-      <h2 class="no-mt">Syllabus</h2>
-      <p>To optimize your chances of success we have divided the course into following parts</p>
+      <h2 class="no-mt">{{$t('syllabus')}}</h2>
+      <p>{{$t('syllabusText')}}</p>
       <div class="course-part-list mb-4">
         <div class="course-part" v-for="cpart in course.course_parts" :key="cpart.id">
           <h3 class="course-part-header">{{ cpart.title }}</h3>
@@ -59,9 +59,9 @@
         </div>
       </div>
       <div class="columns has-text-centered">
-        <div class="column"><h3>Language:</h3><p>The courses language is {{ course.language }}</p></div>
-        <div class="column"><h3>Taught by:</h3><p>The course is taught by {{ course.author }}</p></div>
-        <div class="column"><h3>Time:</h3><p>On average, it takes {{ course.estimated_time }} weeks</p></div>
+        <div class="column"><h3>{{$t('language')}}</h3><p>{{$t('languageText', [course.language])}}</p></div>
+        <div class="column"><h3>{{$t('taughtBy')}}</h3><p>{{$t('taughtByText', [course.author])}}</p></div>
+        <div class="column"><h3>{{$t('time')}}</h3><p>{{$t('timeText', [course.estimated_time])}}</p></div>
       </div>
     </template>
   </div>
@@ -121,6 +121,20 @@ export default {
         })
         e.target.disabled = false
       })
+    },
+  },
+  strings: {
+    en: {
+      enroll: 'Enroll',
+      goCourse: 'Go to course',
+      syllabus: 'Syllabus',
+      syllabusText: 'To optimize your chances of success we have divided the course into following parts',
+      language: 'Language',
+      languageText: 'The course\'s language is {0}',
+      taughtBy: 'Taught by',
+      taughtByText: 'The course is taught by {0}',
+      time: 'Time',
+      timeText: 'On average, it takes {0} weeks',
     },
   },
   created() {
