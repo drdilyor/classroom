@@ -15,7 +15,7 @@ export default {
       goToBefore: 'Go to',
       goToLink: 'main page',
       goToAfter: '',
-    }
+    },
   }
 }
 </script>
