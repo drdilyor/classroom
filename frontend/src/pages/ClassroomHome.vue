@@ -45,7 +45,6 @@ export default {
   } },
   strings: {
     en: {
-      home: 'Home',
       enrollments: 'Current enrollments',
     },
   },
