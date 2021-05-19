@@ -72,7 +72,8 @@ const auth = {
   },
 
   logoutHard() {
-    window.location = `https://${auth.config.domain}/logout`
+    let callbackUrl = `https://${location.host}`
+    window.location = `https://${auth.config.domain}/logout?client_id=${auth.config.clientId}&returnTo=${callbackUrl}`
   },
 
   can(perm) {
