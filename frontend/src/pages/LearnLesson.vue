@@ -31,7 +31,7 @@
                 type="is-primary is-light"
                 :to="nextLesson"
                 icon-right="arrow-right">
-                Next
+                {{$t('btnNext')}}
               </b-button>
               <b-button
                 v-else
@@ -39,7 +39,7 @@
                 :to="'/classroom/course/'+$store.getters.currentCourse.id"
                 icon-right="check"
                 @click.native="partDone">
-                Done
+                {{$t('btnDone')}}
               </b-button>
             </div>
           </div>
@@ -89,9 +89,9 @@ export default {
     partDone() {
       this.$buefy.snackbar.open({
         duration: 3000,
-        message: 'Congratulations! Keep moving on',
+        message: this.$t('doneSnackbar'),
         position: 'is-top-right',
-        actionText: 'GREAT',
+        actionText: this.$t('doneSnackbarAction'),
         queue: false,
         onAction: function() {
           this.close()
@@ -99,6 +99,14 @@ export default {
       })
       this.$router.push('/classroom/course/'+this.$store.getters.currentCourse.id)
     }
+  },
+  strings: {
+    en: {
+      btnNext: 'Next',
+      btnDone: 'Done',
+      doneSnackbar: 'Congratulations! Keep moving on',
+      doneSnackbarAction: 'GREAT',
+    },
   },
   created() {
     this.onCreated()
