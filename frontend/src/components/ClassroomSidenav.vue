@@ -7,12 +7,12 @@
         <router-link to="/" class="has-background-light has-text-centered is-size-4 py-3">&lt;A&gt;code</router-link>
         <nav class="sidenav-default-nav p-4">
           <div class="buttons sidenav-default-buttons">
-            <b-button tag="router-link" to="/classroom" type="is-primary" size="is-medium" icon-left="home" inverted>Home</b-button>
-            <b-button tag="router-link" to="/courses" type="is-primary" size="is-medium" icon-left="view-dashboard" inverted>Catalog</b-button>
+            <b-button tag="router-link" to="/classroom" type="is-primary" size="is-medium" icon-left="home" inverted>{{$t('home')}}</b-button>
+            <b-button tag="router-link" to="/courses" type="is-primary" size="is-medium" icon-left="view-dashboard" inverted>{{$t('catalog')}}</b-button>
           </div>
           <span class="flex-1"/>
           <div class="buttons sidenav-default-buttons">
-            <b-button tag="router-link" to="/profile" type="is-primary" size="is-medium" icon-left="account" inverted>Profile</b-button>
+            <b-button tag="router-link" to="/profile" type="is-primary" size="is-medium" icon-left="account" inverted>{{$t('profile')}}</b-button>
           </div>
         </nav>
       </slot>
@@ -31,6 +31,11 @@ export default {
   data() { return {
     desktop: false,
   } },
+  strings: {
+    en: {
+      catalog: 'Catalog',
+    },
+  },
   methods: {
     logout() {
       this.$auth.logout()

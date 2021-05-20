@@ -1,15 +1,15 @@
 <template>
   <router-link tag="div" class="classroom-course-part-card card" :to="nextLessonLink">
-    <span class="heading is-size-6">Part {{i}}</span>
+    <span class="heading is-size-6">{{$t('part', [i])}}</span>
     <h3 class="title pt-2 is-4">{{ part.title }}</h3>
     <p class="is-flex-grow-1">{{ part.description }}</p>
     <b-button class="my-5 is-hidden-mobile" type="is-primary is-light" icon-right="arrow-right">
-      Continue
+      {{$t('continue')}}
     </b-button>
     <footer>
       <b-progress class="mb-0" :value="progress.percentage" size="is-small" type="is-success" />
       <span class="ml-4 is-flex-grow-1">{{ progress.percentage }}%</span>
-      <span>{{ progress.all - progress.viewed }} left</span>
+      <span>{{$t('lessonsLeft', [progress.all - progress.viewed])}}</span>
     </footer>
   </router-link>
 </template>
@@ -50,7 +50,14 @@ export default {
       const percentage = Math.round(all === 0 ? 100 : viewed / all * 100)
       return {all, viewed, percentage}
     },
-  }
+  },
+  strings: {
+    en: {
+      part: 'Part {0}',
+      continue: 'Continue',
+      lessonsLeft: '{0} left',
+    },
+  },
 }
 </script>
 

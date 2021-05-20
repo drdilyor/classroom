@@ -19,10 +19,10 @@
             type="is-primary"
             :to="'/classroom/lesson/'+resumeLesson.id"
             :title="resumeLesson.title">
-            Resume
+            {{$t('resume')}}
           </b-button>
         </header>
-        <main class="overflow-auto classroom-course-main">
+        <main class="classroom-course-main">
           <div class="container">
             <CoursePartCard
               v-for="(cp, index) in course.course_parts"
@@ -58,6 +58,11 @@ export default {
       const res = this.$store.getters.currentCourse 
       //console.log({res})
       return res
+    },
+  },
+  strings: {
+    en: {
+      resume: 'Resume',
     },
   },
   methods: {
