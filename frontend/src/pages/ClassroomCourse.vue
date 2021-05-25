@@ -64,6 +64,9 @@ export default {
     en: {
       resume: 'Resume',
     },
+    uz: {
+      resume: 'Davom ettirish',
+    },
   },
   methods: {
     async fetchData() {

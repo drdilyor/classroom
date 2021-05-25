@@ -107,6 +107,12 @@ export default {
       doneSnackbar: 'Congratulations! Keep moving on',
       doneSnackbarAction: 'GREAT',
     },
+    uz: {
+      btnNext: 'Keyingi',
+      btnDone: 'Tamomlash',
+      doneSnackbar: "Tabriklaymiz! Oldinga harafatdan to'xtamang",
+      doneSnackbarAction: 'AJOYIB',
+    },
   },
   created() {
     this.onCreated()

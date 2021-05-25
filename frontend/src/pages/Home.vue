@@ -111,6 +111,25 @@ export default {
       regText: 'Sign up today and build skills for tomorrow',
       regBtn: 'Open register page',
     },
+    uz: {
+      welcome: '<A>Code ga xush kelibsiz',
+      welcomeSubtitle: "Ochiq onlayn o'quv platformasi!",
+      btnExplore: "Kurslarni ko'rish",
+      btnClassroom: "Sinfxonaga o'tish",
+      btnRegister: "Ro'yhatdan o'tish",
+      promoSkills: "Yangi ko'nikmalarga tez erishing",
+      promoSkillsText: "Bizning o'quvchilarimiz kurslarimizi iloji boricha tez o'rganishi uchun harakat qilamiz",
+      promoUptodate: "Zamon bilan hamnafas bo'ling",
+      promoUptodateText: "Ba'zi o'xshash saytlardan farqli o'laroq, biz faqat yangi kontent taqdim etamiz",
+      promoUzbeks: "O'zbeklar tomonidan, o'zbeklar uchun",
+      promoUzbeksText: "Biz o'zbekcha kontenti bor juda kam onlayn platformalardan birimiz",
+      dashboardCourses: 'Kurslar',
+      dashboardUsers: "Ro'yxatdan o'tganlar",
+      dashboardCompleted: 'Bitiruvchilar',
+      regTitle: "Hoziroq ro'yhatdan o'ting",
+      regText: "Bugun ro'yhatdan o'ting va ertanggi kun uchun ko'nikmalarga ega bo'ling",
+      regBtn: "Ro'yhatdan o'tish sahifasi",
+    },
   }
 }
 </script>

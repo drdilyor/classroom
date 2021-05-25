@@ -47,6 +47,9 @@ export default {
     en: {
       enrollments: 'Current enrollments',
     },
+    uz: {
+      enrollments: 'Joriy yozilishlar',
+    },
   },
   methods: {
     async fetchData() {
