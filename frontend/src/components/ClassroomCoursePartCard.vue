@@ -57,6 +57,11 @@ export default {
       continue: 'Continue',
       lessonsLeft: '{0} left',
     },
+    uz: {
+      part: "{0}-bo'lim",
+      continue: 'Davom etish',
+      lessonsLeft: '{0} qoldi',
+    },
   },
 }
 </script>

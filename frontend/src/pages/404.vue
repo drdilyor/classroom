@@ -16,6 +16,12 @@ export default {
       goToLink: 'main page',
       goToAfter: '',
     },
+    uz: {
+      pageNotFound: 'Sahifa topilmadi!',
+      goToBefore: '',
+      goToLink: 'Bosh sahifaga',
+      goToAfter: "o'tish",
+    },
   }
 }
 </script>

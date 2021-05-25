@@ -33,6 +33,11 @@ export default {
       by: 'By {0}',
       time: 'Estimated time {0} weeks',
     },
+    uz: {
+      details: 'Batafsil',
+      by: '{0} tomonidan',
+      time: '{0} haftada tugatish rejalashtirilgan',
+    },
   },
 }
 </script>

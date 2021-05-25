@@ -35,6 +35,9 @@ export default {
     en: {
       catalog: 'Catalog',
     },
+    en: {
+      catalog: 'Katalog',
+    },
   },
   methods: {
     logout() {

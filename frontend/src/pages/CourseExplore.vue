@@ -55,6 +55,11 @@ export default {
       results: 'Results',
 
     },
+    uz: {
+      courses: 'Kurslar',
+      search: 'Qidiruv',
+      results: 'Natijalar',
+    },
   },
   created() {
     this.$api.get('/courses')
