@@ -20,7 +20,7 @@ export default {
   
   actions: {
     async setCourse({ commit, getters }, courseId) {
-      if (getters.currentCourse?.id == courseId)
+      if (getters.currentCourse && getters.currentCourse.id == courseId)
         return
       //console.log('setCourse cache miss '+courseId);
       commit('setCourse', null)
