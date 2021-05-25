@@ -45,4 +45,5 @@ async def init(app: FastAPI):
     await init_admin(app)
 
 if __name__ == '__main__':
+    print('run_async')
     run_async(init_tortoise())
