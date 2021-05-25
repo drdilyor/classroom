@@ -38,6 +38,11 @@ export default {
   },
   strings: {
     en: {
+      explore: 'Explore',
+      classroom: 'Classroom',
+      join: "Join",
+    },
+    uz: {
       explore: 'Kurslar',
       classroom: 'Sinfxona',
       join: "Ro'yhatdan o'tish",
