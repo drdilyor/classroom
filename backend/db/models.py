@@ -8,7 +8,7 @@ class ID:
     id = IntField(pk=True)
 
     def __repr__(self):
-        return f'<{self.__class__.__name___} {self.id}>'
+        return f'<{self.__class__.__name__} {self.id}>'
 
 
 class Language(ID, Model):
