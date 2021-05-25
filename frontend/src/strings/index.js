@@ -55,7 +55,7 @@ export function t(name, args = null, defaultValue = null, stringz = strings) {
 
   if (message && !args) return message
 
-  return message.replaceAll(/{([a-zA-Z0-9])}/g, (a, key) => {
+  return message.replace(/{([a-zA-Z0-9])}/g, (a, key) => {
     return args[key]
   })
 }
