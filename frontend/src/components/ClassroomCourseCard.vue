@@ -29,7 +29,7 @@ export default {
   },
   strings: {
     en: {
-      programHome: 'Program home',
+      programHome: 'Dastur bosh sahifasi',
     },
   },
 }

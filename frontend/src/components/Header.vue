@@ -38,9 +38,9 @@ export default {
   },
   strings: {
     en: {
-      explore: 'Explore',
-      classroom: 'Classroom',
-      join: 'Join',
+      explore: 'Kurslar',
+      classroom: 'Sinfxona',
+      join: "Ro'yhatdan o'tish",
     },
   },
 }
