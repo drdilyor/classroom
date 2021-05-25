@@ -140,6 +140,22 @@ export default {
       enrolledSuccessAction: 'GREAT',
       enrolledError: 'Something went wrong',
     },
+    uz: {
+      enroll: 'Yozilish',
+      goCourse: "Kursga o'tish",
+      loginToEnroll: 'Yozilish uchun hisobga kiring',
+      syllabus: 'Kurs rejasi',
+      syllabusText: "Muvaffaqiyatli bo'lishingiz imkoniyatini balandlatish uchun biz kursni quyidagi qismlarga ajratdik",
+      language: 'Til',
+      languageText: "Kursningi tili {0}",
+      taughtBy: "Kim o'qitgan",
+      taughtByText: "Kurs {0} tomonidan o'qitiladi",
+      time: 'Vaqt',
+      timeText: "O'rtacha kursni tamomlash uchun {0} hafta ketadi",
+      enrolledSuccess: 'Muvaffaqiyatli yozildingiz!',
+      enrolledSuccessAction: 'AJOYIB',
+      enrolledError: 'Qandaydir xatolik yuz berdi',
+    },
   },
   created() {
     this.fetchData()

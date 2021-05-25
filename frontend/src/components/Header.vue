@@ -40,7 +40,12 @@ export default {
     en: {
       explore: 'Explore',
       classroom: 'Classroom',
-      join: 'Join',
+      join: "Join",
+    },
+    uz: {
+      explore: 'Kurslar',
+      classroom: 'Sinfxona',
+      join: "Ro'yhatdan o'tish",
     },
   },
 }

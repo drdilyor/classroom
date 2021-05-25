@@ -2,10 +2,10 @@
   <div class="container content">
     <!-- Kinda hidden dev tools -->
     <h1 @click="showJwt = true">{{$t('profile')}}</h1>
-    
+
     <div v-if="$auth.loggedIn()">
       <p v-if="error">{{$t('error')}}: {{ error }}</p>
-      
+
       <!-- Skeleton -->
       <div v-else-if="profile === null" class="box">
         <div class="columns is-vcentered">
@@ -18,7 +18,7 @@
           </div>
         </div>
       </div>
-      
+
       <!-- Profile -->
       <div v-else class="box">
         <div class="columns is-vcentered">
@@ -65,6 +65,14 @@ export default {
       logout: 'Log out',
       logoutHard: 'Log out hard',
       notLoggedIn: 'You aren\'t logged in currently',
+    },
+    uz: {
+      error: "Profilingizni yuklash vaqtida xatolik yuz berdi",
+      emailVerified: 'Bu email tasdiqlangan',
+      emailNotVerified: 'Iltimos emailingizni tasdiqlang',
+      logout: 'Hisobdan chiqish',
+      logoutHard: 'Hisobdan chiqish (hard)',
+      notLoggedIn: 'Hozirda siz hisobga kirmagansiz',
     },
   },
   created() {
