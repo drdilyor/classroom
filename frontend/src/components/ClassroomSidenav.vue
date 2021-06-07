@@ -35,7 +35,7 @@ export default {
     en: {
       catalog: 'Catalog',
     },
-    en: {
+    uz: {
       catalog: 'Katalog',
     },
   },

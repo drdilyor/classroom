@@ -29,6 +29,9 @@ export default {
   },
   strings: {
     en: {
+      programHome: 'Program home',
+    },
+    uz: {
       programHome: 'Dastur bosh sahifasi',
     },
   },
