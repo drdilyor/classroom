@@ -1,7 +1,21 @@
 from typing import List, Optional
 
-from pydantic import BaseModel
+from pydantic import BaseModel as PydanticBaseModel, validator
+from tortoise.fields.relational import ReverseRelation
 
+
+class BaseModel(PydanticBaseModel):
+    class Config:
+        orm_mode = True
+    
+    @validator('*', pre=True)
+    def reverse_relation_to_list(cls, value, **kwargs):
+        if isinstance(value, ReverseRelation):
+            return list(value)
+        return value
+
+class Author(BaseModel):
+    name: str
 
 class Course(BaseModel):
     id: int
@@ -9,21 +23,21 @@ class Course(BaseModel):
     description: str
     image_link: str
     language: str
-    author: str
+    author: Author
     estimated_time: int
 
-    class Config:
-        orm_mode = True
-
+    @validator('language', pre=True)
+    def get_name(cls, v):
+        try:
+            return v.name if not isinstance(v, str) else v
+        except AttributeError as e:
+            raise ValueError from e
 
 class CoursePart(BaseModel):
     id: int
     title: str
     description: str
     course_id: int
-
-    class Config:
-        orm_mode = True
 
 class Lesson(BaseModel):
     id: int
@@ -32,9 +46,6 @@ class Lesson(BaseModel):
     content: str
     course_part_id: int
     is_viewed: bool  # This will be set in a controller
-
-    class Config:
-        orm_mode = True
 
 class LessonInfo(BaseModel):
     id: int
@@ -45,11 +56,8 @@ class LessonInfo(BaseModel):
 class CourseDetailed(Course):
     course_parts: List[CoursePart]
 
-
 class CoursePartDetailed(CoursePart):
     lessons: List[Lesson]
 
 class CourseVeryDetailed(Course):
     course_parts: List[CoursePartDetailed]
-
-

@@ -56,14 +56,14 @@ async def all_courses():
 
 @app.get('/courses/{course_id}', response_model=s.CourseDetailed)
 async def get_course(course_id: int):
-    qs = Course.filter(id=course_id).prefetch_related('course_parts').select_related('language', 'author')
-    c: Course = await qs.get_or_none() or e404()
-    return {
-        **c.__dict__,
-        'language': c.language.name,
-        'course_parts': await c.course_parts,  # noqa
-        'author': c.author.name,
-    }
+    course = await (Course
+        .filter(id=course_id)
+        .prefetch_related('course_parts')
+        .select_related('language', 'author')
+        .get_or_none()
+    ) or e404()
+
+    return s.CourseDetailed.from_orm(course)
 
 @app.get('/courses/{course_id}/is-enrolled')
 async def is_user_enrolled(course_id: int, payload=Depends(requires_auth())):
@@ -77,16 +77,23 @@ async def is_user_enrolled(course_id: int, payload=Depends(requires_auth())):
 
 @app.get('/enrolled-courses', response_model=List[s.Course])  # noqa
 async def get_enrolled_courses(payload=Depends(requires_auth())):
-    qs = await CourseMember.filter(user_sub=payload['sub']).select_related('course__language', 'course__author')
-    return [s.Course(**i.course.__dict__,
-                     language=i.course.language.name,
-                     author=i.course.author.name) for i in qs]
+    cm = await (CourseMember
+        .filter(user_sub=payload['sub'])
+        .select_related('course__language', 'course__author'))
+
+    return [s.Course.from_orm(i.course) for i in cm]
 
 
 @app.put('/courses/{course_id}/enroll')
 async def enroll_course(course_id: int, payload=Depends(requires_auth())):
-    c = await Course.get_or_none(id=course_id) or e404()
-    _cm, created = await CourseMember.get_or_create(user_sub=payload['sub'], course=c)
+    c = await (Course
+        .get_or_none(id=course_id)
+    ) or e404()
+
+    _cm, created = await CourseMember.get_or_create(
+        user_sub=payload['sub'],
+        course=c,
+    )
     return {'created': created}
 
 
@@ -99,46 +106,44 @@ async def enrolled_course(id: int, payload=Depends(requires_auth())):  # noqa
         course_id=id,
     ) or abort(403)
 
-    query = Course.filter(id=id).prefetch_related('course_parts__lessons').select_related('language', 'author')
+    course: Course = await (Course
+        .filter(id=id)
+        .prefetch_related('course_parts__lessons')
+        .select_related('language', 'author')
+        .get_or_none()
+    ) or e404()
 
-    course: Course = await query.get_or_none() or e404()
-    parts = await course.course_parts
+    for part in course.course_parts:
+        for lesson in part.lessons:
+            lesson.is_viewed = await LessonViewed.get_or_none(
+                lesson=lesson,
+                user_sub=payload['sub'],
+            ).get_or_none() is not None
 
-    course_dict = {**course.__dict__}
-    course_dict['language'] = course.language.name
-    course_dict['author'] = course.author.name
-    # 'cause pydantic doesn't await on Course.lessons
-    course_dict['course_parts'] = [await format_course_part(i, payload['sub']) for i in parts]
-
-    return course_dict
-
-
-async def format_course_part(part, sub):
-    part_dict = {**part.__dict__}
-    part_dict['lessons'] = []
-
-    for L in await part.lessons:  # noqa
-        L.is_viewed = await LessonViewed.get_or_none(lesson=L, user_sub=sub) is not None
-        part_dict['lessons'].append(L)
-    return part_dict
+    return s.CourseVeryDetailed.from_orm(course)
 
 
 @app.get('/lessons/{lesson_id}', response_model=s.LessonInfo)
-async def get_lesson_info(
-    lesson_id: int,
-    payload=Depends(requires_auth()),
-):
-    lesson = await Lesson.get_or_none(id=lesson_id) or e404()
-    return {
+async def get_lesson_info(lesson_id: int, payload=Depends(requires_auth())):
+    lesson = await (Lesson
+        .filter(id=lesson_id)
+        .prefetch_related('course_part')
+        .get_or_none()
+    ) or e404()
+
+    return s.LessonInfo(
         **lesson.__dict__,
-        'course_id': (await lesson.course_part).course_id,
-    }
+        course_id=lesson.course_part.course_id,
+    )
 
 
 @app.put('/lessons/{lesson_id}/viewed')
 async def view_lesson(lesson_id: int, payload=Depends(requires_auth())):
     lesson = await Lesson.get_or_none(id=lesson_id) or abort(404)
-    _lv, created = await LessonViewed.get_or_create(user_sub=payload['sub'], lesson=lesson)
+    _lv, created = await LessonViewed.get_or_create(
+        user_sub=payload['sub'],
+        lesson=lesson,
+    )
     return {'created': created}
 
 

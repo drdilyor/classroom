@@ -15,7 +15,7 @@
         <b-button class="mt-2" type="is-primary">{{$t('details')}}</b-button>
         </div>
         <div class="has-text-black mt-2 bar-info">
-          <span>{{$t('by', [course.author])}}</span>
+          <span>{{$t('by', [course.author.name])}}</span>
           <span>{{$t('time', [course.estimated_time])}}</span>
           <span>{{ course.language }}</span>
         </div>

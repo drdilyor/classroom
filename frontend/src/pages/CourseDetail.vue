@@ -60,7 +60,7 @@
       </div>
       <div class="columns has-text-centered">
         <div class="column"><h3>{{$t('language')}}</h3><p>{{$t('languageText', [course.language])}}</p></div>
-        <div class="column"><h3>{{$t('taughtBy')}}</h3><p>{{$t('taughtByText', [course.author])}}</p></div>
+        <div class="column"><h3>{{$t('taughtBy')}}</h3><p>{{$t('taughtByText', [course.author.name])}}</p></div>
         <div class="column"><h3>{{$t('time')}}</h3><p>{{$t('timeText', [course.estimated_time])}}</p></div>
       </div>
     </template>
